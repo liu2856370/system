@@ -2,8 +2,8 @@
 ## 工程简介
 政务系统平台
 
-## 技术依赖
-vue, vantUI, axios
+## 技术栈
+vue, vantUI, axios, webpack, typescript, es6
 
 ## 工程拉取下载之后
 ```
