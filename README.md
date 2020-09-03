@@ -1,19 +1,16 @@
 # system
+## 工程简介
+政务系统平台
 
-## Project setup
-```
-npm install
-```
+## 技术栈
+vue, vantUI, axios, webpack, typescript, es6
 
-### Compiles and hot-reloads for development
+## 工程拉取下载之后
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+npm install  //下载依赖
+npm run serve  //运行项目
+npm run build  //编译打包
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+##
+
