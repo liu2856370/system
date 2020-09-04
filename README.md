@@ -13,4 +13,3 @@ npm run build  //编译打包
 ```
 
 ##
-测试账号是否可提交--zhangxianquan
