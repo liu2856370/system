@@ -18,7 +18,7 @@ const _axios = axios.create(config);
 
 _axios.interceptors.request.use(
   function(config) {
-    // Do something before request is sent
+    //在此对所有请求进行一次数据包装
     return config;
   },
   function(error) {
