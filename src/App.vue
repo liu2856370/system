@@ -17,6 +17,6 @@
   color: #2c3e50;
 }
 #nav{
-  font-size:0.3rem;
+  font-size:0.2rem;
 }
 </style>

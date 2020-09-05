@@ -1,16 +1,7 @@
 <template>
   <div class="index">
-    <PHeader :showArrow="true" @leftClick="onClickLeft" @rightClick="onClickRight">
-      <template #left>
-          返回
-      </template>
-      <template #default>
-          首页
-      </template>
-     <template #right>
-          搜索
-      </template>
-    </PHeader>
+    <PHeader :showArrow="true" @leftClick="onClickLeft" @rightClick="onClickRight">首页</PHeader>
+    <button @click="goIndex">下一步</button>
   </div>
 </template>
 
@@ -31,6 +22,9 @@ export default {
     },
     onClickRight() {
         Toast('点击了搜索');
+    },
+    goIndex(){
+      this.$router.go("/info/confirm");
     }
   }
 }
