@@ -7,7 +7,7 @@
         class="info"
       >信息公示查询</router-link>
       <router-link
-        to="/login"
+        to="/platform"
         class="platform"
       >业务办理平台</router-link>
     </div>

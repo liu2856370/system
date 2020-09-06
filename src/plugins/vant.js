@@ -1,10 +1,14 @@
 import Vue from 'vue'
-import { Button } from 'vant'
-import { Dialog } from 'vant'
-import { NavBar } from 'vant'
-import { Toast } from 'vant'
-import { Tab, Tabs } from 'vant'
+import { Button, NavBar, Dialog, Toast, Tab, Tabs, List, Cell, CellGroup } from 'vant'
+import { Tag } from 'vant'
+import { Col, Row } from 'vant'
 
+Vue.use(Col);
+Vue.use(Row);
+Vue.use(Tag);
+Vue.use(List);
+Vue.use(Cell);
+Vue.use(CellGroup);
 Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Toast);
