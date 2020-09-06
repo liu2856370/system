@@ -41,6 +41,7 @@ export default {
   },
   methods: {
       onClickLeft(){
+          this.showArrow ? this.$router.go(-1):"";
           this.$emit("leftClick");
       },
       onClickRight(){

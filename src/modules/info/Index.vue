@@ -1,9 +1,6 @@
 <template>
   <div class="index">
-    <PHeader :showArrow="true" @leftClick="onClickLeft" @rightClick="onClickRight">
-      <template #left>
-          返回
-      </template>
+    <PHeader :showArrow="true" leftText="返回" @leftClick="onClickLeft" @rightClick="onClickRight">
       <template #default>
           首页
       </template>
@@ -27,7 +24,6 @@ export default {
   methods:{
     onClickLeft() {
         Toast('点击了返回');
-        this.$router.go(-1);
     },
     onClickRight() {
         Toast('点击了搜索');

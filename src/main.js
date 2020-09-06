@@ -5,6 +5,9 @@ import './plugins/axios'
 import './plugins/vant.js'
 import './client/index'
 
+//重置公共UI样式
+import './common/less/reset-vant.less'
+
 Vue.config.productionTip = false;
 
 window.flags = { 
