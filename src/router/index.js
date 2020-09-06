@@ -16,7 +16,12 @@ const routes = [{
   {
     path: '/platform',
     name: 'platform',
-    component: () => import( /* webpackChunkName: "平台首页" */ '../modules/platform/Index.vue')
+    component: () => import(/* webpackChunkName: "平台首页" */ '../modules/platform/Index.vue')
+  },
+  {
+    path: '/process-info',
+    name: 'process-info',
+    component: () => import(/* webpackChunkName: "过程信息" */ '../modules/info/ProcessInfo.vue')
   }
 ]
 
