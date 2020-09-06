@@ -5,7 +5,7 @@
 </template>
 
 <style>
-
+@import './common/less/index';
 html,
 body,
 #app {
