@@ -1,12 +1,13 @@
 <template>
   <div class="home">
+    <div class="govTitle"> 山东市场监管行政许可管理系统 </div>
     <div class="nav">
       <router-link
         to="/info"
         class="info"
       >信息公示查询</router-link>
       <router-link
-        to="/platform"
+        to="/login"
         class="platform"
       >业务办理平台</router-link>
     </div>
@@ -14,30 +15,47 @@
 </template>
 <script>
 export default {
-      name: 'home'
-}
+  name: "home",
+};
 </script>
 
-<style lang="less" scoped>
-#app .home {
-  height: 100%;
+<style scoped>
+.govTitle {
+  top: 0.76rem;
+  width: 100%;
+  font-size: 0.2rem;
+  font-weight: bold;
+  color: #000;
+  position: fixed;
+}
+.govTitle::before {
+  display: block;
+  content: "";
+  width: 0.95rem;
+  height: 1.03rem;
+  background: url("../../assets/home/icon-markeyManager.png") no-repeat center;
+  background-size: 100% 100%;
+  margin-left: 1.6rem;
+  margin-bottom: 0.15rem;
 }
 .home {
-
-  background: url("../../common/images/home-bg.png") no-repeat center;
+  height: 100%;
+  background: url("../../assets/home/home-bg.png") no-repeat center;
+  background-size: 100% 100%;
 }
 .nav {
   font-size: 0.2rem;
   position: fixed;
-  top: 50%;
+  top: 2.7rem;
   left: 50%;
   margin-left: -1.5rem;
-  margin-top: -0.7rem;
 }
 .nav a {
   display: block;
   float: left;
   width: 1.5rem;
+  line-height: 0.4rem;
+  color: #000;
 }
 .nav a::before {
   display: block;
@@ -47,11 +65,12 @@ export default {
   margin-left: 0.3rem;
   background: no-repeat center;
   background-size: 100% 100%;
+  margin-bottom: 0.1rem;
 }
 .nav a.info::before {
-  background-image: url("../../common/images/home-icon-infoQuery.png");
+  background-image: url("../../assets/home/home-icon-infoQuery.png");
 }
 .nav a.platform::before {
-  background-image: url("../../common/images/home-icon-platform.png");
+  background-image: url("../../assets/home/home-icon-platform.png");
 }
 </style>
