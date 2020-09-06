@@ -7,7 +7,7 @@
         class="info"
       >信息公示查询</router-link>
       <router-link
-        to="/platform"
+        to="/login"
         class="platform"
       >业务办理平台</router-link>
     </div>
@@ -20,6 +20,11 @@ export default {
 </script>
 
 <style scoped>
+html,
+body,
+#app {
+  height: 100%;
+}
 .govTitle {
   top: 0.76rem;
   width: 100%;
