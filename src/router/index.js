@@ -22,6 +22,11 @@ const routes = [{
     path: '/process-info',
     name: 'process-info',
     component: () => import(/* webpackChunkName: "过程信息" */ '../modules/info/ProcessInfo.vue')
+  },
+  {
+    path: '/qualifications',
+    name: 'qualificationsList',
+    component: () => import(/* webpackChunkName: "过程信息" */ '../modules/info/QualificationsList.vue')
   }
 ]
 
