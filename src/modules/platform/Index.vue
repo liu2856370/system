@@ -1,17 +1,30 @@
 <template>
   <div class="index">
-      <PHeader :showArrow="true" >业务办理平台</PHeader>
+    <van-tabs v-model="active" sticky>
+       <van-tab title="申报历史">
+          <platform-list :list="list1"> </platform-list>
+       </van-tab>
+       <van-tab title="许可档案">
+          <platform-list :list="list2"> </platform-list>
+       </van-tab>
+    </van-tabs>
+
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import PHeader from '@/components/PHeader.vue'
-
+import platformList from './common/platformList'
 export default {
   name: 'index',
   components: {
-    PHeader
+    platformList
+  },
+  data(){
+    return {
+      active:0,
+      list1: [1,2,3],
+      list2: [1,2,3,4]
+    }
   }
 }
 </script>
