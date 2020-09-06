@@ -14,30 +14,28 @@
 </template>
 <script>
 export default {
-      name: 'home'
-}
+  name: "home",
+};
 </script>
 
-<style>
-#app .home {
-  height: 100%;
-}
+<style scoped>
 .home {
-
+  height: 100%;
   background: url("../../common/images/home-bg.png") no-repeat center;
 }
 .nav {
   font-size: 0.2rem;
   position: fixed;
-  top: 50%;
+  top: 2.7rem;
   left: 50%;
   margin-left: -1.5rem;
-  margin-top: -0.7rem;
 }
 .nav a {
   display: block;
   float: left;
   width: 1.5rem;
+  line-height: 0.4rem;
+  color: #000;
 }
 .nav a::before {
   display: block;
@@ -47,6 +45,7 @@ export default {
   margin-left: 0.3rem;
   background: no-repeat center;
   background-size: 100% 100%;
+  margin-bottom: 0.1rem;
 }
 .nav a.info::before {
   background-image: url("../../common/images/home-icon-infoQuery.png");
