@@ -20,11 +20,6 @@ export default {
 </script>
 
 <style scoped>
-html,
-body,
-#app {
-  height: 100%;
-}
 .govTitle {
   top: 0.76rem;
   width: 100%;
