@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link
-        to="/info"
+        to="/process-info"
         class="info"
       >信息公示查询</router-link>
       <router-link
