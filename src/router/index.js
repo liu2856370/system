@@ -35,7 +35,7 @@ const routes = [{
 {
   path: '/qualifications',
   name: 'qualificationsList',
-  component: () => import(/* webpackChunkName: "符合单位列表信息" */ '../modules/info/QualificationsList.vue')
+  component: () => import(/* webpackChunkName: "符合企业列表" */ '../modules/info/QualificationsList.vue')
 },
 {
   path: '/info-query',
@@ -46,6 +46,26 @@ const routes = [{
   path: '/according-info',
   name: 'accordingInfo',
   component: () => import(/* webpackChunkName: "匹配信息" */ '../modules/info/AccordingInfo.vue')
+},
+{
+  path: '/set-basis-list',
+  name: 'setBasisList',
+  component: () => import(/* webpackChunkName: "法律依据列表" */ '../modules/info/SetBasisList.vue')
+},
+{
+  path: '/certification-check',
+  name: 'certificationCheck',
+  component: () => import(/* webpackChunkName: "发证检核" */ '../modules/info/CertificationCheck.vue')
+},
+{
+  path: '/change-check',
+  name: 'changeCheck',
+  component: () => import(/* webpackChunkName: "发证检核" */ '../modules/info/ChangeCheck.vue')
+},
+{
+  path: '/replace-check',
+  name: 'replaceCheck',
+  component: () => import(/* webpackChunkName: "发证检核" */ '../modules/info/ReplaceCheck.vue')
 }
 ]
 

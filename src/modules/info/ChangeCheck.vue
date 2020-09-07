@@ -1,34 +1,44 @@
 <template>
   <div class="index">
-    <van-tabs v-model="active" sticky>
-      <van-tab title="过程信息">
+    <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" >以最终技术审查结果和许可审批结果为准</van-notice-bar>
+    <van-tabs type="card" v-model="active" sticky>
+      <van-tab title="核查结果">
         <platform-list :list="list1">
           <template #fixed="{slotProps}">
-            <van-row class="org-info">
-              <van-col span="12" class="org-name" @click="goVerificationInfo(slotProps.index)">{{slotProps.orgname}}</van-col>
-              <van-col span="12" class="org-tags">
-                <van-tag plain round type="primary" class="mr10">审查中</van-tag>
-                <van-tag plain round type="primary">发证</van-tag>
-              </van-col>
-            </van-row>
-            <van-cell title="产品类别" value="危险化学品" />
-            <van-cell title="审批事项" value="工业产品生产许可" />
-          </template>
-          <template #variable>
-            <van-cell title="所在地区" value="菏泽市成武县" />
-            <van-cell title="营业执照注册号" value="0254215421357561354" />
-            <van-cell title="组织机构代码" value="05165415X" />
+            <van-cell title="计量器具名称" value="电压互感器" />
+            <van-cell title="型号" value="JDZ(X)10-10" />
+            <van-cell title="规格" value="（5-1000）/5A" />
+            <van-cell title="准确度等级/最大允许误差/测量部准确度" value="0.2s/10P 10级" />
+            <van-cell title="实地核查结果" value="合格" />
+            <van-cell title="检定规程及编号" value="GB1208-2010" />
+            <van-cell title="技术审查意见" value="合格" />
+            <van-cell title="抽查复查结论" value="未抽查" />
+            <van-cell title="许可意见" value="许可" />
+            <van-cell title="不予行政许可理由" value="" />
           </template>
         </platform-list>
       </van-tab>
-      <van-tab title="证书信息">
-        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-          <van-cell-group v-for="(item,index) in data" :key="index" class="mt10">
-            <van-radio name=index @click="goQualificationsList">{{item}}</van-radio>
-          </van-cell-group>
-        </van-list>
-        <van-button type="primary" size="large" to="/qualifications">下一步</van-button>
-        <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" >证书如需邮寄送达，请于当地业务窗口联系告知邮寄地址、收件人等信息，便于邮寄</van-notice-bar>
+      <van-tab title="实地核查结论">
+        <van-cell title="核查开始时间" value="2013-06-28" />
+        <van-cell title="核查结束时间" value="2013-06-28" />
+        <van-cell title="实际开始时间" value="2013-06-28" />
+        <van-cell title="实际结束时间" value="2013-06-28" />
+        <van-cell title="实地核查记录备用说明" value="" />
+        <platform-list :list="list2">
+          <template #fixed="{slotProps}">
+            <van-cell title="计量器具类别" value="测量电压互感器" />
+            <van-cell title="计量器具名称" value="电压互感器" />
+            <van-cell title="型号" value="JDZ(X)10-10" />
+            <van-cell title="规格" value="（5-1000）/5A" />
+            <van-cell title="准确度等级/最大允许误差/测量部准确度" value="0.2s/10P 10级" />
+            <van-cell title="实地核查结果" value="合格" />
+            <van-cell title="检验报告">
+              <template #right-icon>
+                <van-tag plain round type="primary">查看</van-tag>
+              </template>
+            </van-cell>
+          </template>
+        </platform-list>
       </van-tab>
     </van-tabs>
   </div>
@@ -89,13 +99,13 @@ export default {
     },
     goVerificationInfo(index){
       if(index === 1){
-        this.$router.push("/certification-check");
+        this.$router.push();
       }
       else if(index === 2){
-        this.$router.push("/change-check");
+        this.$router.push();
       }
       else{
-        this.$router.push("/relace-check");
+        this.$router.push();
       }
     }
   }
