@@ -64,6 +64,18 @@ const routes = [{
         name: 'siteReview',
         component: () =>
             import ( /* webpackChunkName: "现场审查列表" */ '../modules/platform/SiteReView.vue')
+    },
+    {
+        path: '/siteReView-companyList',
+        name: 'siteReview-companyList',
+        component: () =>
+            import ( /* webpackChunkName: "现场审查列表-待审查公司列表" */ '../modules/platform/SiteReView-companyList.vue')
+    },
+    {
+        path: '/siteReView-companyInfo',
+        name: 'siteReview-companyInfo',
+        component: () =>
+            import ( /* webpackChunkName: "现场审查列表-待审查公司详情" */ '../modules/platform/SiteReView-companyInfo.vue')
     }
 ]
 
