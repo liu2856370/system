@@ -47,6 +47,14 @@ name: "accordingInfo",
         }
       ]
     };
+  },
+  methods:{
+    goInfoQuery(){
+      this.$router.push("/info-query");
+    },
+    queryInfo(){
+      this.$router.push("/info-query");
+    }
   }
 }
 </script>
