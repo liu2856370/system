@@ -61,19 +61,39 @@ const routes = [{
     },
     //zp
 
-    //zxq
+{
+  path: '/set-basis-list',
+  name: 'setBasisList',
+  component: () => import(/* webpackChunkName: "法律依据列表" */ '../modules/info/SetBasisList.vue')
+},
+{
+  path: '/certification-check',
+  name: 'certificationCheck',
+  component: () => import(/* webpackChunkName: "发证检核" */ '../modules/info/CertificationCheck.vue')
+},
+{
+  path: '/change-check',
+  name: 'changeCheck',
+  component: () => import(/* webpackChunkName: "发证检核" */ '../modules/info/ChangeCheck.vue')
+},
+{
+  path: '/replace-check',
+  name: 'replaceCheck',
+  component: () => import(/* webpackChunkName: "发证检核" */ '../modules/info/ReplaceCheck.vue')
+},
+//zxq
 
-    //swj
-    // {
-    //     path: '/site-reView',
-    //     name: 'siteReview',
-    //     component: () =>
-    //         import ( /* webpackChunkName: "现场审查列表" */ '../modules/platform/SiteReView.vue')
-    // }
+//swj
+{
+  path: '/site-reView',
+  name: 'siteReview',
+  component: () =>
+    import( /* webpackChunkName: "现场审查列表" */ '../modules/platform/SiteReView.vue')
+}
 ]
 
 const router = new VueRouter({
-    routes
+  routes
 })
 
 export default router
