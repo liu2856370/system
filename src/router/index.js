@@ -16,12 +16,6 @@ const routes = [{
             import ( /* webpackChunkName: "信息查询首页" */ '../modules/info/Index.vue')
     },
     {
-        path: '/platform',
-        name: 'platform',
-        component: () =>
-            import ( /* webpackChunkName: "平台首页" */ '../modules/platform/Index.vue')
-    },
-    {
         path: '/login',
         name: 'login',
         component: () =>
@@ -53,18 +47,29 @@ const routes = [{
     },
 
     //lzq
-
+    {
+        path: '/platform',
+        name: 'platform',
+        component: () =>
+            import ( /* webpackChunkName: "平台首页" */ '../modules/platform/Index.vue')
+    },
+    {
+        path: '/user-center',
+        name: 'userCenter',
+        component: () =>
+            import ( /* webpackChunkName: "平台首页" */ '../modules/platform/UserCenter.vue')
+    },
     //zp
 
     //zxq
 
     //swj
-    {
-        path: '/site-reView',
-        name: 'siteReview',
-        component: () =>
-            import ( /* webpackChunkName: "现场审查列表" */ '../modules/platform/SiteReView.vue')
-    }
+    // {
+    //     path: '/site-reView',
+    //     name: 'siteReview',
+    //     component: () =>
+    //         import ( /* webpackChunkName: "现场审查列表" */ '../modules/platform/SiteReView.vue')
+    // }
 ]
 
 const router = new VueRouter({
