@@ -47,6 +47,11 @@ const routes = [{
   name: 'accordingInfo',
   component: () => import(/* webpackChunkName: "匹配信息" */ '../modules/info/AccordingInfo.vue')
 },
+
+//lzq
+
+//zp
+
 {
   path: '/set-basis-list',
   name: 'setBasisList',
@@ -66,6 +71,15 @@ const routes = [{
   path: '/replace-check',
   name: 'replaceCheck',
   component: () => import(/* webpackChunkName: "发证检核" */ '../modules/info/ReplaceCheck.vue')
+},
+//zxq
+
+//swj
+{
+  path: '/site-reView',
+  name: 'siteReview',
+  component: () =>
+    import( /* webpackChunkName: "现场审查列表" */ '../modules/platform/SiteReView.vue')
 }
 ]
 
