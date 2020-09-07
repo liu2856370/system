@@ -27,6 +27,7 @@ export default {
   font-weight: bold;
   color: #000;
   position: fixed;
+  text-align: center;
 }
 .govTitle::before {
   display: block;
@@ -56,6 +57,7 @@ export default {
   width: 1.5rem;
   line-height: 0.4rem;
   color: #000;
+  text-align: center;
 }
 .nav a::before {
   display: block;

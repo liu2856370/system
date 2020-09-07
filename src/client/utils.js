@@ -1030,4 +1030,36 @@ export const getArrRepeat = (arr1,arr2) =>{
     })
 } 
 
-export default {}
+export default {
+    //类型判断
+    checkStr,
+    isEmail,
+    isMobile,
+    isPhone,
+    isURL,
+    isString,
+    isNumber,
+    isFunction,
+    isBoolean,
+    isArray,
+    //银行卡
+    isCardID,
+    //机器浏览器判断
+    isPC,
+    isIos,
+    isWeiXin,
+    isQQBrowser,
+    isDeviceMobile,
+    //字符串
+    trim,
+    changeCase,
+    //数组处理
+    sort,
+    contains,
+    debouncer,
+    formArray,
+    max,
+    min,
+    sum,
+    average
+}
