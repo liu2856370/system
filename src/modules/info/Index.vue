@@ -16,7 +16,6 @@
             <van-cell title="所在地区" value="菏泽市成武县" />
             <van-cell title="营业执照注册号" value="0254215421357561354" />
             <van-cell title="组织机构代码" value="05165415X" />
-            <van-cell title="申办号/密码" value="0/0" />
           </template>
         </info-list>
       </van-tab>
@@ -77,7 +76,7 @@ export default {
         "工业产品生产许可证获证单位",
         "计量器具型式批准许可证获证单位",
         "工业产品生产许可证获证单位",
-        "计量器具型式批准许可证获证单位",
+        "计量器具型式批准许可证获证单位"
       ]
     };
   },

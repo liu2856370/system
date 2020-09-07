@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Button, NavBar, Dialog, Toast, Tab, Tabs, List, Cell, CellGroup, Radio, NoticeBar } from 'vant'
+import { Button, NavBar, Dialog, Toast, Tab, Tabs, List, Cell, CellGroup, Radio, NoticeBar, Collapse, CollapseItem } from 'vant'
 import { Tag } from 'vant'
 import { Col, Row } from 'vant'
 
@@ -17,3 +17,5 @@ Vue.use(Dialog);
 Vue.use(NavBar);
 Vue.use(Radio);
 Vue.use(NoticeBar);
+Vue.use(Collapse);
+Vue.use(CollapseItem);

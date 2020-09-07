@@ -16,7 +16,7 @@
             <van-cell title="审批部门" value="05165415X" />
             <van-row class="org-info">
               <van-col span="12" class="org-name">设定依据</van-col>
-              <van-col span="12" class="org-tags" @click="goQueryInfo">查看</van-col>
+              <van-col span="12" class="org-tags" @click="queryInfo">查看</van-col>
             </van-row>
           </template>
         </info-list>
@@ -26,7 +26,7 @@
 <script>
 import infoList from "./common/InfoList";
 export default {
-  name: "qualificationsList",
+name: "accordingInfo",
   components: {
     infoList
   },
@@ -47,30 +47,10 @@ export default {
         }
       ]
     };
-  },
-  methods:{
-    onLoad(){},
-    goInfoQuery(){
-      this.$router.push("/info-query");
-    },
-    goQueryInfo(){
-      this.$router.push("/according-info");
-    }
   }
-};
+}
 </script>
 
 <style>
-.van-radio,
-.van-button,
-.van-notice-bar{
-  padding: 10px 16px;
-}
 
-.van-radio{
-  padding: 10px 16px;
-  overflow: hidden;
-  font-size: 14px;
-  line-height: 24px;
-}
 </style>

@@ -27,6 +27,16 @@ const routes = [{
     path: '/qualifications',
     name: 'qualificationsList',
     component: () => import(/* webpackChunkName: "过程信息" */ '../modules/info/QualificationsList.vue')
+  },
+  {
+    path: '/info-query',
+    name: 'infoQuery',
+    component: () => import(/* webpackChunkName: "过程信息" */ '../modules/info/InfoQuery.vue')
+  },
+  {
+    path: '/according-info',
+    name: 'accordingInfo',
+    component: () => import(/* webpackChunkName: "过程信息" */ '../modules/info/AccordingInfo.vue')
   }
 ]
 
