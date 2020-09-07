@@ -78,7 +78,7 @@
               </div>
             </van-field>
 
-            <van-button round size="large" type="info" class="mt30">登录</van-button>
+            <van-button round size="large" type="info" class="mt30" @click="goSiteReView">登录</van-button>
             <div class="aLink">密码重置申请</div>
           </div>
         </van-tab>
@@ -141,6 +141,9 @@ export default {
   methods: {
     goCompanyDeclare(){
       this.$router.push('/platform');
+    },
+    goSiteReView(){
+      this.$router.push("./site-reView");
     },
     onConfirm(value) {
       this.value = value;
