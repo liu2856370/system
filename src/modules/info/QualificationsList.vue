@@ -1,76 +1,68 @@
 <template>
   <div class="index">
-        <info-list :list="list1">
-          <template #default="{slotProps}">
+        <platform-list :list="list1">
+          <template #fixed="{slotProps}">
             <van-row class="org-info">
               <van-col span="12" class="org-name" @click="goInfoQuery">{{slotProps.orgname}}</van-col>
               <van-col span="12" class="org-tags"></van-col>
             </van-row>
             <van-cell title="许可事项名称" value="工业产品生产许可" />
             <van-cell title="产品类别" value="人造板" />
-            <van-cell title="许可编号" value="（鲁）XK13-008-00004" />
+            <van-cell title="许可证编号" value="（鲁）XK13-008-00004" />
+          </template>
+          <template #variable>
             <van-cell title="所在地区" value="青岛市崂山区" />
             <van-cell title="营业执照注册号" value="416510564065411324" />
             <van-cell title="组织机构代码" value="05165415X" />
             <van-cell title="有效期" value="05165415X" />
             <van-cell title="审批部门" value="05165415X" />
-            <van-row class="org-info">
-              <van-col span="12" class="org-name">设定依据</van-col>
-              <van-col span="12" class="org-tags" @click="goQueryInfo">查看</van-col>
-            </van-row>
+            <van-cell title="设定依据">
+              <template #right-icon>
+                <van-tag plain round type="primary" @click="queryBasisList">查看</van-tag>
+              </template>
+            </van-cell>
           </template>
-        </info-list>
+        </platform-list>
   </div>
 </template>
 
 <script>
-import infoList from "./common/InfoList";
+import platformList from "../platform/common/platformList";
 export default {
-  name: "qualificationsList",
+name: "accordingInfo",
   components: {
-    infoList
+    platformList
   },
   data() {
     return {
       active: 0,
-      loading: false,
-      finished: true,
       list1: [
-        {
-          orgname: "山东群英电气有限公司1"
-        },
-        {
-          orgname: "山东群英电气有限公司2"
-        },
-        {
-          orgname: "山东群英电气有限公司3"
-        }
+        { orgname: "山东群英电气有限公司1" },
+        { orgname: "山东群英电气有限公司2" },
+        { orgname: "山东群英电气有限公司3" }
       ]
     };
   },
   methods:{
-    onLoad(){},
     goInfoQuery(){
       this.$router.push("/info-query");
     },
-    goQueryInfo(){
-      this.$router.push("/according-info");
+    queryBasisList(){
+      this.$router.push("/set-basis-list");
     }
   }
-};
+}
 </script>
 
-<style>
-.van-radio,
-.van-button,
-.van-notice-bar{
-  padding: 10px 16px;
-}
-
-.van-radio{
-  padding: 10px 16px;
-  overflow: hidden;
-  font-size: 14px;
-  line-height: 24px;
+<style lang="less" scoped>
+.org-info {
+  padding: 0.1rem 0.15rem;
+  color: #7b7b7b;
+  .org-name {
+    font-size: 0.16rem;
+  }
+  .org-tags {
+    text-align: right;
+  }
 }
 </style>
