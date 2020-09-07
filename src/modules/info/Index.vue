@@ -88,9 +88,14 @@ export default {
       this.$router.push("/qualifications")
     },
     goVerificationInfo(index){
-      debugger;
       if(index === 1){
-        
+        this.$router.push();
+      }
+      else if(index === 2){
+        this.$router.push();
+      }
+      else{
+        this.$router.push();
       }
     }
   }
