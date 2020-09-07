@@ -25,7 +25,7 @@ const routes = [{
         path: '/login',
         name: 'login',
         component: () =>
-            import ( /* webpackChunkName: "平台首页" */ '../modules/platform/Login.vue')
+            import ( /* webpackChunkName: "平台登录页" */ '../modules/platform/Login.vue')
     },
     {
         path: '/process-info',

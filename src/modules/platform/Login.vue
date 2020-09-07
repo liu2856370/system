@@ -1,13 +1,8 @@
 <template>
-  <div>
-    <div class="govTitle"> 山东市场监管行政许可管理系统 </div>
+  <div class="platform-login">
+    <div class="govTitle">山东市场监管行政许可管理系统</div>
     <div class="loginPanel">
-      <van-tabs
-        type="card"
-        background="#fff"
-        animated
-        swipeable
-      >
+      <van-tabs type="card" background="#fff" animated swipeable>
         <van-tab>
           <div slot="title">企业审报</div>
           <div class="tabContent">
@@ -22,12 +17,7 @@
               class="van-cellForSelect"
               center
             />
-            <van-popup
-              v-model="showPicker"
-              round
-              position="bottom"
-              get-container="body"
-            >
+            <van-popup v-model="showPicker" round position="bottom" get-container="body">
               <van-picker
                 show-toolbar
                 :columns="columns"
@@ -36,10 +26,7 @@
               />
             </van-popup>
 
-            <van-field
-              v-model="code"
-              placeholder="请输入社会信用代码第9位至17位"
-            />
+            <van-field v-model="code" placeholder="请输入社会信用代码第9位至17位" />
 
             <van-field
               v-model="password"
@@ -49,29 +36,19 @@
               @click-right-icon="passwordClick"
             />
 
-            <van-field
-              v-model="imgCode"
-              center
-              maxlength=4
-              placeholder="验证码"
-            >
+            <van-field v-model="imgCode" center maxlength="4" placeholder="验证码">
               <div slot="button">
                 <van-image
                   width="1.1rem"
                   height=".35rem"
                   fit="contain"
                   @click="getVerifyCode"
-                  :src=vImg
+                  :src="vImg"
                 />
-
               </div>
             </van-field>
 
-            <van-button
-              round
-              size="large"
-              type="info"
-            >登录</van-button>
+            <van-button round size="large" type="info" class="mt30" @click="goCompanyDeclare">登录</van-button>
             <div class="aLink">密码重置申请</div>
           </div>
         </van-tab>
@@ -79,11 +56,7 @@
         <van-tab title="现场审查">
           <div slot="title">现场审查</div>
           <div class="tabContent">
-
-            <van-field
-              v-model="code"
-              placeholder="审查员登录账号"
-            />
+            <van-field v-model="code" placeholder="审查员登录账号" />
 
             <van-field
               v-model="password"
@@ -93,40 +66,26 @@
               @click-right-icon="passwordClick"
             />
 
-            <van-field
-              v-model="imgCode"
-              center
-              maxlength=4
-              placeholder="验证码"
-            >
+            <van-field v-model="imgCode" center maxlength="4" placeholder="验证码">
               <div slot="button">
                 <van-image
                   width="1.1rem"
                   height=".35rem"
                   fit="contain"
                   @click="getVerifyCode"
-                  :src=vImg
+                  :src="vImg"
                 />
-
               </div>
             </van-field>
 
-            <van-button
-              round
-              size="large"
-              type="info"
-            >登录</van-button>
+            <van-button round size="large" type="info" class="mt30">登录</van-button>
             <div class="aLink">密码重置申请</div>
           </div>
         </van-tab>
         <van-tab title="行政审批">
           <div slot="title">行政审批</div>
           <div class="tabContent">
-
-            <van-field
-              v-model="code"
-              placeholder="请输入用户名"
-            />
+            <van-field v-model="code" placeholder="请输入用户名" />
 
             <van-field
               v-model="password"
@@ -136,16 +95,11 @@
               @click-right-icon="passwordClick"
             />
 
-            <van-button
-              round
-              size="large"
-              type="info"
-            >登录</van-button>
+            <van-button round size="large" type="info" class="mt30">登录</van-button>
             <div class="aLink">密码重置申请</div>
           </div>
         </van-tab>
       </van-tabs>
-
     </div>
   </div>
 </template>
@@ -185,6 +139,9 @@ export default {
     };
   },
   methods: {
+    goCompanyDeclare(){
+      this.$router.push('/platform');
+    },
     onConfirm(value) {
       this.value = value;
       this.showPicker = false;
@@ -204,7 +161,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .govTitle {
   margin-top: 0.76rem;
   width: 100%;
@@ -229,65 +186,82 @@ export default {
   margin: 0 auto;
   margin-top: 0.3rem;
 }
-/* 重写tab样式 */
-.van-tabs--card > .van-tabs__wrap {
-  height: 0.5rem;
-}
-.van-tabs__nav--card {
-  border: none;
-  border-bottom: #1677ff 1px solid !important;
-  margin: 0;
-  height: 0.5rem;
-}
-.van-tabs__nav--card .van-tab {
-  line-height: 0.5rem !important;
-  font-size: 0.2rem !important;
-  color: #8d8d8d;
-  border: none;
-}
-.van-tabs__nav--card .van-tab.van-tab--active {
-  background: #fff;
-  color: #1677ff;
-}
-.van-tabs__nav--card .van-tab.van-tab--active::after {
-  display: block;
-  content: "";
-  position: absolute;
-  width: 0.21rem;
-  height: 0.11rem;
-  background: url("../../assets/platform/icon-arrowForTab.png") no-repeat center;
-  background-size: 100% 100%;
-  bottom: -1px;
-}
-.van-cellForSelect,
-.van-cell {
-  padding: 0 0.08rem;
-  height: 0.5rem;
-  line-height: 0.5rem;
-  border: none;
-  border-bottom: #cccccc 1px solid;
 
-  font-size: 0.18rem;
-}
-.van-cellForSelect {
-  border: #cccccc 1px solid;
-}
 .tabContent {
   margin-top: 0.2rem;
-}
-.van-image {
-  margin-top: 0.2rem;
-  border: #bfbfbf 0.01rem solid;
-  border-radius: 0.4rem;
-}
-.van-image img {
-  width: 100%;
-  height: 100%;
 }
 .aLink {
   font-size: 0.14rem;
   text-decoration: underline;
   color: #1677ff;
   margin-top: 0.24rem;
+}
+</style>
+<style lang="less">
+.platform-login {
+  text-align: center;
+  overflow: hidden;
+  height: 100%;
+  background-color: #fff;
+  /* 重写tab样式 */
+  .van-tabs--card > .van-tabs__wrap {
+    height: 0.5rem;
+  }
+  .van-tabs__nav--card {
+    border: none;
+    border-bottom: #1677ff 1px solid !important;
+    margin: 0;
+    height: 0.5rem;
+  }
+  .van-tabs__nav--card .van-tab {
+    line-height: 0.5rem !important;
+    font-size: 0.2rem !important;
+    color: #8d8d8d;
+    border: none;
+  }
+  .van-tabs__nav--card .van-tab.van-tab--active {
+    background: #fff;
+    color: #1677ff;
+  }
+  .van-tabs__nav--card .van-tab.van-tab--active::after {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 0.21rem;
+    height: 0.11rem;
+    background: url("../../assets/platform/icon-arrowForTab.png") no-repeat
+      center;
+    background-size: 100% 100%;
+    bottom: -1px;
+  }
+  .van-cellForSelect,
+  .van-cell {
+    padding: 0 0.08rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    border: none;
+    border-bottom: #cccccc 1px solid;
+
+    font-size: 0.18rem;
+  }
+  .van-cellForSelect {
+    border: #cccccc 1px solid;
+  }
+  .van-image {
+    margin-top: 0.2rem;
+    border: #bfbfbf 0.01rem solid;
+    border-radius: 0.4rem;
+  }
+  .van-image img {
+    width: 100%;
+    height: 100%;
+  }
+  .van-button--round {
+    border-radius: 0.1rem;
+  }
+  .van-button--large {
+      width: 98%;
+      height: 0.4rem;
+  }
 }
 </style>
