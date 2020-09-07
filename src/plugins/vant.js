@@ -3,7 +3,10 @@ import { Button, NavBar, Dialog, Toast, Tab, Tabs, List, Cell, CellGroup, Radio,
 import { Tag } from 'vant'
 import { Col, Row } from 'vant'
 import { Icon } from 'vant'
+import { Tabbar, TabbarItem } from 'vant'
 
+Vue.use(Tabbar);
+Vue.use(TabbarItem);
 Vue.use(Icon);
 Vue.use(Col);
 Vue.use(Row);

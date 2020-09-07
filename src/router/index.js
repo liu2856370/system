@@ -16,12 +16,6 @@ const routes = [{
             import ( /* webpackChunkName: "信息查询首页" */ '../modules/info/Index.vue')
     },
     {
-        path: '/platform',
-        name: 'platform',
-        component: () =>
-            import ( /* webpackChunkName: "平台首页" */ '../modules/platform/Index.vue')
-    },
-    {
         path: '/login',
         name: 'login',
         component: () =>
@@ -53,9 +47,44 @@ const routes = [{
     },
 
     //lzq
-
+    {
+        path: '/platform',
+        name: 'platform',
+        component: () =>
+            import ( /* webpackChunkName: "平台首页" */ '../modules/platform/Index.vue')
+    },
+    {
+        path: '/user-center',
+        name: 'userCenter',
+        component: () =>
+            import ( /* webpackChunkName: "平台首页" */ '../modules/platform/UserCenter.vue')
+    },
     //zp
 
+    {
+        path: '/set-basis-list',
+        name: 'setBasisList',
+        component: () =>
+            import ( /* webpackChunkName: "法律依据列表" */ '../modules/info/SetBasisList.vue')
+    },
+    {
+        path: '/certification-check',
+        name: 'certificationCheck',
+        component: () =>
+            import ( /* webpackChunkName: "发证检核" */ '../modules/info/CertificationCheck.vue')
+    },
+    {
+        path: '/change-check',
+        name: 'changeCheck',
+        component: () =>
+            import ( /* webpackChunkName: "发证检核" */ '../modules/info/ChangeCheck.vue')
+    },
+    {
+        path: '/replace-check',
+        name: 'replaceCheck',
+        component: () =>
+            import ( /* webpackChunkName: "发证检核" */ '../modules/info/ReplaceCheck.vue')
+    },
     //zxq
 
     //swj
