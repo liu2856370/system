@@ -2,7 +2,9 @@ import Vue from 'vue'
 import { Button, NavBar, Dialog, Toast, Tab, Tabs, List, Cell, CellGroup, Radio, NoticeBar, Collapse, CollapseItem } from 'vant'
 import { Tag } from 'vant'
 import { Col, Row } from 'vant'
+import { Icon } from 'vant'
 
+Vue.use(Icon);
 Vue.use(Col);
 Vue.use(Row);
 Vue.use(Tag);
