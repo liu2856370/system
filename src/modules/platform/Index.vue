@@ -24,8 +24,8 @@
             </van-cell>
             <van-row>
               <van-col>
-                   <van-icon name="arrow-down" />
-                   <van-icon name="arrow-down" />
+                <van-icon name="arrow-down" />
+                <van-icon name="arrow-down" />
               </van-col>
             </van-row>
           </template>
@@ -49,37 +49,46 @@
         </platform-list>
       </van-tab>
     </van-tabs>
-
   </div>
 </template>
 
 <script>
-import platformList from './common/platformList'
+import platformList from "./common/platformList";
 export default {
-  name: 'index',
+  name: "index",
   components: {
-    platformList
+    platformList,
   },
-  data(){
+  data() {
     return {
-      active:0,
-      list1: [1,2,3],
-      list2: [1,2,3,4]
-    }
-  }
-}
+      active: 0,
+      list1: [
+        { orgname: "山东群英电气有限公司1" },
+        { orgname: "山东群英电气有限公司2" },
+        { orgname: "山东群英电气有限公司3" },
+      ],
+      list2: [
+        { orgname: "山东群英电气有限公司1" },
+        { orgname: "山东群英电气有限公司2" },
+        { orgname: "山东群英电气有限公司3" },
+        { orgname: "山东群英电气有限公司4" },
+        { orgname: "山东群英电气有限公司5" }
+      ],
+    };
+  },
+};
 </script>
 
 
 <style lang="less" scoped>
-.org-info{
-    padding: 0.1rem 0.15rem;
-    color: #7b7b7b;
-    .org-name{
-        font-size:0.16rem;
-    }
-    .org-tags{
-        text-align: right;
-    }
+.org-info {
+  padding: 0.1rem 0.15rem;
+  color: #7b7b7b;
+  .org-name {
+    font-size: 0.16rem;
+  }
+  .org-tags {
+    text-align: right;
+  }
 }
 </style>
