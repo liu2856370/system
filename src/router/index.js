@@ -87,6 +87,12 @@ const routes = [{
     },
     //zxq
 
+    {
+        path: '/image',
+        name: 'image',
+        component: () =>
+            import ( /* webpackChunkName: "平台首页img" */ '../modules/platform/ImageShow.vue')
+    },
     //swj
     {
         path: '/site-reView',
