@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PHeader>等待办理企业信息</PHeader>
+    <PHeader :showArrow="true">等待办理企业信息</PHeader>
     <van-search
       v-model="keyword"
       placeholder="请输入搜索关键词"
