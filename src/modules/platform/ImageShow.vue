@@ -31,7 +31,7 @@
         data(){
         return{
             active: Number(localStorage.getItem('activeIdx'))?Number(localStorage.getItem('activeIdx')):0,
-            tabList:['受理通知书','许可证书','不予许可决定书','证照寄送凭证'],
+            tabList:['受理通知书','许可证书','不予许可决定书','证照寄送凭证']
         }
         },
         methods:{
