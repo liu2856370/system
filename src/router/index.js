@@ -117,6 +117,12 @@ const routes = [{
         name: 'siteReview-companyInfo',
         component: () =>
             import ( /* webpackChunkName: "现场审查列表-待审查公司详情" */ '../modules/platform/SiteReView-companyInfo.vue')
+    },
+    {
+        path: '/siteReView-userCenter',
+        name: 'siteReview-userCenter',
+        component: () =>
+            import ( /* webpackChunkName: "现场审查列表-待审查公司详情" */ '../modules/platform/SiteReView-userCenter.vue')
     }
 ]
 

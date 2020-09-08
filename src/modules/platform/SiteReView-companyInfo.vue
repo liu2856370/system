@@ -4,11 +4,11 @@
       山东群英电气有限公司
       <template #right>
         <van-tag
-                round
-                plain
-                size="large"
-                type="primary"
-              >新增</van-tag>
+          round
+          plain
+          size="large"
+          type="primary"
+        >新增</van-tag>
       </template>
     </PHeader>
     <van-tabs
@@ -35,7 +35,10 @@
           />
           <van-cell title="现场核查通知书">
             <template #default>
-              <van-tag type="primary">查看</van-tag>
+              <van-tag
+                type="primary"
+                size="large"
+              >查看</van-tag>
             </template>
           </van-cell>
         </van-cell-group>
@@ -69,7 +72,10 @@
                   />
                   <van-cell title="生产地址">
                     <template #default>
-                      <van-tag type="primary">查看</van-tag>
+                      <van-tag
+                        type="primary"
+                        size="large"
+                      >查看</van-tag>
                     </template>
                   </van-cell>
                   <van-cell
@@ -82,7 +88,10 @@
                   />
                   <van-cell title="审报产品">
                     <template #default>
-                      <van-tag type="primary">查看</van-tag>
+                      <van-tag
+                        type="primary"
+                        size="large"
+                      >查看</van-tag>
                     </template>
                   </van-cell>
                   <van-cell
@@ -434,12 +443,82 @@
 
         </template>
       </van-tab>
-      <van-tab title="评审材料列表">评审材料列表</van-tab>
+      <van-tab title="评审材料列表">
+        <template>
+          <van-cell
+            title="现场签到"
+            value="2020-07-04 12:35:21"
+          />
+          <van-cell-group class="mt10">
+            <van-cell
+              title="规定提交材料"
+              value="实地核查办法 *"
+              value-class="color-red"
+            />
+            <van-cell
+              title="已提交材料"
+              value="22 危化品工业气体核查办法1.zip "
+            />
+            <van-cell
+              title="现场情况"
+              center
+            >
+              <template #right-icon>
+                <van-icon class-prefix="icon-camera" />
+              </template>
+            </van-cell>
+          </van-cell-group>
+          <van-cell-group class="mt10">
+            <van-cell
+              title="规定提交材料"
+              value="实地核查报告 *"
+              value-class="color-red"
+            />
+            <van-cell
+              title="已提交材料"
+              value="22 危化品工业气体核查办法1.zip "
+            />
+            <van-cell
+              title="现场情况"
+              center
+            >
+              <template #right-icon>
+                <van-icon class-prefix="icon-camear" />
+              </template>
+            </van-cell>
+          </van-cell-group>
+          <van-cell-group class="mt10">
+            <van-cell
+              title="规定提交材料"
+              value="实地核查总结 *"
+              value-class="color-red"
+            />
+            <van-cell
+              title="已提交材料"
+              value="22 危化品工业气体核查办法1.zip "
+            />
+            <van-cell
+              title="现场情况"
+              center
+            >
+              <template #right-icon>
+                <van-icon class-prefix="icon-camear" />
+              </template>
+            </van-cell>
+          </van-cell-group>
+        </template>
+      </van-tab>
     </van-tabs>
 
     <van-tabbar v-model="active">
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="friends-o">个人中心</van-tabbar-item>
+      <van-tabbar-item
+        icon="home-o"
+        to="/site-reView"
+      >首页</van-tabbar-item>
+      <van-tabbar-item
+        icon="user-o"
+        to="/siteReView-userCenter"
+      >个人中心</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -497,9 +576,9 @@ export default {
       this.value = value;
       this.showPicker = false;
     },
-    onClickRight(){
-      console.info("新增")
-    }
+    onClickRight() {
+      console.info("新增");
+    },
   },
 };
 </script>
@@ -515,6 +594,9 @@ export default {
 }
 .ml20 {
   margin-left: 0.2rem;
+}
+.color-red {
+  color: #ff3b30;
 }
 .whiteBg {
   width: 100%;
@@ -560,5 +642,12 @@ export default {
   color: #323232;
   font-size: 0.14rem;
   line-height: 0.25rem;
+}
+.icon-camera {
+  width: 0.24rem;
+  height: 0.24rem;
+  display: block;
+  background: url("../../assets/platform/icon-camera.png") no-repeat center;
+  background-size: 100% 100%;
 }
 </style>
