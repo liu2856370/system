@@ -22,6 +22,12 @@ const routes = [{
             import ( /* webpackChunkName: "平台首页" */ '../modules/platform/Index.vue')
     },
     {
+        path: '/image',
+        name: 'image',
+        component: () =>
+            import ( /* webpackChunkName: "平台首页img" */ '../modules/platform/ImageShow.vue')
+    },
+    {
         path: '/login',
         name: 'login',
         component: () =>
