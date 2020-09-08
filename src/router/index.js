@@ -85,6 +85,12 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "发证检核" */ '../modules/info/ReplaceCheck.vue')
     },
+    {
+        path: '/permit-archiver',
+        name: 'permitArchiver',
+        component: () =>
+            import ( /* webpackChunkName: "许可档案" */ '../modules/platform/PermitArchiver.vue')
+    },
     //zxq
 
     {
