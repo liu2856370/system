@@ -12,7 +12,7 @@ Vue.config.productionTip = false;
 
 window.flags = { 
     enableLog:true,//开启日志
-    enableMock:true//开启本地虚拟报文
+    enableMock:false//开启本地虚拟报文
 }
 
 
