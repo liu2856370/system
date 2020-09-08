@@ -61,39 +61,61 @@ const routes = [{
     },
     //zp
 
-{
-  path: '/set-basis-list',
-  name: 'setBasisList',
-  component: () => import(/* webpackChunkName: "法律依据列表" */ '../modules/info/SetBasisList.vue')
-},
-{
-  path: '/certification-check',
-  name: 'certificationCheck',
-  component: () => import(/* webpackChunkName: "发证检核" */ '../modules/info/CertificationCheck.vue')
-},
-{
-  path: '/change-check',
-  name: 'changeCheck',
-  component: () => import(/* webpackChunkName: "发证检核" */ '../modules/info/ChangeCheck.vue')
-},
-{
-  path: '/replace-check',
-  name: 'replaceCheck',
-  component: () => import(/* webpackChunkName: "发证检核" */ '../modules/info/ReplaceCheck.vue')
-},
-//zxq
+    {
+        path: '/set-basis-list',
+        name: 'setBasisList',
+        component: () =>
+            import ( /* webpackChunkName: "法律依据列表" */ '../modules/info/SetBasisList.vue')
+    },
+    {
+        path: '/certification-check',
+        name: 'certificationCheck',
+        component: () =>
+            import ( /* webpackChunkName: "发证检核" */ '../modules/info/CertificationCheck.vue')
+    },
+    {
+        path: '/change-check',
+        name: 'changeCheck',
+        component: () =>
+            import ( /* webpackChunkName: "发证检核" */ '../modules/info/ChangeCheck.vue')
+    },
+    {
+        path: '/replace-check',
+        name: 'replaceCheck',
+        component: () =>
+            import ( /* webpackChunkName: "发证检核" */ '../modules/info/ReplaceCheck.vue')
+    },
+    //zxq
 
-//swj
-{
-  path: '/site-reView',
-  name: 'siteReview',
-  component: () =>
-    import( /* webpackChunkName: "现场审查列表" */ '../modules/platform/SiteReView.vue')
-}
+    {
+        path: '/image',
+        name: 'image',
+        component: () =>
+            import ( /* webpackChunkName: "平台首页img" */ '../modules/platform/ImageShow.vue')
+    },
+    //swj
+    {
+        path: '/site-reView',
+        name: 'siteReview',
+        component: () =>
+            import ( /* webpackChunkName: "现场审查列表" */ '../modules/platform/SiteReView.vue')
+    },
+    {
+        path: '/siteReView-companyList',
+        name: 'siteReview-companyList',
+        component: () =>
+            import ( /* webpackChunkName: "现场审查列表-待审查公司列表" */ '../modules/platform/SiteReView-companyList.vue')
+    },
+    {
+        path: '/siteReView-companyInfo',
+        name: 'siteReview-companyInfo',
+        component: () =>
+            import ( /* webpackChunkName: "现场审查列表-待审查公司详情" */ '../modules/platform/SiteReView-companyInfo.vue')
+    }
 ]
 
 const router = new VueRouter({
-  routes
+    routes
 })
 
 export default router
