@@ -31,7 +31,7 @@
         <platform-list :list="list2">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
-              <van-col span="12" class="org-name">{{slotProps.orgname}}</van-col>
+              <van-col span="12" class="org-name" @click="goPermitArchiver">{{slotProps.orgname}}</van-col>
               <van-col span="12" class="org-tags">
                 <van-tag plain round type="primary" class="mr10">准许许可</van-tag>
                 <van-tag plain round type="primary">发证</van-tag>
@@ -80,6 +80,11 @@ export default {
       ]
     };
   },
+  methods:{
+    goPermitArchiver(){
+      this.$router.push("/permit-archiver");
+    }
+  }
 };
 </script>
 

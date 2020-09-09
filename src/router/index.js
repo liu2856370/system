@@ -85,6 +85,12 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "发证检核" */ '../modules/info/ReplaceCheck.vue')
     },
+    {
+        path: '/permit-archiver',
+        name: 'permitArchiver',
+        component: () =>
+            import ( /* webpackChunkName: "许可档案" */ '../modules/platform/PermitArchiver.vue')
+    },
     //zxq
 
     {
@@ -159,6 +165,12 @@ const routes = [{
         name: 'siteReview-companyInfo',
         component: () =>
             import ( /* webpackChunkName: "现场审查列表-待审查公司详情" */ '../modules/platform/SiteReView-companyInfo.vue')
+    },
+    {
+        path: '/siteReView-userCenter',
+        name: 'siteReview-userCenter',
+        component: () =>
+            import ( /* webpackChunkName: "现场审查列表-待审查公司详情" */ '../modules/platform/SiteReView-userCenter.vue')
     }
 ]
 

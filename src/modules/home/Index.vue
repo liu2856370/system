@@ -16,6 +16,11 @@
 <script>
 export default {
   name: "home",
+  created(){
+    client.rpc("/dict/getSpxx",{}).then(res=>{
+      console.log(res);
+    })
+  }
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PHeader>等待办理企业信息</PHeader>
+    <PHeader :showArrow="true">等待办理企业信息</PHeader>
     <van-search
       v-model="keyword"
       placeholder="请输入搜索关键词"
@@ -57,8 +57,14 @@
     </platform-list>
 
     <van-tabbar v-model="active">
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="friends-o">个人中心</van-tabbar-item>
+      <van-tabbar-item
+        icon="home-o"
+        to="/site-reView"
+      >首页</van-tabbar-item>
+      <van-tabbar-item
+        icon="user-o"
+        to="/siteReView-userCenter"
+      >个人中心</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>

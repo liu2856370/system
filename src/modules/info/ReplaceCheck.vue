@@ -1,7 +1,7 @@
 <template>
   <div class="index">
         <platform-list :list="list1">
-          <template #fixed="{slotProps}">
+          <template #fixed>
             <van-cell title="产品品种" value="工业用丙烯晴" />
             <van-cell title="规格型号" value="JDZ(X)10-10" />
             <van-cell title="产品标准" value="GB1208-2010" />
@@ -17,7 +17,7 @@
 <script>
 import platformList from "../platform/common/platformList";
 export default {
-  name: "index",
+  name: "replaceCheck",
   components: {
     platformList
   },
