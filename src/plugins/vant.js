@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import { Button, NavBar, Dialog, Toast, Tab, Tabs, List, Cell, CellGroup, Radio, NoticeBar, Collapse, CollapseItem, Image, Form, Field } from 'vant'
 
-
 Vue.use(RadioGroup);
 Vue.use(Field);
 Vue.use(Form);
