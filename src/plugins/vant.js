@@ -8,6 +8,7 @@ import { Form } from 'vant'
 import { Field } from 'vant'
 import { RadioGroup, Radio } from 'vant'
 
+
 Vue.use(RadioGroup);
 Vue.use(Field);
 Vue.use(Form);
