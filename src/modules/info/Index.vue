@@ -95,7 +95,7 @@ export default {
         this.$router.push("/change-check");
       }
       else{
-        this.$router.push("/relace-check");
+        this.$router.push("/replace-check");
       }
     }
   }

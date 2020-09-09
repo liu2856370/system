@@ -1,12 +1,5 @@
 import Vue from 'vue'
-import { Button, NavBar, Dialog, Toast, Tab, Tabs, List, Cell, CellGroup, NoticeBar, Collapse, CollapseItem } from 'vant'
-import { Tag } from 'vant'
-import { Col, Row } from 'vant'
-import { Icon } from 'vant'
-import { Tabbar, TabbarItem } from 'vant'
-import { Form } from 'vant'
-import { Field } from 'vant'
-import { RadioGroup, Radio } from 'vant'
+import { Button, NavBar, Dialog, Toast, Tab, Tabs, List, Cell, CellGroup, Radio, NoticeBar, Collapse, CollapseItem, Image, Form, Field } from 'vant'
 
 
 Vue.use(RadioGroup);
@@ -31,3 +24,6 @@ Vue.use(Radio);
 Vue.use(NoticeBar);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
+Vue.use(Image);
+Vue.use(Form);
+Vue.use(Field);
