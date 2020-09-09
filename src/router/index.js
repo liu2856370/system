@@ -93,6 +93,54 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "平台首页img" */ '../modules/platform/ImageShow.vue')
     },
+    {
+        path: '/admin-ListView',
+        name: 'adminListView',
+        component: () =>
+            import ( /* webpackChunkName: "行政审批列表" */ '../modules/platform/Administration-List.vue')
+    },
+    {
+        path: '/admin-InfoView',
+        name: 'adminInfoView',
+        component: () =>
+            import ( /* webpackChunkName: "行政审批信息" */ '../modules/platform/Administration-Info.vue')
+    },
+    {
+        path: '/admin-DetailView',
+        name: 'adminDetailView',
+        component: () =>
+            import ( /* webpackChunkName: "行政审批信息" */ '../modules/platform/Administration-Detail.vue')
+    },
+    {
+        path: '/admin-EquipmentView',
+        name: 'adminEquipmentView',
+        component: () =>
+            import ( /* webpackChunkName: "行政审批-生产设备信息" */ '../modules/platform/Admin-Equipment.vue')
+    },
+    {
+        path: '/admin-InstrumentView',
+        name: 'adminInstrumentView',
+        component: () =>
+            import ( /* webpackChunkName: "行政审批-仪器、设备信息" */ '../modules/platform/Admin-Instrument.vue')
+    },
+    {
+        path: '/admin-AgreementView',
+        name: 'adminAgreementView',
+        component: () =>
+            import ( /* webpackChunkName: "行政审批-原材料外构件、外协议信息" */ '../modules/platform/Admin-Agreement.vue')
+    },
+    {
+        path: '/admin-MaterialsView',
+        name: 'adminMaterialsView',
+        component: () =>
+            import ( /* webpackChunkName: "行政审批-许可档案-申请材料信息" */ '../modules/platform/Admin-Materials.vue')
+    },
+    {
+        path: '/admin-ObserverView',
+        name: 'adminObserverView',
+        component: () =>
+            import ( /* webpackChunkName: "行政审批-许可档案-观察员报告信息" */ '../modules/platform/Admin-Observer.vue')
+    },
     //swj
     {
         path: '/site-reView',

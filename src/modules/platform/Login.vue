@@ -95,7 +95,7 @@
               @click-right-icon="passwordClick"
             />
 
-            <van-button round size="large" type="info" class="mt30">登录</van-button>
+            <van-button round size="large" type="info" class="mt30" @click="goAdministrationView">登录</van-button>
             <div class="aLink">密码重置申请</div>
           </div>
         </van-tab>
@@ -144,6 +144,9 @@ export default {
     },
     goSiteReView(){
       this.$router.push("./site-reView");
+    },
+    goAdministrationView(){
+      this.$router.push("./admin-ListView");
     },
     onConfirm(value) {
       this.value = value;
