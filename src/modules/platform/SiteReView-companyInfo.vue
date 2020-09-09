@@ -8,6 +8,7 @@
           plain
           size="large"
           type="primary"
+          @click="goAdd"
         >新增</van-tag>
       </template>
     </PHeader>
@@ -38,6 +39,7 @@
               <van-tag
                 type="primary"
                 size="large"
+                @click="showNotice"
               >查看</van-tag>
             </template>
           </van-cell>
@@ -75,6 +77,7 @@
                       <van-tag
                         type="primary"
                         size="large"
+                        @click="showAddress"
                       >查看</van-tag>
                     </template>
                   </van-cell>
@@ -91,6 +94,7 @@
                       <van-tag
                         type="primary"
                         size="large"
+                        @click="showProduction"
                       >查看</van-tag>
                     </template>
                   </van-cell>
@@ -376,6 +380,7 @@
                 plain
                 size="large"
                 type="success"
+                @click="goEdit"
               >编辑</van-tag>
               <van-tag
                 round
@@ -429,6 +434,7 @@
                 plain
                 size="large"
                 type="success"
+                @click="goEdit"
               >编辑</van-tag>
               <van-tag
                 round
@@ -562,7 +568,7 @@ Vue.use(Button);
 export default {
   data() {
     return {
-      active: 2,
+      active: 0,
       result: ["0", "2"],
       value: "",
       showPicker: false,
@@ -578,6 +584,24 @@ export default {
     },
     onClickRight() {
       console.info("新增");
+    },
+    goAdd() {
+      this.$router.push("/siteReView-unqualifiedEdit");
+    },
+    goEdit() {
+      this.$router.push("/siteReView-unqualifiedEdit");
+    },
+    showNotice() {
+      // 现场核查通知书
+      this.$router.push("./goMore-showNotice");
+    },
+    showAddress() {
+      // 生产地址
+      this.$router.push("./goMore-showAddress");
+    },
+    showProduction() {
+      // 申报产品
+      this.$router.push("./goMore-showProduction");
     },
   },
 };

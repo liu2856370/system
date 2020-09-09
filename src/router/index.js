@@ -170,7 +170,31 @@ const routes = [{
         path: '/siteReView-userCenter',
         name: 'siteReview-userCenter',
         component: () =>
-            import ( /* webpackChunkName: "现场审查列表-待审查公司详情" */ '../modules/platform/SiteReView-userCenter.vue')
+            import ( /* webpackChunkName: "现场审查列表-用户中心" */ '../modules/platform/SiteReView-userCenter.vue')
+    },
+    {
+        path: '/siteReView-unqualifiedEdit',
+        name: 'siteReview-unqualifiedEdit',
+        component: () =>
+            import ( /* webpackChunkName: "现场审查列表-编辑不符合项" */ '../modules/platform/SiteReView-unqualifiedEdit.vue')
+    },
+    {
+        path: '/goMore-showAddress',
+        name: 'goMore-showAddress',
+        component: () =>
+            import ( /* webpackChunkName: "现场审查列表-详情-更多-展示生产地址" */ '../modules/platform/SiteReView-companyInfo-showAddress.vue')
+    },
+    {
+        path: '/goMore-showProduction',
+        name: 'goMore-showProduction',
+        component: () =>
+            import ( /* webpackChunkName: "现场审查列表-详情-更多-申报产品" */ '../modules/platform/SiteReView-companyInfo-showProduction.vue')
+    },
+    {
+        path: '/goMore-showNotice',
+        name: 'goMore-showNotice',
+        component: () =>
+            import ( /* webpackChunkName: "现场审查列表-详情-更多-展示现场核查通知书" */ '../modules/platform/SiteReView-companyInfo-showNotice.vue')
     }
 ]
 
