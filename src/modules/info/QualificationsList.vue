@@ -38,6 +38,7 @@ name: "accordingInfo",
   data() {
     return {
       active: 0,
+      value: "",
       list1: [
         { orgname: "山东群英电气有限公司1" },
         { orgname: "山东群英电气有限公司2" },
