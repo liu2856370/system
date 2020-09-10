@@ -1,3 +1,5 @@
+import dictData from "./dictData"
+
 //产品标签
 const  labels = [
    {label:"秒批",value:"01"},
@@ -222,28 +224,29 @@ const unitFormatter = (val)=>{
     }
   }
 }
-//产品标签翻译
-const labelFormatter = (val)=>{
-  // for(let item of labels){
-  //   if(item.value == val){
-  //       return item.label;
-  //   }
-  // }
-  return val;
+    /**
+     * 脱敏姓名，字典翻译过滤器
+     * @params 字典名称 dictName
+     * @params 字典key  key
+     * @params type [string] 开头或结尾开始脱敏和中间脱敏
+     * @author liuzq 2020-09-10
+     */
+const dictFormatter = (key = "",dictName = "")=>{
+  return dictData[dictName][key];
 }
-
-
 
 export default {
     install (Vue, option) {
+        //格式化过滤器
         Vue.filter('formatMoney', formatMoney);
         Vue.filter('formatPhone', formatPhone); //脱敏手机号
         Vue.filter('formatName', formatName); //脱敏姓名
         Vue.filter('formatAllDate', formatAllDate);
         Vue.filter('dateFormat', dateFormat);
         Vue.filter('unitFormatter', unitFormatter);//产品期限范围的单位（天:D,月:M,年:Y）
-        Vue.filter('labelFormatter', labelFormatter);//产品标签
-
+      
+        //字典翻译过滤器
+        Vue.filter('dictFormatter', dictFormatter);//字典翻译
         //公共方法
         Vue.prototype['formatEditVal']= formatEditVal;
     }

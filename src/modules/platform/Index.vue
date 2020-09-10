@@ -66,6 +66,7 @@ export default {
     return {
       active: 0,
       activeTabbar: 0,
+      aa:"01",
       list1: [
         { orgname: "山东群英电气有限公司1" },
         { orgname: "山东群英电气有限公司2" },
