@@ -1,5 +1,7 @@
 <template>
   <div class="index">
+    <van-search v-model="value" shape="round" placeholder="单位名称" />
+    <van-cell :title="list1.length" value="筛选" />
         <platform-list :list="list1">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
@@ -36,6 +38,7 @@ name: "accordingInfo",
   data() {
     return {
       active: 0,
+      value: "",
       list1: [
         { orgname: "山东群英电气有限公司1" },
         { orgname: "山东群英电气有限公司2" },

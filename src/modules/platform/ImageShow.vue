@@ -8,8 +8,30 @@
         <van-tabs  v-model="active" 
             @click="tabHandler"
             :ellipsis="false"
-            :border="false">
-            <van-tab v-for="(tabname,idx) in tabList" :key="idx" :title="tabname" >
+            :border="false"
+            swipe-threshold="4">
+            <van-tab title="受理通知书" >
+                <van-image src="https://img.yzcdn.cn/vant/cat.jpeg">
+                    <template #default>
+                        <div class="text" style="margin-top: 0.3rem;color: #646566;font-size: 14px;text-align: center;">全国工业产品生产许可证</div>
+                    </template>
+                </van-image>
+            </van-tab>
+            <van-tab title="许可证书" >
+                <van-image src="https://img.yzcdn.cn/vant/cat.jpeg">
+                    <template #default>
+                        <div class="text" style="margin-top: 0.3rem;color: #646566;font-size: 14px;text-align: center;">全国工业产品生产许可证</div>
+                    </template>
+                </van-image>
+            </van-tab>
+            <van-tab title="不予许可决定书" >
+                <van-image src="https://img.yzcdn.cn/vant/cat.jpeg">
+                    <template #default>
+                        <div class="text" style="margin-top: 0.3rem;color: #646566;font-size: 14px;text-align: center;">全国工业产品生产许可证</div>
+                    </template>
+                </van-image>
+            </van-tab>
+            <van-tab title="照片寄送凭证" >
                 <van-image src="https://img.yzcdn.cn/vant/cat.jpeg">
                     <template #default>
                         <div class="text" style="margin-top: 0.3rem;color: #646566;font-size: 14px;text-align: center;">全国工业产品生产许可证</div>
@@ -30,8 +52,6 @@
         },
         data(){
         return{
-            active: Number(localStorage.getItem('activeIdx'))?Number(localStorage.getItem('activeIdx')):0,
-            tabList:['受理通知书','许可证书','不予许可决定书','证照寄送凭证']
         }
         },
         methods:{

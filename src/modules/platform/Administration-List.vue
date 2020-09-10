@@ -88,34 +88,42 @@
             </van-tab>
             <van-tab title="综合查询">
                     <platform-list :list="list3">
-                    <template #fixed="{slotProps}">
-                    <van-row class="org-info">
-                    <van-col span="12" class="org-name" @click="goSynthesis(slotProps.index)">{{slotProps.orgname}}</van-col>
-                    <van-col span="12" class="org-tags">
-                        <van-tag
-                        plain
-                        round
-                        :type="slotProps.state2Type"
-                        >{{slotProps.state2}}</van-tag>
-                    </van-col>
-                    </van-row>
-                    <van-cell
-                    title="许可事项"
-                    value="特种设备安装改造维修许可"
-                    />
-                    <van-cell
-                    title="所在地区"
-                    value="淄博市周村区"
-                    />
-                    <van-cell
-                    title="所处环节"
-                    value="已提交至材料接收处"
-                    />
-                    <van-cell
-                    title="简化流程"
-                    value="是"
-                    />
-                </template>
+                    <template #fixed>
+                        <van-row class="org-info">
+                        <van-col span="12" class="org-name" @click="goSynthesis(slotProps.index)">{{slotProps.orgname}}</van-col>
+                        <van-col span="12" class="org-tags">
+                            <van-tag plain round:type="slotProps.state2Type" >{{slotProps.state2}}</van-tag>
+                        </van-col>
+                        </van-row>
+                        <van-cell title="许可事项" value="特种设备安装改造维修许可" />
+                        <van-cell title="所在地区" value="淄博市周村区" />
+                        <van-cell title="所处环节" value="已提交至材料接收处" />
+                        <van-cell title="简化流程" value="是" />
+                    </template>
+                    <template #fixed>
+                        <van-row class="org-info">
+                        <van-col span="12" class="org-name" @click="goSynthesis(slotProps.index)">{{slotProps.orgname}}</van-col>
+                        <van-col span="12" class="org-tags">
+                            <van-tag plain round:type="slotProps.state2Type" >{{slotProps.state2}}</van-tag>
+                        </van-col>
+                        </van-row>
+                        <van-cell title="许可事项" value="特种设备安装改造维修许可" />
+                        <van-cell title="所在地区" value="淄博市周村区" />
+                        <van-cell title="所处环节" value="材料退回" @click="goReturnable" />
+                        <van-cell title="简化流程" value="是" />
+                    </template>
+                    <template #fixed>
+                        <van-row class="org-info">
+                        <van-col span="12" class="org-name" @click="goSynthesis(slotProps.index)">{{slotProps.orgname}}</van-col>
+                        <van-col span="12" class="org-tags">
+                            <van-tag plain round:type="slotProps.state2Type" >{{slotProps.state2}}</van-tag>
+                        </van-col>
+                        </van-row>
+                        <van-cell title="许可事项" value="特种设备安装改造维修许可" />
+                        <van-cell title="所在地区" value="淄博市周村区" />
+                        <van-cell title="所处环节" value="材料补正" @click="goCorrection" />
+                        <van-cell title="简化流程" value="是" />
+                    </template>
                 </platform-list>
             </van-tab>
         </van-tabs>
@@ -168,6 +176,22 @@
                     state1Type: "danger",
                     state2: "发证",
                     state2Type: "success",
+                },
+                {
+                    orgname: "青岛计量技术研究院",
+                    index: 1,
+                    state1: "",
+                    state1Type: "danger",
+                    state2: "发证",
+                    state2Type: "success",
+                },
+                {
+                    orgname: "青岛计量技术研究院",
+                    index: 1,
+                    state1: "",
+                    state1Type: "danger",
+                    state2: "发证",
+                    state2Type: "success",
                 }
             ]
         };
@@ -178,6 +202,14 @@
             console.info("当前点击的索引是：" + ind);
             this.$router.push("/admin-InfoView");
         },
+        //材料退回
+        goReturnable(){
+            this.$router.push("/admin-ReturnableView");
+        },
+        //材料补正
+        goCorrection(){
+            this.$router.push("/admin-CorrectionView");
+        }
     },
  };
 </script>

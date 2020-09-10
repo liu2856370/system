@@ -66,39 +66,17 @@
             
             <van-tab title="企业主要负责人和技术人员情况">
                 <template>
-                    <van-cell title="是否免评审" value="否" />
-                    <van-cell title="申请产品类别" value="化肥" />
-                    <van-cell title="申请产品名称" value="复肥" />
-                    <van-cell title="申报产品项目总投资" value="100000(万元)" />
-                    <van-cell title="社保产品年设计生产力" value="合格" />
-                    <van-cell title="申请人名称" value="住商肥料(青岛)有限公司" />
-                    <van-cell title="单位注册地址" value="青岛市平度市" />
-                    <van-cell title="邮政编码" value="252600" />
-                    <van-cell title="电话" value="0532-88336225" />
-                    <van-cell title="传真" value="" />
-                    <van-cell title="电子邮箱" value="" />
-                    <van-cell title="组织机构代码" value="763613016" />
-                    <van-cell title="经济类型" value="" />
-                    <van-cell title="工商登记机构" value="763613016" />
-                    <van-cell title="营业执照注册号" value="" />
-                    <van-cell title="经营期限(俩日期)" value="763613016" />
-                    <van-cell title="成立日期" value="" />
-                    <van-cell title="固定资产" value="763613016" />
-                    <van-cell title="注册资金" value="" />
-                    <van-cell title="年总产值" value="763613016" />
-                    <van-cell title="年销售额" value="" />
-                    <van-cell title="年纳税金额" value="763613016" />
-                    <van-cell title="年利润" value="" />
-                    <van-cell title="法定代表人" value="763613016" />
-                    <van-cell title="法定代表人身份证号" value="" />
-                    <van-cell title="企业代表人身份证号" value="763613016" />
-                    <van-cell title="质量保证负责人" value="" />
-                    <van-cell title="质量保证负责人身份证号" value="763613016" />
-                    <van-cell title="联系人" value="" />
-                    <van-cell title="联系人身份证号" value="763613016" />
-                    <van-cell title="联系人手机" value="" />
-                    <van-cell title="从业人员总数" value="763613016" />
-                    <van-cell title="专业技术人员数" value="" />
+                    <van-cell title="姓名" value="刘星" />
+                    <van-cell title="性别" value="男" />
+                    <van-cell title="证件类型" value="" />
+                    <van-cell title="证件号码" value="" />
+                    <van-cell title="职务" value="" />
+                    <van-cell title="职称" value="" />
+                    <van-cell title="学历" value="" />
+                    <van-cell title="所学专业" value="" />
+                    <van-cell title="工作年限" value="" />
+                    <van-cell title="工作岗位" value="" />
+                    <van-cell title="备注" value="" />
                 </template>
             </van-tab>
             <van-tab title="集团总公司及所属单位明细">
@@ -234,7 +212,9 @@ export default {
       this.$router.push("/admin-MaterialsView");
     },
     //受理通知书
-    goNotification(){},
+    goNotification(){
+      this.$router.push("/admin-NotificationView");
+    },
     //核查材料
     goCheckApply(){},
     //观察员报告

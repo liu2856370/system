@@ -1,6 +1,7 @@
 <template>
   <div class="index">
-    <van-tabs v-model="active" sticky>
+    <van-tabs v-model="active" :ellipsis="false"
+            :border="false" swipe-threshold="4">
       <van-tab title="受理通知书">
           <div v-for="(item, index) in list1" :key="index" class="imageStyle">
               <van-image width="2rem" height="2rem" fit="contain" src="https://img.yzcdn.cn/vant/cat.jpeg" rel="external nofollow" />

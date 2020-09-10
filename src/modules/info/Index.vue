@@ -1,7 +1,9 @@
 <template>
   <div class="index">
+    <van-search v-model="value" shape="round" placeholder="请输入单位名称" />
     <van-tabs v-model="active" sticky>
       <van-tab title="过程信息">
+        <van-cell :title="list1.length" value="筛选" />
         <platform-list :list="list1">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
@@ -22,9 +24,12 @@
         </platform-list>
       </van-tab>
       <van-tab title="证书信息">
+        <van-cell :title="list1.length" value="" />
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
           <van-cell-group v-for="(item,index) in data" :key="index" class="mt10">
-            <van-radio name=index @click="goQualificationsList">{{item}}</van-radio>
+            <van-radio :name=index>
+              <span @click="goQualificationsList">{{item}}</span>
+            </van-radio>
           </van-cell-group>
         </van-list>
         <van-button type="primary" size="large" to="/qualifications">下一步</van-button>
@@ -44,6 +49,7 @@ export default {
   data() {
     return {
       active: 0,
+      value: "",
       finished: true,
       loading: false,
       list1: [

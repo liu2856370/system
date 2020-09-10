@@ -8,7 +8,7 @@
         <div v-show="item.unfold">
           <slot name="variable" :slotProps="item"></slot>
         </div>
-        <div class="arrow-outer" @click="toggleShow(index)">
+        <div v-if="show" class="arrow-outer" @click="toggleShow(index)">
             <van-icon v-show="item.unfold" name="arrow-up" />
             <van-icon v-show="!item.unfold"  name="arrow-down" />
         </div>
@@ -25,11 +25,14 @@ export default {
       type: Array,
       default: [],
     },
+    show:{
+      type:Boolean
+    }
   },
   data() {
     return {
       loading: false,
-      finished: false
+      finished: true
     };
   },
   methods: {
