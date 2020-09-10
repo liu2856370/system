@@ -7,9 +7,9 @@ import { Tabbar, TabbarItem } from 'vant'
 import { Form } from 'vant'
 import { Field } from 'vant'
 import { RadioGroup, Radio } from 'vant'
+import { Image as VanImage } from 'vant'
 
-
-
+Vue.use(VanImage);
 Vue.use(RadioGroup);
 Vue.use(Field);
 Vue.use(Form);
@@ -32,6 +32,5 @@ Vue.use(Radio);
 Vue.use(NoticeBar);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
-Vue.use(Image);
 Vue.use(Form);
 Vue.use(Field);
