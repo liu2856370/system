@@ -147,6 +147,24 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "行政审批-许可档案-观察员报告信息" */ '../modules/platform/Admin-Observer.vue')
     },
+    {
+        path: '/admin-NotificationView',
+        name: 'adminNotificationView',
+        component: () =>
+            import ( /* webpackChunkName: "行政审批-许可档案-受理通知书信息" */ '../modules/platform/Admin-Notification.vue')
+    },
+    {
+        path: '/admin-ReturnableView',
+        name: 'adminReturnableView',
+        component: () =>
+            import ( /* webpackChunkName: "行政审批-综合查询-材料退回信息" */ '../modules/platform/Admin-Returnable.vue')
+    },
+    {
+        path: '/admin-CorrectionView',
+        name: 'adminCorrectionView',
+        component: () =>
+            import ( /* webpackChunkName: "行政审批-综合查询-材料补正信息" */ '../modules/platform/Admin-Correction.vue')
+    },
     //swj
     {
         path: '/site-reView',
