@@ -17,9 +17,15 @@
 export default {
   name: "home",
   created(){
-    client.rpc("/dict/getSpxx",{}).then(res=>{
+   /* 
+    请求示例
+        client.rpc("/xxgs/findGcxx").then(res=>{
       console.log(res);
-    })
+    });
+    client.rpc("/dic/getArea",{}).then(res=>{
+      console.log(res);
+    });*/
+
   }
 };
 </script>

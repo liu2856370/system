@@ -32,7 +32,6 @@ Vue.use(Radio);
 Vue.use(NoticeBar);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
-
 Vue.use(Form);
 Vue.use(Field);
 Vue.use(Search);
