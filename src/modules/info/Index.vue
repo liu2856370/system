@@ -3,14 +3,14 @@
     <van-search v-model="value" shape="round" placeholder="请输入单位名称" />
     <van-tabs v-model="active" sticky>
       <van-tab title="过程信息">
-        <van-cell :title="total" value="筛选" />
-        <platform-list :list="list">
+        <van-cell :title="processTotal" value="筛选" />
+        <platform-list :list="processList">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
-              <van-col span="12" class="org-name" @click="goVerificationInfo(slotProps.index)">{{slotProps.orgname}}</van-col>
+              <van-col span="12" class="org-name" @click="goVerificationInfo(slotProps)">{{slotProps.orgname}}</van-col>
               <van-col span="12" class="org-tags">
-                <van-tag plain round type="primary" class="mr10">审查中</van-tag>
-                <van-tag plain round type="primary">发证</van-tag>
+                <van-tag plain round type="primary" class="mr10">{{slotProps.flag|dictFormatter("businessType")}}</van-tag>
+                <van-tag plain round type="primary">{{slotProps.applydescription}}</van-tag>
               </van-col>
             </van-row>
             <van-cell title="产品类别" :value="slotProps.prodtype" />
@@ -24,11 +24,11 @@
         </platform-list>
       </van-tab>
       <van-tab title="证书信息">
-        <van-cell :title="total" value="" />
+        <van-cell :title="certificateTotal" value="" />
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-          <van-cell-group v-for="(item,index) in data" :key="index" class="mt10">
+          <van-cell-group v-for="(item,index) in certificateCompanyList" :key="index" class="mt10">
             <van-radio :name=index>
-              <span @click="goQualificationsList">{{item}}</span>
+              <span @click="goQualificationsList(item)">{{item}}</span>
             </van-radio>
           </van-cell-group>
         </van-list>
@@ -48,50 +48,69 @@ export default {
   },
   data() {
     return {
-      total: "",
+      processTotal: "",
+      certificateTotal: "",
       active: 0,
       value: "",
       finished: true,
       loading: false,
-      list: [],
-      data:[
-        "工业产品生产许可证获证单位",
-        "计量器具型式批准许可证获证单位",
-        "工业产品生产许可证获证单位",
-        "计量器具型式批准许可证获证单位",
-        "工业产品生产许可证获证单位",
-        "计量器具型式批准许可证获证单位",
-        "工业产品生产许可证获证单位",
-        "计量器具型式批准许可证获证单位",
-        "工业产品生产许可证获证单位",
-        "计量器具型式批准许可证获证单位"
-      ]
+      processList: [],
+      certificateList:{},
+      certificateCompanyList:[]
     };
   },
   methods:{
     onLoad(){},
-    goQualificationsList(){
-      this.$router.push("/qualifications")
+    goQualificationsList(value){
+      client.saveStorage("certificateList", this.certificateList[value]);
+      this.$router.push("/qualifications");
     },
-    goVerificationInfo(index){
-      if(index === 1){
+    goVerificationInfo(itemData){
+      client.saveStorage("companyProcessInfo", itemData);
+      if(itemData.applydescription === "发证"){
         this.$router.push("/certification-check");
       }
-      else if(index === 2){
+      else if(itemData.applydescription === "变更"){
         this.$router.push("/change-check");
       }
-      else{
+      else if(itemData.applydescription === "换证"){
         this.$router.push("/replace-check");
       }
     }
   },
   created(){
-    client.rpc("findGcxx").then(res=>{
-      let rspData = res.data;
+    client.rpc("/dic/getSpxx").then(res=>{
+      client.rpc("/xxgs/findGcxx?itemId=1410").then(res=>{
+        this.processTotal = "共" + res.list.length + "条";
+        this.processList = res.list;
+      });
+    });
 
-      this.total = rspData.total;
-      this.list = rspData.list;
-      console.log(res);
+    client.rpc("/xxgs/gy/findZsList").then(res=>{
+      if(res.list && res.list.length){
+        let certificateList = {};
+        let certificateCompanyList = [];
+        for(let i=0;i<res.list.length;i++){
+          let item = res.list[i];
+
+          item.unfold = true;
+          if(certificateCompanyList.indexOf(item.xksx) === -1){
+            certificateCompanyList.push(item.xksx);
+          }
+
+          if(certificateList[item.xksx]){
+            certificateList[item.xksx].push(item);
+          }
+          else{
+            certificateList[item.xksx] = [item];
+          }
+        }
+
+        this.certificateList = certificateList;
+        this.certificateCompanyList = certificateCompanyList;
+      }
+
+      this.certificateTotal = "共" + this.certificateCompanyList.length + "条";
     });
   }
 };
