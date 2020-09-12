@@ -2,11 +2,18 @@
   <div class="platform-login">
     <div class="govTitle">山东市场监管行政许可管理系统</div>
     <div class="loginPanel">
-      <van-tabs type="card" background="#fff" animated swipeable>
+      <van-tabs
+        v-model="usertype"
+        type="card"
+        background="#fff"
+        animated
+        swipeable
+        @click="onClick"
+      >
         <van-tab>
           <div slot="title">企业审报</div>
           <div class="tabContent">
-            <van-field
+            <!-- <van-field
               readonly
               clickable
               clearable
@@ -17,30 +24,41 @@
               class="van-cellForSelect"
               center
             />
-            <van-popup v-model="showPicker" round position="bottom" get-container="body">
+            <van-popup
+              v-model="showPicker"
+              round
+              position="bottom"
+              get-container="body"
+            >
               <van-picker
                 show-toolbar
                 :columns="columns"
                 @cancel="showPicker = false"
                 @confirm="onConfirm"
               />
-            </van-popup>
-
-            <van-field v-model="code" placeholder="请输入社会信用代码第9位至17位" />
+            </van-popup> -->
 
             <van-field
-              v-model="password"
+              v-model="loginId1"
+              placeholder="请输入社会信用代码第9位至17位"
+            />
+
+            <van-field
+              v-model="password1"
               :type="passwordType"
               :right-icon="passwordRightIcon"
               placeholder="请输入密码"
               @click-right-icon="passwordClick"
             />
 
-            <van-field v-model="imgCode" center maxlength="4" placeholder="验证码">
+            <van-field
+              v-model="captcha"
+              center
+              maxlength="4"
+              placeholder="验证码"
+            >
               <div slot="button">
                 <van-image
-                  width="1.1rem"
-                  height=".35rem"
                   fit="contain"
                   @click="getVerifyCode"
                   :src="vImg"
@@ -48,7 +66,13 @@
               </div>
             </van-field>
 
-            <van-button round size="large" type="info" class="mt30" @click="goCompanyDeclare">登录</van-button>
+            <van-button
+              round
+              size="large"
+              type="info"
+              class="mt30"
+              @click="goCompanyDeclare"
+            >登录</van-button>
             <div class="aLink">密码重置申请</div>
           </div>
         </van-tab>
@@ -56,21 +80,27 @@
         <van-tab title="现场审查">
           <div slot="title">现场审查</div>
           <div class="tabContent">
-            <van-field v-model="code" placeholder="审查员登录账号" />
+            <van-field
+              v-model="loginId2"
+              placeholder="审查员登录账号"
+            />
 
             <van-field
-              v-model="password"
+              v-model="password2"
               :type="passwordType"
               :right-icon="passwordRightIcon"
               placeholder="请输入密码"
               @click-right-icon="passwordClick"
             />
 
-            <van-field v-model="imgCode" center maxlength="4" placeholder="验证码">
+            <van-field
+              v-model="captcha"
+              center
+              maxlength="4"
+              placeholder="验证码"
+            >
               <div slot="button">
                 <van-image
-                  width="1.1rem"
-                  height=".35rem"
                   fit="contain"
                   @click="getVerifyCode"
                   :src="vImg"
@@ -78,24 +108,54 @@
               </div>
             </van-field>
 
-            <van-button round size="large" type="info" class="mt30" @click="goSiteReView">登录</van-button>
+            <van-button
+              round
+              size="large"
+              type="info"
+              class="mt30"
+              @click="goSiteReView"
+            >登录</van-button>
             <div class="aLink">密码重置申请</div>
           </div>
         </van-tab>
         <van-tab title="行政审批">
           <div slot="title">行政审批</div>
           <div class="tabContent">
-            <van-field v-model="code" placeholder="请输入用户名" />
+            <van-field
+              v-model="loginId3"
+              placeholder="请输入用户名"
+            />
 
             <van-field
-              v-model="password"
+              v-model="password3"
               :type="passwordType"
               :right-icon="passwordRightIcon"
               placeholder="请输入密码"
               @click-right-icon="passwordClick"
             />
 
-            <van-button round size="large" type="info" class="mt30" @click="goAdministrationView">登录</van-button>
+            <van-field
+              v-model="captcha"
+              center
+              maxlength="4"
+              placeholder="验证码"
+            >
+              <div slot="button">
+                <van-image
+                  fit="contain"
+                  @click="getVerifyCode"
+                  :src="vImg"
+                />
+              </div>
+            </van-field>
+
+            <van-button
+              round
+              size="large"
+              type="info"
+              class="mt30"
+              @click="goAdministrationView"
+            >登录</van-button>
             <div class="aLink">密码重置申请</div>
           </div>
         </van-tab>
@@ -119,12 +179,17 @@ Vue.use(Button);
 export default {
   data() {
     return {
-      value: "",
-      code: "",
-      password: "",
+      loginId1: "740208528",
+      loginId2: "jinpeizhi",
+      loginId3: "",
+      password1: "740208528",
+      password2: "aaaaa",
+      password3: "",
+      usertype: 0, //登陆类型
       passwordType: "password",
       passwordRightIcon: "closed-eye",
-      imgCode: "",
+      captcha: "", //图形验证码
+      openId: this.getTimes(),
       showPicker: false,
       vImg:
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAAAaCAYAAAAOl/o1AAAABHNCSVQICAgIfAhkiAAABFJJREFUWEftmF1oW2UYx//Pe5bm0CSnfrAl60mCF4qC3TqQwQRhygZ+bnWzoLDhF7vxYupYQocXInjTkeyiCDKQgp1TFFldJ4KgEwoWp6JQFFEmXjRpl1CY5DRpc5qd88h72gNnXZeeJAVvTu6S87zP876//J//8yaE4HUTAQp43EwgALJGEQGQAEhzkwgUEijEh0LmwbF61HgFoMMA9q4uGWdbGU4vRn7erElkJpM7GZgGcFEtFg/5zZuKLvSRYv+2XrzN2FM0en70m0st5c+D+SkQ3Qnmfxn0mbk985q73mmZQtS4AOAwMV62WfkGgE7Cykk4BNqXrMa+81uwWVw9mfwCwLPtAmGbBsD0j7dGAyiXqrF5P/tzYABHAHxsEeUU5qx8z8AlM5EZkDkcIDPdtd2ApacXtYtuYvkZCesnMEZTNe2Yn4LNYkxdH2Siz5l5iojm21FIq2pYux/1Wu46EwpmItvvPguX8hMEHLSIdjXiJ6ebmmohajCAyVRVe7QTIByPR8xQaBrME0R0BwN3tQQkZhwkwROdAFFLefmlfsCMs94WCZdyBwh0SaqmnsgcvS2QFV9ZMACMp6rac50Aqev6GRANYHn5cerqeqtVIEmtckQQzrMldhSqsd/b2UvXtdyQIBoG8el6PHvKm2NFOfSrmcjsvy2QYsR4iQkfSl9J1rSxdjYh13iM9E21WBwxk8nRdoGYFS1aBtXa2UszIOFS/iqBu+uJrH4LkJnuWi+JG4MAjUj/UGuxE1tBC+1sQq5Z0vXvpWeEG42jVC7XOgECxlcgPC3zMuMcA++3OGGkBVypJzIPu+eRrcTM7xHh+i1A3GnjGbvH04uRubZh9Pa+SkKMKrb9SGhubmpVMS0rRI5dED8Bpq9lyySiC1tDws4T4UXrhrJ/tha97GePain/A4A9rl9I1RDwjjNd1gMiH0jvMKPV3Qx+W45d0cADuqn95aegN4a3bYubXV1T0kjV2dmT7rN2FLJe7Tg4Eu6pTIKpNGP0PONnf6HymX6F+Swz7yIiFeA5ED5iJscjzUTmvqamuhRZuCoZpWvaDj8FvTFLq+rYYJ3jK63mduPTWmUEhNc78RaZSy3lmYHLTU1VBrotpFZjWic+4j3wZilE5kxplTEiftCs9Oxt12zVcm4YTEM286nl7dnTjkLkRAnXYuPeQ8vWkQohwp9qNXbg/wIiWyOkGX1rzdO9zjPj3YLRI9t7w5e8c5iJ7JfeQGfCMN9tCfGYczGbDRv3W1swKYMEMGSz8ocQdsxmHiFCH9s45L3Bblh1g4BWFaJHqvuULda3cqrYlnJOEJdZ2P2C+IQstWwpT/q9urvjVfqGXCu9g4B7XXU45uoa6VJ39Q0QPy8hOGdijBLRJ5v1O6YTU02oS/eEQo1BEvYLAD0E8C9si08bTGN+Yax6xTEGHyfQzpUj4m8ivuC9qAX/h6xRdAAkANLc5AKFBApprpD/AMR4GTmcpMJ8AAAAAElFTkSuQmCC",
@@ -138,22 +203,83 @@ export default {
       ],
     };
   },
+  created: function () {
+    this.getVerifyCode(); //初始化图形验证码
+  },
   methods: {
-    goCompanyDeclare(){
-      this.$router.push('/platform');
+    goCompanyDeclare() {
+      //企业审报登陆
+      client
+        .rpc(
+          "/login?loginId=" +
+            this.loginId1 +
+            "&password=" +
+            this.password1 +
+            "&openId=" +
+            this.openId +
+            "&usertype=" +
+            (this.usertype+1) +
+            "&captcha=" +
+            this.captcha
+        )
+        .then((res) => {
+          this.$router.push("/platform");
+        });
     },
-    goSiteReView(){
-      this.$router.push("./site-reView");
+    goSiteReView() {
+      //现场审批登陆
+      client
+        .rpc(
+          "/login?loginId=" +
+            this.loginId2 +
+            "&password=" +
+            this.password2 +
+            "&openId=" +
+            this.openId +
+            "&usertype=" +
+            (this.usertype+1) +
+            "&captcha=" +
+            this.captcha
+        )
+        .then((res) => {
+          this.$router.push("./site-reView");
+        });
     },
-    goAdministrationView(){
-      this.$router.push("./admin-ListView");
+    goAdministrationView() {
+      //行政审批登陆
+      client
+        .rpc(
+          "/login?loginId=" +
+            this.loginId3 +
+            "&password=" +
+            this.password3 +
+            "&openId=" +
+            this.openId +
+            "&usertype=" +
+            (this.usertype+1) +
+            "&captcha=" +
+            this.captcha
+        )
+        .then((res) => {
+          this.$router.push("./admin-ListView");
+        });
     },
-    onConfirm(value) {
-      this.value = value;
-      this.showPicker = false;
+    // onConfirm(value) {
+    //   this.value = value;
+    //   this.showPicker = false;
+    // },
+    onClick() {
+      this.getVerifyCode();
+      this.captcha = "";
+    },
+    getTimes() {
+      return new Date().getTime();
     },
     getVerifyCode() {
       console.info("刷新图形验证码");
+      client.rpc("/login/getCaptcha?openId=" + this.openId).then((res) => {
+        this.vImg = "data:image/png;base64," + res;
+      });
     },
     passwordClick(item) {
       if (item.target.className.indexOf("van-icon-closed-eye") > -1) {
@@ -254,6 +380,9 @@ export default {
     border: #cccccc 1px solid;
   }
   .van-image {
+    width: 1rem;
+    height: 0.25rem;
+    padding: 0.05rem;
     margin-top: 0.2rem;
     border: #bfbfbf 0.01rem solid;
     border-radius: 0.4rem;
@@ -266,8 +395,8 @@ export default {
     border-radius: 0.1rem;
   }
   .van-button--large {
-      width: 98%;
-      height: 0.4rem;
+    width: 98%;
+    height: 0.4rem;
   }
 }
 </style>
