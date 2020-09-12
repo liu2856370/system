@@ -2,13 +2,13 @@
   <div class="list">
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
       <van-cell-group v-for="(item, index) in list" :key="index" class="mt10">
-        <div>
+        <div class="fixed-outer">
           <slot name="fixed" :slotProps="item"></slot>
         </div>
-        <div v-show="item.unfold">
+        <div  class="variable-outer" v-show="item.unfold">
           <slot name="variable" :slotProps="item"></slot>
         </div>
-        <div v-if="show" class="arrow-outer" @click="toggleShow(index)">
+        <div class="arrow-outer" @click="toggleShow(index)">
             <van-icon v-show="item.unfold" name="arrow-up" />
             <van-icon v-show="!item.unfold"  name="arrow-down" />
         </div>
@@ -25,9 +25,6 @@ export default {
       type: Array,
       default: [],
     },
-    show:{
-      type:Boolean
-    }
   },
   data() {
     return {
@@ -46,12 +43,18 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.fixed-outer::after,.variable-outer::after{
+     content: "";
+     border-top: 1px solid #f3f3f3;
+     height: 0;
+     margin: 0rem 0.16rem;
+     display: block;
+}
 .arrow-outer{
     text-align: center;
     font-size:0.22rem;
     height: 0.3rem;
-    line-height:0.38rem;
+    line-height:0.32rem;
     margin: 0.1rem 0.16rem;
-    border-top: 0.01rem solid rgb(235, 237, 240);
 }
 </style>

@@ -1,4 +1,5 @@
 import { Dialog } from 'vant';
+import storage from 'good-storage';
 
 export default {
     rpc(url,data = {}){
@@ -37,7 +38,7 @@ export default {
             axios.post(url, params)
                 .then(response => {
                     if (response) {
-                        let rspData = response;//返回数据
+                        let rspData = response.data;//返回数据
                         let successFlag = rspData.success;//成功标志
                         let code = rspData.code;
                         let msg = rspData.msg;
@@ -70,5 +71,74 @@ export default {
                     console.log(err)
                 });
         });
+    },
+       /**
+       * 读取数据，有第二个参数是true，会读取后把数据删除
+       * @author liuzq 2018.11.06
+       * @method loadStorage
+       * @param {String} 键值名
+       * @param {Boolean} 是否读取后删除数据
+       */
+      loadStorage: (key, isRemoved = false) => {
+        let value = storage.get(key, {});
+        if (isRemoved) {
+            this.deleteStorage(key)
+        }
+        return value;
+    },
+
+    /**
+     * 存储，有第三个参数是true，将会存储在localStorage，否则是在sessiontStorage
+     * @author liuzq 2018.11.06
+     * @method loadStorage
+     * @param {String} 键值名
+     * @param {obj} 存放的对象
+     */
+    saveStorage: (key, value) => {
+        storage.set(key, value);
+    },
+    /**
+     * //删除storage
+     * @author liuzq 2018.11.06
+     * @method loadStorage
+     * @param {String} 键值名
+     */
+    deleteStorage: (key) => {
+        storage.remove(key);
+    },
+   /**
+       * 读取数据，有第二个参数是true，会读取后把数据删除
+       * @author liuzq 2018.11.06
+       * @method loadSessionStorage
+       * @param {String} 键值名
+       * @param {Boolean} 是否读取后删除数据
+       */
+      loadSessionStorage: (key, isRemoved = false) => {
+        let value = storage.session.get(key, {});
+        if (isRemoved) {
+            this.deleteStorage(key)
+        }
+        return value;
+    },
+
+    /**
+     * 存储，有第三个参数是true，将会存储在localStorage，否则是在sessiontStorage
+     * @author liuzq 2018.11.06
+     * @method saveSessionStorage
+     * @param {String} 键值名
+     * @param {obj} 存放的对象
+     */
+    saveSessionStorage: (key, value) => {
+        storage.session.set(key, value);
+    },
+    /**
+     * //删除storage
+     * @author liuzq 2018.11.06
+     * @method loadStorage
+     * @param {String} 键值名
+     */
+    deleteSessionStorage: (key) => {
+        storage.session.remove(key);
     }
+
 }
