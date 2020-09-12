@@ -165,6 +165,12 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "行政审批-综合查询-材料补正信息" */ '../modules/platform/Admin-Correction.vue')
     },
+    {
+        path: '/admin-BaiduMapView',
+        name: 'adminBaiduMapView',
+        component: () =>
+            import ( /* webpackChunkName: "百度地图" */ '../modules/platform/Admin-BaiduMap.vue')
+    },
     //swj
     {
         path: '/site-reView',
