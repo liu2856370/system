@@ -56,26 +56,35 @@ export default {
   methods: {
     handler({ BMap, map }) {
       map.enableScrollWheelZoom(true); //开启滚轮缩放
-      const hide = alert("正在获取当前省市请稍候..", 0);
       const _this = this;
       const geolocation = new BMap.Geolocation();
       geolocation.getCurrentPosition(
-
-        function(r) {
-          setTimeout(hide, 1000);
-
-          console.log(r);
-
-          _this.center = { lng: r.longitude, lat: r.latitude }; 
-          _this.initLocation = true;
-
+        function (r) {
+          let lat = r.latitude;
+          let lng = r.longitude;
+          const pointBak = new BMap.Point(lng, lat);
+          const convertor = new BMap.Convertor();
+          convertor.translate([pointBak], 1, 5, function (resPoint) {
+            if (resPoint && resPoint.points && resPoint.points.length > 0) {
+              lng = resPoint.points[0].lng;
+              lat = resPoint.points[0].lat;
+            }
+            const point = new BMap.Point(lng, lat);
+            const geo = new BMap.Geocoder();
+            geo.getLocation(point, (res) => {
+              _this.center = point;
+              var mk = new BMap.Marker(point);
+              map.addOverlay(mk);
+              map.panTo(point);
+            });
+          });
+          //  _this.center = { lng: r.longitude, lat: r.latitude };
+          //  _this.initLocation = true;
         },
-        window.map = map,
-      // 赋值，方便调用，本节被用到
-        this.BMap = BMap,
-        this.map = map,
+        (window.map = map),
+        (this.BMap = BMap),
+        (this.map = map),
         { enableHighAccuracy: true }
-
       );
 
       // console.log(BMap, map)
@@ -84,19 +93,21 @@ export default {
       // this.zoom = 15
     },
     onClickLeft() {},
-    dragend(e){
+    dragend(e) {
       this.position = e.point;
       const _this = this;
       console.log(e.point);
       console.log(this.position);
       const gc = new this.BMap.Geocoder();
-      gc.getLocation(e.point, function(rs) {
+      gc.getLocation(e.point, function (rs) {
         console.log(rs);
         // var addComp = rs.addressComponents
         // this.addr = addComp.province + ', ' + addComp.city + ', ' + addComp.district + ', ' + addComp.street + ', ' + addComp.streetNumber
         _this.addr = rs.address;
-
       });
+    },
+    goAdministrationView(){
+      
     }
   },
 };
