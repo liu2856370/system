@@ -32,10 +32,6 @@ Vue.use(Radio);
 Vue.use(NoticeBar);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
-<<<<<<< HEAD
-=======
-
->>>>>>> 35029b376990f0747da573620aef7d64676b6e27
 Vue.use(Form);
 Vue.use(Field);
 Vue.use(Search);

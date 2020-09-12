@@ -4,9 +4,12 @@ import router from './router'
 import './plugins/axios'
 import './plugins/vant.js'
 import './client/index'
+import filter from './common/core/filter'
 
 //重置公共UI样式
 import './common/less/reset-vant.less'
+
+Vue.use(filter);
 
 Vue.config.productionTip = false;
 
