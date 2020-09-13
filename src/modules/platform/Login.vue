@@ -227,7 +227,7 @@ export default {
       client
         .rpc('/login',{
           loginId:this.loginId2,
-          password2:this.password2,
+          password:this.password2,
           openId:this.openId,
           usertype:this.usertype+1,
           captcha:this.captcha

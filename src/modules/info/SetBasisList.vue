@@ -18,9 +18,9 @@
 </template>
 
 <script>
-import platformList from "../platform/common/platformList";
+import platformList from "../common/platformList";
 export default {
-name: "accordingInfo",
+name: "setBasisList",
   components: {
     platformList
   },
@@ -37,7 +37,7 @@ name: "accordingInfo",
   methods:{
   },
   created(){
-    client.rpc("/qy/getJhtzsInfo/" + client.loadStorage("reportId")).then(res=>{
+    client.rpc("/qy/getJhtzsInfo",{"id":client.loadStorage("reportId")}).then(res=>{
       console.log(res)
     });
   }

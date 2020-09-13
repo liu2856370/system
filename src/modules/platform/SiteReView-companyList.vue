@@ -6,7 +6,7 @@
       placeholder="请输入搜索关键词"
     />
     <!-- 这里给筛选留个地方 -->
-    <platform-list :list="list1">
+    <platform-list :list="findPlanList">
       <template #fixed="{slotProps}">
         <van-row class="org-info">
           <van-col
@@ -21,37 +21,40 @@
             <van-tag
               plain
               round
+              size="large"
               :type="slotProps.state1Type"
               class="mr10"
-            >{{slotProps.state1}}</van-tag>
+            >{{slotProps.showDays}}</van-tag>
             <van-tag
               plain
               round
+              size="large"
               :type="slotProps.state2Type"
-            >{{slotProps.state2}}</van-tag>
+            >{{slotProps.applydescription}}</van-tag>
           </van-col>
         </van-row>
         <van-cell
           title="产品类别"
-          value="危险化学品"
+          :value="slotProps.producttype"
         />
-        <van-cell
-          title="审批事项"
-          value="工业产品生产许可"
-        />
-      </template>
-      <template #variable>
         <van-cell
           title="所在地区"
-          value="菏泽市成武县"
+          :value="slotProps.region"
+        />
+        <!-- </template>
+      <template #variable="{slotProps}"> -->
+
+        <van-cell
+          title="联系人"
+          :value="slotProps.linkman"
         />
         <van-cell
-          title="营业执照注册号"
-          value="0254215421357561354"
+          title="联系电话"
+          :value="slotProps.tel"
         />
         <van-cell
-          title="组织机构代码"
-          value="05165415X"
+          title="评审时间"
+          :value="slotProps.date"
         />
       </template>
     </platform-list>
@@ -82,40 +85,40 @@ export default {
     return {
       keyword: "",
       active: 0,
-      finished: true,
-      loading: false,
-      list1: [
-        {
-          orgname: "山东群英电气有限公司1",
-          index: 1,
-          state1: "超期50天",
-          state1Type: "danger",
-          state2: "发证",
-          state2Type: "success",
-        },
-        {
-          orgname: "山东群英电气有限公司2",
-          index: 2,
-          state1: "上报4天",
-          state1Type: "success",
-          state2: "变更",
-          state2Type: "danger",
-        },
-        {
-          orgname: "山东群英电气有限公司3",
-          index: 3,
-          state1: "超期2天",
-          state1Type: "danger",
-          state2: "换证",
-          state2Type: "primary",
-        },
-      ],
+      findPlanList: [],
     };
+  },
+  created() {
+    this.findPlanList = client.loadSessionStorage("findPlanList");
+    for (let i = 0; i < this.findPlanList.length; i++) {
+      const itemData = this.findPlanList[i];
+      itemData.index = i;
+      itemData.date = itemData.sdate + "至" + itemData.edate;
+      if (itemData.lastdate < 0) {
+        itemData.showDays = "超期：" + itemData.lastdate + "天";
+        itemData.state1Type = "danger";
+      } else {
+        itemData.showDays = "上报：" + itemData.lastdate + "天";
+        itemData.state1Type = "success";
+      }
+      switch (itemData.applydescription) {
+        case "发证":
+          itemData.state2Type = "success";
+          break;
+        case "变更":
+          itemData.state2Type = "danger";
+          break;
+        case "换证":
+          itemData.state2Type = "primary";
+          break;
+      }
+    }
   },
   components: { PHeader, platformList },
   methods: {
     goVerificationInfo(ind) {
       console.info("当前点击的索引是：" + ind);
+      client.saveSessionStorage("findPlanInfo", this.findPlanList[ind]);
       this.$router.push("/siteReView-companyInfo");
     },
   },
