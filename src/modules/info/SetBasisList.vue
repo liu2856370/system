@@ -35,12 +35,11 @@ name: "accordingInfo",
     };
   },
   methods:{
-    goInfoQuery(){
-      this.$router.push("/info-query");
-    },
-    queryInfo(){
-      this.$router.push("/info-query");
-    }
+  },
+  created(){
+    client.rpc("/qy/getJhtzsInfo/" + client.loadStorage("reportId")).then(res=>{
+      console.log(res)
+    });
   }
 }
 </script>

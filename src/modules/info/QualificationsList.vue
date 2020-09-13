@@ -20,7 +20,7 @@
             <van-cell title="审批部门" :value="slotProps.spbm" />
             <van-cell title="设定依据">
               <template #right-icon>
-                <van-tag plain round type="primary" @click="queryBasisList">查看</van-tag>
+                <van-tag plain round type="primary" @click="queryBasisList(slotProps.id)">查看</van-tag>
               </template>
             </van-cell>
           </template>
@@ -48,7 +48,8 @@ name: "accordingInfo",
       client.saveStorage("companyId", id);
       this.$router.push("/info-query");
     },
-    queryBasisList(){
+    queryBasisList(id){
+      client.saveStorage("reportId", id);
       this.$router.push("/set-basis-list");
     }
   },
