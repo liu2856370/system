@@ -26,8 +26,8 @@ export default {
     client.rpc("/dic/getArea",{}).then(res=>{
       console.log(res);
     });*/
-
-};
+  }
+}
 </script>
 
 <style scoped>

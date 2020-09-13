@@ -42,6 +42,19 @@ export default {
   },
   methods:{
     
+  },
+  created(){
+    this.companyProcessInfo = client.loadStorage("companyProcessInfo");
+
+    //核查结果
+    client.rpc("/xxgs/jl/getGcxx/xspz/hcjg/" + this.companyProcessInfo.id).then(res=>{
+      this.resultList = res;
+    });
+
+     //实地核查结论
+    client.rpc("/xxgs/jl/getGcxx/xspz/sdhcjl/" + this.companyProcessInfo.id).then(res=>{
+      this.conclusionData = res;
+    });
   }
 };
 </script>
