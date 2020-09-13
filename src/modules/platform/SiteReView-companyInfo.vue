@@ -1,7 +1,7 @@
 <template>
   <div>
     <PHeader :showArrow="true">
-      山东群英电气有限公司
+      {{showPageData.orgname}}
       <template #right>
         <van-tag
           round
@@ -20,19 +20,19 @@
         <van-cell-group>
           <van-cell
             title="计划标题"
-            value="关于山东泰汶盐化工有限责任公司的审查计划"
+            :value="showPageData.plantitle"
           />
           <van-cell
             title="计划编号"
-            value="scbgy-11-20-064"
+            :value="showPageData.planno"
           />
           <van-cell
             title="评审开始时间"
-            value="2020-07-04"
+            :value="showPageData.plansdate"
           />
           <van-cell
             title="评审结束时间"
-            value="2020-07-04"
+            :value="showPageData.planedate"
           />
           <van-cell title="现场核查通知书">
             <template #default>
@@ -111,114 +111,66 @@
             </van-tab>
             <van-tab title="评审组">
               <template>
-                <van-cell-group class="mt10">
+
+                <van-cell-group
+                  class="mt10"
+                  v-for="(item) in showPageData.pszryList"
+                  v-bind:key="item.certno"
+                >
                   <van-cell
                     title="姓名"
-                    value="高新"
+                    :value="item.name"
                   />
                   <van-cell
                     title="性别"
-                    value="男"
+                    :value="item.sex|dictFormatter('isManOrWoman')"
                   />
                   <van-cell
                     title="组长"
-                    value="是"
+                    :value="item.isgroupleader|dictFormatter('isShowYesAndNo')"
                   />
                   <van-cell
                     title="实习"
-                    value="是"
+                    :value="item.ispractise|dictFormatter('isShowYesAndNo')"
                   />
                   <van-cell title="职责">
                     <template #default>
                       <van-checkbox-group
-                        v-model="result"
+                        v-model="item.ismanageList"
                         direction="horizontal"
                       >
-                        <van-checkbox name="0">管理</van-checkbox>
-                        <van-checkbox name="1">工艺</van-checkbox>
-                        <van-checkbox name="2">检验</van-checkbox>
+                        <van-checkbox name="管理">管理</van-checkbox>
+                        <van-checkbox name="工艺">工艺</van-checkbox>
+                        <van-checkbox name="检验">检验</van-checkbox>
                       </van-checkbox-group>
                     </template>
                   </van-cell>
                   <van-cell
                     title="工作单位"
-                    value="山东省化肥总厂"
+                    :value="item.orgname"
                   />
                   <van-cell
                     title="手机"
-                    value="13788990076"
+                    :value="item.mobileno"
                   />
-                  <van-cell
+                  <!-- <van-cell
                     title="电话"
-                    value="0531-88765543"
+                    :value="0531-88765543"
                   />
                   <van-cell
                     title="Email"
-                    value="gaoxin@sina.com"
-                  />
+                    :value="gaoxin@sina.com"
+                  /> -->
                   <van-cell
                     title="联系地址"
-                    value="济南历山路80号"
+                    :value="item.address"
                   />
                   <van-cell
                     title="注册号"
-                    value="GS-002543"
+                    :value="item.certno"
                   />
                 </van-cell-group>
-                <van-cell-group class="mt10">
-                  <van-cell
-                    title="姓名"
-                    value="高新"
-                  />
-                  <van-cell
-                    title="性别"
-                    value="男"
-                  />
-                  <van-cell
-                    title="组长"
-                    value="是"
-                  />
-                  <van-cell
-                    title="实习"
-                    value="是"
-                  />
-                  <van-cell title="职责">
-                    <template #default>
-                      <van-checkbox-group
-                        v-model="result"
-                        direction="horizontal"
-                      >
-                        <van-checkbox name="0">管理</van-checkbox>
-                        <van-checkbox name="1">工艺</van-checkbox>
-                        <van-checkbox name="2">检验</van-checkbox>
-                      </van-checkbox-group>
-                    </template>
-                  </van-cell>
-                  <van-cell
-                    title="工作单位"
-                    value="山东省化肥总厂"
-                  />
-                  <van-cell
-                    title="手机"
-                    value="13788990076"
-                  />
-                  <van-cell
-                    title="电话"
-                    value="0531-88765543"
-                  />
-                  <van-cell
-                    title="Email"
-                    value="gaoxin@sina.com"
-                  />
-                  <van-cell
-                    title="联系地址"
-                    value="济南历山路80号"
-                  />
-                  <van-cell
-                    title="注册号"
-                    value="GS-002543"
-                  />
-                </van-cell-group>
+
               </template>
             </van-tab>
           </van-tabs>
@@ -568,6 +520,7 @@ Vue.use(Button);
 export default {
   data() {
     return {
+      showPageData: {},
       active: 0,
       result: ["0", "2"],
       value: "",
@@ -577,7 +530,27 @@ export default {
     };
   },
   components: { PHeader, platformList },
+  created() {
+    var self = this;
+    this.getCommentInfo();
+  },
   methods: {
+    //获取评论信息
+    getCommentInfo() {
+      const findPlanInfo = client.loadSessionStorage("findPlanInfo");
+      client
+        .rpc("/sc/gy/findPsxx", {
+          neaid: findPlanInfo.id,
+          planid: findPlanInfo.planid,
+        })
+        .then((res) => {
+          this.showPageData = res;
+          for (let i = 0; i < this.showPageData.pszryList.length; i++) {
+            var itemData = this.showPageData.pszryList[i];
+            itemData.ismanageList = itemData.ismanage.split(",");
+          }
+        });
+    },
     onConfirm(value) {
       this.value = value;
       this.showPicker = false;
