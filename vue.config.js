@@ -61,9 +61,9 @@ module.exports = {
 
   // 配置 webpack-dev-server 行为。
   devServer: {
-    host: 'localhost',
+    host: '0.0.0.0',
     port: 8080,
-    proxy: {
+   /* proxy: {
       '/': {
         target: 'http://218.57.139.17:30000',
         changeOrigin: true,
@@ -76,7 +76,7 @@ module.exports = {
           console.log("原路径：" + req.originalUrl, "代理路径：" + req.path);
         }
       }
-    },
+    },*/
     before: app => { }
   },
 

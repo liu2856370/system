@@ -210,18 +210,13 @@ export default {
     goCompanyDeclare() {
       //企业审报登陆
       client
-        .rpc(
-          "/login?loginId=" +
-            this.loginId1 +
-            "&password=" +
-            this.password1 +
-            "&openId=" +
-            this.openId +
-            "&usertype=" +
-            (this.usertype+1) +
-            "&captcha=" +
-            this.captcha
-        )
+        .rpc('/login',{
+          loginId:this.loginId1,
+          password:this.password1,
+          openId:this.openId,
+          usertype:this.usertype+1,
+          captcha:this.captcha
+        })
         .then((res) => {
           client.saveSessionStorage("logonInfoToken",res.token);
           this.$router.push("/platform");
@@ -230,18 +225,13 @@ export default {
     goSiteReView() {
       //现场审批登陆
       client
-        .rpc(
-          "/login?loginId=" +
-            this.loginId2 +
-            "&password=" +
-            this.password2 +
-            "&openId=" +
-            this.openId +
-            "&usertype=" +
-            (this.usertype+1) +
-            "&captcha=" +
-            this.captcha
-        )
+        .rpc('/login',{
+          loginId:this.loginId2,
+          password2:this.password2,
+          openId:this.openId,
+          usertype:this.usertype+1,
+          captcha:this.captcha
+        })
         .then((res) => {
           client.saveSessionStorage("logonInfoToken",res.token);
           this.$router.push("./site-reView");
@@ -250,18 +240,13 @@ export default {
     goAdministrationView() {
       //行政审批登陆
       client
-        .rpc(
-          "/login?loginId=" +
-            this.loginId3 +
-            "&password=" +
-            this.password3 +
-            "&openId=" +
-            this.openId +
-            "&usertype=" +
-            (this.usertype+1) +
-            "&captcha=" +
-            this.captcha
-        )
+        .rpc('/login',{
+          loginId:this.loginId3,
+          password:this.password3,
+          openId:this.openId,
+          usertype:this.usertype+1,
+          captcha:this.captcha
+        })
         .then((res) => {
           client.saveSessionStorage("logonInfoToken",res.token);
           this.$router.push("./admin-ListView");
@@ -280,7 +265,9 @@ export default {
     },
     getVerifyCode() {
       console.info("刷新图形验证码");
-      client.rpc("/login/getCaptcha?openId=" + this.openId).then((res) => {
+      client.rpc("/login/getCaptcha",{
+        openId:this.openId
+      }).then((res) => {
         this.vImg = "data:image/png;base64," + res;
       });
     },

@@ -1,53 +1,48 @@
-import { Dialog } from 'vant';
+import {
+    Dialog
+} from 'vant';
 import storage from 'good-storage';
 import qs from 'qs';
 
 export default {
-    rpc(url,data = {}){
-        if(window.flags.enableMock == true){
-           return this.rpcMock(url,data);
-        }else{
-           return this.rpcAxios(url,data);
+    rpc(url, data = {}) {
+        if (window.flags.enableMock == true) {
+            return this.rpcMock(url, data);
+        } else {
+            return this.rpcAxios(url, data);
         }
     },
-    rpcMock(url, data){
-       return new Promise((resolve, reject) => {
-           //动态引入,如下引入
-           //let imgUrl = require('../images/' + imgName + '.png');  // 目录 + 文件名 + 后缀
-           import("../mock/api/"+url+".js").then(res=>{
-                let rspData = res.default[data.opid||'index'](data);
+    rpcMock(url, data) {
+        return new Promise((resolve, reject) => {
+            //动态引入,如下引入
+            //let imgUrl = require('../images/' + imgName + '.png');  // 目录 + 文件名 + 后缀
+            import("../mock/api/" + url + ".js").then(res => {
+                let rspData = res.default[data.opid || 'index'](data);
                 resolve(rspData);
-            }).catch(error=>{
+            }).catch(error => {
                 console.log(error);
             });
         });
     },
-    rpcAxios(url, data){
+    rpcAxios(url, data) {
         //是否应该有统一的错误处理，后端返回错误信息，前端公共抛错·
         return new Promise((resolve, reject) => {
             //前置信息
             let params = {
-                header: {
-                    UUID: '',
-                    channel: '',
-                    transId: ''
-                },
-                body: {
-                    ...data
-                }
+                ...data
             };
             axios({
-                method: 'POST',
-                headers: { 
-                    'content-type': 'application/x-www-form-urlencoded',
-                    'token':this.loadSessionStorage("logonInfoToken")
-                },
-                data: qs.stringify(params),
-                url,
-            }).then(response => {
+                    method: 'POST',
+                    headers: {
+                        'token': this.loadSessionStorage("logonInfoToken"),
+                        'Content-Type': 'application/json'
+                    },
+                    data: params,
+                    url: "http://218.57.139.17:30000/SHENPIAPI" + url,
+                }).then(response => {
                     if (response) {
-                        let rspData = response.data;//返回数据
-                        let successFlag = rspData.success;//成功标志
+                        let rspData = response.data; //返回数据
+                        let successFlag = rspData.success; //成功标志
                         let code = rspData.code;
                         let msg = rspData.msg;
                         if (!successFlag) {
@@ -67,7 +62,7 @@ export default {
                             //注意session超时的处理
                         } else {
                             //成功
-                            return resolve(rspData.data,rspData);
+                            return resolve(rspData.data, rspData);
                         }
                     } else {
                         //公共处理一下错误信息
@@ -80,14 +75,14 @@ export default {
                 });
         });
     },
-       /**
-       * 读取数据，有第二个参数是true，会读取后把数据删除
-       * @author liuzq 2018.11.06
-       * @method loadStorage
-       * @param {String} 键值名
-       * @param {Boolean} 是否读取后删除数据
-       */
-      loadStorage: (key, isRemoved = false) => {
+    /**
+     * 读取数据，有第二个参数是true，会读取后把数据删除
+     * @author liuzq 2018.11.06
+     * @method loadStorage
+     * @param {String} 键值名
+     * @param {Boolean} 是否读取后删除数据
+     */
+    loadStorage: (key, isRemoved = false) => {
         let value = storage.get(key, {});
         if (isRemoved) {
             this.deleteStorage(key)
@@ -114,14 +109,14 @@ export default {
     deleteStorage: (key) => {
         storage.remove(key);
     },
-   /**
-       * 读取数据，有第二个参数是true，会读取后把数据删除
-       * @author liuzq 2018.11.06
-       * @method loadSessionStorage
-       * @param {String} 键值名
-       * @param {Boolean} 是否读取后删除数据
-       */
-      loadSessionStorage: (key, isRemoved = false) => {
+    /**
+     * 读取数据，有第二个参数是true，会读取后把数据删除
+     * @author liuzq 2018.11.06
+     * @method loadSessionStorage
+     * @param {String} 键值名
+     * @param {Boolean} 是否读取后删除数据
+     */
+    loadSessionStorage: (key, isRemoved = false) => {
         let value = storage.session.get(key, {});
         if (isRemoved) {
             this.deleteStorage(key)
