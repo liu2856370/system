@@ -1,5 +1,6 @@
 import { Dialog } from 'vant';
 import storage from 'good-storage';
+import qs from 'qs';
 
 export default {
     rpc(url,data = {}){
@@ -35,8 +36,15 @@ export default {
                     ...data
                 }
             };
-            axios.post(url, params)
-                .then(response => {
+            axios({
+                method: 'POST',
+                headers: { 
+                    'content-type': 'application/x-www-form-urlencoded',
+                    'token':this.loadSessionStorage("logonInfoToken")
+                },
+                data: qs.stringify(params),
+                url,
+            }).then(response => {
                     if (response) {
                         let rspData = response.data;//返回数据
                         let successFlag = rspData.success;//成功标志
