@@ -18,15 +18,15 @@ export default {
   name: "home",
   created(){
    /* 
-    请求示例
+    请求示例            client.rpc("/xxgs/findGcxx",{id:"1111"}).then(res=>{
+      console.log(res);
+    });
 
   }
     client.rpc("/dic/getArea",{}).then(res=>{
       console.log(res);
     });*/
-            client.rpc("/xxgs/findGcxx",{id:"1111"}).then(res=>{
-      console.log(res);
-    });
+
   }
 }
 </script>
