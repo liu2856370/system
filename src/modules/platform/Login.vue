@@ -223,6 +223,7 @@ export default {
             this.captcha
         )
         .then((res) => {
+          client.saveSessionStorage("logonInfoToken",res.token);
           this.$router.push("/platform");
         });
     },
@@ -242,6 +243,7 @@ export default {
             this.captcha
         )
         .then((res) => {
+          client.saveSessionStorage("logonInfoToken",res.token);
           this.$router.push("./site-reView");
         });
     },
@@ -261,6 +263,7 @@ export default {
             this.captcha
         )
         .then((res) => {
+          client.saveSessionStorage("logonInfoToken",res.token);
           this.$router.push("./admin-ListView");
         });
     },
