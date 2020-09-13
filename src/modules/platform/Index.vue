@@ -15,14 +15,14 @@
                 <van-tag plain round type="primary">发证</van-tag>
               </van-col>
             </van-row>
-            <van-cell title="许可事项" value="工业产品生产许可" />
-            <van-cell title="产品类别" value="测量用电流互感器" />
+            <van-cell title="许可事项" :value="slotProps.itemname" />
+            <van-cell title="产品类别" :value="slotProps.producttypename" />
           </template>
-           <template #variable>
-            <van-cell title="产品名称" value="测量用电流互感器" />
-            <van-cell title="提交单位" value="烟台市市场监督管理局" />
-            <van-cell title="主动撤回日期" value="2020-01-15" />
-            <van-cell title="申办号/密码" value="0/0" />
+           <template #variable="{slotProps}">
+            <van-cell title="产品名称" :value="slotProps.producttype" />
+            <van-cell title="提交单位" :value="slotProps.description" />
+            <van-cell title="主动撤回日期" :value="slotProps.orgname" />
+            <van-cell title="申办号/密码" :value="slotProps.orgname" />
             <van-cell title="现场审查计划通知书">
               <template #right-icon>
                 <van-tag plain round type="primary">查看</van-tag>
@@ -96,7 +96,8 @@ export default {
     }
   },
   created(){
-    client.rpc("/qy/ﬁndSbLsList").then(res=>{
+    client.rpc("/qy/findSbLsList").then(res=>{
+      debugger;
         this.processTotal = "共" + res.list.length + "条";
         this.processList = res.list;
     });
