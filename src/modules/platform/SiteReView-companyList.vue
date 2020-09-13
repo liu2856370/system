@@ -117,7 +117,6 @@ export default {
   components: { PHeader, platformList },
   methods: {
     goVerificationInfo(ind) {
-      debugger;
       console.info("当前点击的索引是：" + ind);
       client.saveSessionStorage("findPlanInfo", this.findPlanList[ind]);
       this.$router.push("/siteReView-companyInfo");
