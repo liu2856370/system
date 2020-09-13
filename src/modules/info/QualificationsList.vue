@@ -20,7 +20,7 @@
             <van-cell title="审批部门" :value="slotProps.spbm" />
             <van-cell title="设定依据">
               <template #right-icon>
-                <van-tag plain round type="primary" @click="queryBasisList(slotProps.id)">查看</van-tag>
+                <van-tag plain round type="primary" size="large" @click="queryBasisList(slotProps.id)">查看</van-tag>
               </template>
             </van-cell>
           </template>

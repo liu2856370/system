@@ -23,6 +23,7 @@
         <van-cell title="住所" :value="permitData.abode" />
         <van-cell title="生产地址" :value="permitData.prodaddrxx" />
         <van-cell title="拟许可范围" :value="permitData.certinfo" />
+        <van-notice-bar wrapable :scrollable="false" text="备注：拟许可范围内容如果需要修改，请同步修改“技术审查确认信息”中的相关数据" />
       </van-tab>
       <van-tab title="实地核查结论">
         <van-cell title="检核开始时间" :value="conclusionData.plansdate" />
@@ -45,16 +46,14 @@
                 <van-tag plain round type="primary">查看</van-tag>
             </template> -->
         </van-cell>
-        <van-cell title="检核开始时间" value="2013-06-28" />
-        <van-cell title="检核结束时间" value="2013-06-28" />
-        <van-cell title="实际开始时间" value="2013-06-28" />
-        <van-cell title="实际结束时间" value="2013-06-28" />
         <platform-list :list="list2">
           <template #fixed="{slotProps}">
-            <van-cell title="产品单元" value="盐酸" />
-            <van-cell title="产品品种" value="复产盐酸" />
-            <van-cell title="产品规格型号" value="" />
-            <van-cell title="实地核查结论" value="合格" />
+            <van-cell title="不合符条款" value="盐酸" />
+            <van-cell title="核查项目" value="复产盐酸" />
+            <van-cell title="频次" value="" />
+            <van-cell title="改进建议" value="合格" />
+            <van-cell title="缺陷事实描述" value="合格" />
+            <van-cell title="整改要求" value="合格" />
           </template>
         </platform-list>
       </van-tab>
@@ -93,27 +92,34 @@ export default {
   created(){
     this.companyProcessInfo = client.loadStorage("companyProcessInfo");
 
-    //核查结果
-    client.rpc("/xxgs/gy/getGcxx/hcjg/" + this.companyProcessInfo.id).then(res=>{
-      this.resultList = res;
-    });
+    //审查中、许可中、已发证、不予许可调用接口
+    if(50000 <= this.companyProcessInfo.state <= 80000 || parentInt(this.companyProcessInfo.state) === 10700){
+      //核查结果
+      client.rpc("/xxgs/gy/getGcxx/hcjg",{"neaid":this.companyProcessInfo.id}).then(res=>{
+        this.resultList = res;
+      });
 
-    //拟许可范围
-    client.rpc("/xxgs/gy/getGcxx/nxkfw/" + this.companyProcessInfo.id).then(res=>{
-      this.permitData = res;
-    });
+      //拟许可范围
+      client.rpc("/xxgs/gy/getGcxx/nxkfw",{"neaid":this.companyProcessInfo.id}).then(res=>{
+        this.permitData = res;
+        console.log(res)
+      });
 
-    //实地核查结论
-    client.rpc("/xxgs/gy/getGcxx/sdhcjl/" + this.companyProcessInfo.id).then(res=>{
-      this.conclusionData = res;
-      console.log(res)
-    });
+      //实地核查结论
+      client.rpc("/xxgs/gy/getGcxx/sdhcjl",{"neaid":this.companyProcessInfo.id}).then(res=>{
+        this.conclusionData = res;
+      });
 
-    //不合格项汇总
-    // client.rpc("/xxgs/gy/getGcxx/bhgx/" + this.companyProcessInfo.id + "/" + ).then(res=>{
-    //   this.conclusionData = res;
-    //   console.log(res)
-    // });
+      //不合格项汇总
+      // client.rpc("/xxgs/gy/getGcxx/bhgx/" + this.companyProcessInfo.id + "/" + ).then(res=>{
+      //   this.conclusionData = res;
+      //   console.log(res)
+      // });
+    }
+    //受理中、计划中调用接口
+    else if (20000 <= this.companyProcessInfo.state < 50000){
+
+    }
   }
 };
 </script>
@@ -130,6 +136,11 @@ export default {
   overflow: hidden;
   font-size: 14px;
   line-height: 24px;
+}
+
+.van-notice-bar{
+  background-color: #fff;
+  color: #ccc;
 }
 
 .org-info {
