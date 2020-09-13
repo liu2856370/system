@@ -8,7 +8,15 @@ import { Form } from 'vant'
 import { Field } from 'vant'
 import { RadioGroup, Radio } from 'vant'
 import { Image as VanImage } from 'vant'
+import { Popup } from 'vant'
+import { Calendar } from 'vant'
+import { Overlay } from 'vant'
+import { Loading } from 'vant'
 
+Vue.use(Loading);
+Vue.use(Overlay);
+Vue.use(Calendar);
+Vue.use(Popup);
 Vue.use(VanImage);
 Vue.use(RadioGroup);
 Vue.use(Field);
