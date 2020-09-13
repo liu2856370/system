@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view />
-    <OverLayPage isShow="false"></OverLayPage> 
+    <OverLayPage :isShow="false"></OverLayPage> 
   </div>
 </template>
 <script>
