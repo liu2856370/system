@@ -7,10 +7,10 @@
         <platform-list :list="processList">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
-              <van-col span="12" class="org-name" @click="goVerificationInfo(slotProps)">{{slotProps.orgname}}</van-col>
-              <van-col span="12" class="org-tags">
-                <van-tag plain round type="primary" class="mr10">{{slotProps.flag|dictFormatter("businessType")}}</van-tag>
-                <van-tag plain round type="primary">{{slotProps.applydescription}}</van-tag>
+              <van-col span="14" class="org-name" @click="goVerificationInfo(slotProps)">{{slotProps.orgname}}</van-col>
+              <van-col span="10" class="org-tags">
+                <van-tag plain round type="primary" size="large" class="mr10">{{slotProps.flag|dictFormatter("businessType")}}</van-tag>
+                <van-tag plain round type="primary" size="large">{{slotProps.applydescription}}</van-tag>
               </van-col>
             </van-row>
             <van-cell title="产品类别" :value="slotProps.prodtype" />
@@ -26,11 +26,13 @@
       <van-tab title="证书信息">
         <van-cell :title="certificateTotal" value="" />
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-          <van-cell-group v-for="(item,index) in certificateCompanyList" :key="index" class="mt10">
-            <van-radio :name=index>
+          <van-radio-group v-model="radio" v-for="(item,index) in certificateCompanyList" :key="index" class="mt10">
+          <van-cell-group>
+            <van-radio :name="index">
               <span @click="goQualificationsList(item)">{{item}}</span>
             </van-radio>
           </van-cell-group>
+          </van-radio-group>
         </van-list>
         <van-button type="primary" size="large" to="/qualifications">下一步</van-button>
         <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" >证书如需邮寄送达，请于当地业务窗口联系告知邮寄地址、收件人等信息，便于邮寄</van-notice-bar>
@@ -48,6 +50,7 @@ export default {
   },
   data() {
     return {
+      radio: "0",
       processTotal: "",
       certificateTotal: "",
       active: 0,
@@ -80,7 +83,8 @@ export default {
   },
   created(){
     client.rpc("/dic/getSpxx").then(res=>{
-      client.rpc("/xxgs/findGcxx?itemId=1410").then(res=>{
+      client.rpc("/xxgs/findGcxx",{"itemId": "1410"}).then(res=>{
+        console.log(res)
         this.processTotal = "共" + res.list.length + "条";
         this.processList = res.list;
       });
@@ -135,6 +139,7 @@ export default {
   color: #7b7b7b;
   .org-name {
     font-size: 0.16rem;
+    color: #1989fa;
   }
   .org-tags {
     text-align: right;
