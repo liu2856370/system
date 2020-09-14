@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <PHeader :showArrow="true">核查信息</PHeader>
     <van-tabs v-model="active" sticky>
       <van-tab title="核查结果">
         <platform-list :list="resultList">
@@ -62,11 +63,13 @@
 </template>
 
 <script>
+import PHeader from "../../components/PHeader.vue";
 import platformList from "../platform/common/platformList";
 export default {
   name: "index",
   components: {
-    platformList
+    platformList,
+    PHeader
   },
   data() {
     return {

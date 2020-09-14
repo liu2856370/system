@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <PHeader :showArrow="true">设定依据</PHeader>
         <platform-list :list="list1">
           <template #fixed="{slotProps}">
             <van-cell title="基本编码" value="370131619000" />
@@ -18,11 +19,13 @@
 </template>
 
 <script>
+import PHeader from "../../components/PHeader.vue";
 import platformList from "../common/platformList";
 export default {
 name: "setBasisList",
   components: {
-    platformList
+    platformList,
+    PHeader
   },
   data() {
     return {

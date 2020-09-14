@@ -91,6 +91,12 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "许可档案" */ '../modules/platform/PermitArchiver.vue')
     },
+    {
+        path: '/approval-matter',
+        name: 'approvalMatter',
+        component: () =>
+            import ( /* webpackChunkName: "许可档案" */ '../modules/info/ApprovalMatter.vue')
+    },
     //zxq
 
     {

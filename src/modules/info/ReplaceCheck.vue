@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <PHeader :showArrow="true">品种信息</PHeader>
         <platform-list :list="list1">
           <template #fixed>
             <van-cell title="产品品种" value="工业用丙烯晴" />
@@ -15,11 +16,13 @@
 </template>
 
 <script>
+import PHeader from "../../components/PHeader.vue";
 import platformList from "../platform/common/platformList";
 export default {
   name: "replaceCheck",
   components: {
-    platformList
+    platformList,
+    PHeader
   },
   data() {
     return {
@@ -46,15 +49,15 @@ export default {
   created(){
     this.companyProcessInfo = client.loadStorage("companyProcessInfo");
 
-    //核查结果
-    client.rpc("/xxgs/jl/getGcxx/xspz/hcjg/" + this.companyProcessInfo.id).then(res=>{
-      this.resultList = res;
-    });
+    // //核查结果
+    // client.rpc("/xxgs/jl/getGcxx/xspz/hcjg/" + this.companyProcessInfo.id).then(res=>{
+    //   this.resultList = res;
+    // });
 
-     //实地核查结论
-    client.rpc("/xxgs/jl/getGcxx/xspz/sdhcjl/" + this.companyProcessInfo.id).then(res=>{
-      this.conclusionData = res;
-    });
+    //  //实地核查结论
+    // client.rpc("/xxgs/jl/getGcxx/xspz/sdhcjl/" + this.companyProcessInfo.id).then(res=>{
+    //   this.conclusionData = res;
+    // });
   }
 };
 </script>

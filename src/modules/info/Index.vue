@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <PHeader :showArrow="true">信息公示查询</PHeader>
     <van-search v-model="value" shape="round" placeholder="请输入单位名称" />
     <van-tabs v-model="active" sticky>
       <van-tab title="过程信息">
@@ -28,13 +29,16 @@
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
           <van-radio-group v-model="radio" v-for="(item,index) in certificateCompanyList" :key="index" class="mt10">
           <van-cell-group>
-            <van-radio :name="index">
-              <span @click="goQualificationsList(item)">{{item}}</span>
+            <van-radio :name="index" :index="index" @click="saveData(item)">
+                <template #default>
+                  <span @click="goQualificationsList(item)">{{item}}</span>
+                </template>
+             
             </van-radio>
           </van-cell-group>
           </van-radio-group>
         </van-list>
-        <van-button type="primary" size="large" to="/qualifications">下一步</van-button>
+        <van-button type="primary" size="large" @click="goQualifications">下一步</van-button>
         <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" >证书如需邮寄送达，请于当地业务窗口联系告知邮寄地址、收件人等信息，便于邮寄</van-notice-bar>
       </van-tab>
     </van-tabs>
@@ -42,21 +46,24 @@
 </template>
 
 <script>
+import PHeader from "../../components/PHeader.vue";
 import platformList from "../common/platformList";
 export default {
   name: "index",
   components: {
-    platformList
+    platformList,
+    PHeader
   },
   data() {
     return {
-      radio: "0",
+      radio: 0,
       processTotal: "",
       certificateTotal: "",
       active: 0,
       value: "",
       finished: true,
       loading: false,
+      itemData: "",
       processList: [],
       certificateList:{},
       certificateCompanyList:[]
@@ -64,8 +71,15 @@ export default {
   },
   methods:{
     onLoad(){},
+    saveData(item){
+      this.itemData = item;
+    },
     goQualificationsList(value){
       client.saveStorage("certificateList", this.certificateList[value]);
+      this.$router.push("/qualifications");
+    },
+    goQualifications(){
+      client.saveStorage("certificateList", this.certificateList[this.itemData]);
       this.$router.push("/qualifications");
     },
     goVerificationInfo(itemData){
@@ -82,13 +96,10 @@ export default {
     }
   },
   created(){
-    client.rpc("/dic/getSpxx").then(res=>{
-      client.rpc("/xxgs/findGcxx",{"itemId": "1410"}).then(res=>{
-        console.log(res)
+      client.rpc("/xxgs/findGcxx",{"itemId": client.loadStorage("approvalInfo").code}).then(res=>{
         this.processTotal = "共" + res.list.length + "条";
         this.processList = res.list;
       });
-    });
 
     client.rpc("/xxgs/gy/findZsList").then(res=>{
       if(res.list && res.list.length){
@@ -97,6 +108,7 @@ export default {
         for(let i=0;i<res.list.length;i++){
           let item = res.list[i];
 
+          if(!this.itemData) this.itemData = item.xksx;
           item.unfold = true;
           if(certificateCompanyList.indexOf(item.xksx) === -1){
             certificateCompanyList.push(item.xksx);
