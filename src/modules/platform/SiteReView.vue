@@ -15,8 +15,8 @@
     >
       <van-cell
         v-for="item in list"
-        :key="item"
-        :title="item"
+        :key="item.planid"
+        :title="item.itemName"
         is-link
         @click="goCompanyList"
       />
@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       keyword: "",
-      list: ["工业计划", "食品相关计划", "工业计划", "食品相关计划"],
+      list: [],
       loading: false,
       finished: false,
       active: 0,
@@ -58,7 +58,19 @@ export default {
   },
   components: { PHeader },
   methods: {
-    onLoad() {},
+    onLoad() {
+      client.rpc("/sc/findPlanList", { type: "wait" }).then((res) => {
+        const obj = {};
+        client.saveSessionStorage("findPlanList", res);
+        for (let i = 0; i < res.length; i++) {
+          if (!obj[res[i].itemName]) {
+            this.list.push(res[i]);
+            obj[res[i].itemName] = true;
+          }
+        }
+        this.finished = true;
+      });
+    },
     goCompanyList() {
       this.$router.push("/siteReView-companyList");
     },

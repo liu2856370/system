@@ -24,7 +24,7 @@ export default {
     },
     created(){
         let companyId = client.loadStorage("companyId");
-        client.rpc("/xxgs/gy/getZsxx/" + companyId, {"id": companyId}).then(res=>{
+        client.rpc("/xxgs/gy/getZsxx", {"id": companyId}).then(res=>{
             this.companyData = res;
         });
     }

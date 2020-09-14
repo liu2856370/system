@@ -26,7 +26,13 @@ export default {
     client.rpc("/dic/getArea",{}).then(res=>{
       console.log(res);
     });*/
+    client.rpc("/qy/getDaFileList",{id:"275185",type:"3"}).then(res=>{
+      console.log(res);
+    });
+
   }
+
+
 }
 </script>
 

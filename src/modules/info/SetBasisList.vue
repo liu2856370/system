@@ -18,9 +18,9 @@
 </template>
 
 <script>
-import platformList from "../platform/common/platformList";
+import platformList from "../common/platformList";
 export default {
-name: "accordingInfo",
+name: "setBasisList",
   components: {
     platformList
   },
@@ -35,12 +35,11 @@ name: "accordingInfo",
     };
   },
   methods:{
-    goInfoQuery(){
-      this.$router.push("/info-query");
-    },
-    queryInfo(){
-      this.$router.push("/info-query");
-    }
+  },
+  created(){
+    client.rpc("/qy/getJhtzsInfo",{"id":client.loadStorage("reportId")}).then(res=>{
+      console.log(res)
+    });
   }
 }
 </script>

@@ -1,9 +1,18 @@
 <template>
   <div id="app">
     <router-view />
+    <OverLayPage :isShow="false"></OverLayPage> 
   </div>
 </template>
-
+<script>
+import OverLayPage from "./components/OverLayPage"
+export default {
+    name: "app",
+    components:{
+        OverLayPage
+    }
+}
+</script>
 <style>
 @import './common/less/index.less';
 html,

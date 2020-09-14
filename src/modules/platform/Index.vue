@@ -1,11 +1,13 @@
 <template>
   <div class="index">
     <PHeader :showArrow="false">
-        <template #default>企业申报</template>
+      <template #default>企业申报</template>
     </PHeader>
     <van-tabs v-model="active" sticky>
       <van-tab title="申报历史">
-        <van-cell :title="processTotal" value="筛选" />
+        <van-cell :title="processTotal">
+          <div>筛选</div>
+        </van-cell>
         <platform-list :list="processList">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
@@ -18,7 +20,7 @@
             <van-cell title="许可事项" :value="slotProps.itemname" />
             <van-cell title="产品类别" :value="slotProps.producttypename" />
           </template>
-           <template #variable="{slotProps}">
+          <template #variable="{slotProps}">
             <van-cell title="产品名称" :value="slotProps.producttype" />
             <van-cell title="提交单位" :value="slotProps.description" />
             <van-cell title="主动撤回日期" :value="slotProps.submitdate" />
@@ -49,7 +51,9 @@
         </platform-list>
       </van-tab>
     </van-tabs>
-
+    <van-popup v-model="isShowPopup" position="right" :style="{ width: '75%', height:'100%' }">
+      <filterSearch> </filterSearch>
+    </van-popup>
     <van-tabbar v-model="activeTabbar">
       <van-tabbar-item icon="wap-home-o" to="/platform">首页</van-tabbar-item>
       <van-tabbar-item icon="user-o" to="/user-center">个人中心</van-tabbar-item>
@@ -59,27 +63,30 @@
 
 <script>
 import platformList from "../common/platformList";
+import filterSearch from "./common/filterSearch";
 import PHeader from "../../components/PHeader.vue";
 export default {
   name: "index",
   components: {
     platformList,
-    PHeader
+    PHeader,
+    filterSearch
   },
   data() {
     return {
       processTotal: "",
       active: 0,
       activeTabbar: 0,
-      aa:"01",
+      aa: "01",
       processList: [],
+      isShowPopup:false,
       list2: [
         { orgname: "山东群英电气有限公司1" },
         { orgname: "山东群英电气有限公司2" },
         { orgname: "山东群英电气有限公司3" },
         { orgname: "山东群英电气有限公司4" },
-        { orgname: "山东群英电气有限公司5" }
-      ]
+        { orgname: "山东群英电气有限公司5" },
+      ],
     };
   },
   methods:{
