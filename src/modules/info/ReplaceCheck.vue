@@ -1,15 +1,15 @@
 <template>
   <div class="index">
     <PHeader :showArrow="true">品种信息</PHeader>
-        <platform-list :list="list1">
+        <platform-list :list="resultList">
           <template #fixed>
-            <van-cell title="产品品种" value="工业用丙烯晴" />
-            <van-cell title="规格型号" value="JDZ(X)10-10" />
-            <van-cell title="产品标准" value="GB1208-2010" />
-            <van-cell title="年设计生产能力" value="13万吨" />
-            <van-cell title="申请类别" value="发证" />
-            <van-cell title="涉及产业政策情况" value="GB1208-2010" />
-            <van-cell title="生产地址" value="山东省菏泽市" />
+            <van-cell title="产品品种" value="kind" />
+            <van-cell title="规格型号" value="cellmodel" />
+            <van-cell title="产品标准" value="cellexecstandard" />
+            <van-cell title="年设计生产能力" value="designability" />
+            <van-cell title="申请类别" value="applydescription" />
+            <van-cell title="涉及产业政策情况" value="policyremark" />
+            <van-cell title="生产地址" value="addr" />
           </template>
         </platform-list>
   </div>
@@ -27,20 +27,7 @@ export default {
   data() {
     return {
       active: 0,
-      list1: [
-        { 
-          orgname: "山东群英电气有限公司1",
-          index: 1
-        },
-        { 
-          orgname: "山东群英电气有限公司2",
-          index: 2
-        },
-        { 
-          orgname: "山东群英电气有限公司3",
-          index: 3
-        }
-      ]
+      resultList: []
     };
   },
   methods:{
@@ -49,10 +36,14 @@ export default {
   created(){
     this.companyProcessInfo = client.loadStorage("companyProcessInfo");
 
-    // //核查结果
-    // client.rpc("/xxgs/jl/getGcxx/xspz/hcjg/" + this.companyProcessInfo.id).then(res=>{
-    //   this.resultList = res;
-    // });
+    //品种信息
+    client.rpc("/xxgs/gy/getGcxx/sqxm",{"neaid":this.companyProcessInfo.id}).then(sqxmRes=>{
+      client.rpc("/xxgs/gy/getGcxx/sqxmpz",{"neaid":this.companyProcessInfo.id,"unitid":sqxmRes[0].id}).then(res=>{
+        this.resultList = res;
+        console.log(res)
+      });
+    });
+
 
     //  //实地核查结论
     // client.rpc("/xxgs/jl/getGcxx/xspz/sdhcjl/" + this.companyProcessInfo.id).then(res=>{
