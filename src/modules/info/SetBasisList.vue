@@ -40,9 +40,9 @@ name: "setBasisList",
   methods:{
   },
   created(){
-    client.rpc("/qy/getJhtzsInfo",{"id":client.loadStorage("reportId")}).then(res=>{
-      console.log(res)
-    });
+    // client.rpc("/qy/getJhtzsInfo",{"id":client.loadStorage("reportId")}).then(res=>{
+    //   console.log(res)
+    // });
   }
 }
 </script>
