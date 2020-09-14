@@ -11,7 +11,6 @@
           </template>
         </platform-list>
     </div>
-    
 </template>
 <script>
 import PHeader from "../../components/PHeader.vue";

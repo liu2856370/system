@@ -11,8 +11,8 @@
             <van-row class="org-info">
               <van-col span="12" class="org-name">{{slotProps.orgname}}</van-col>
               <van-col span="12" class="org-tags">
-                <van-tag plain round type="primary" class="mr10">准许许可</van-tag>
-                <van-tag plain round type="primary">发证</van-tag>
+                <van-tag plain round type="primary" class="mr10">{{slotProps.spzt}}</van-tag>
+                <van-tag plain round type="primary">{{slotProps.applydescription}}</van-tag>
               </van-col>
             </van-row>
             <van-cell title="许可事项" :value="slotProps.itemname" />
@@ -21,32 +21,30 @@
            <template #variable="{slotProps}">
             <van-cell title="产品名称" :value="slotProps.producttype" />
             <van-cell title="提交单位" :value="slotProps.description" />
-            <van-cell title="主动撤回日期" :value="slotProps.orgname" />
-            <van-cell title="申办号/密码" :value="slotProps.orgname" />
-            <van-cell title="现场审查计划通知书">
+            <van-cell title="主动撤回日期" :value="slotProps.submitdate" />
+            <van-cell v-show="slotProps.button" @click="seeNotice(slotProps.id)" title="现场审查计划通知书">
               <template #right-icon>
-                <van-tag plain round type="primary">查看</van-tag>
+                <van-tag plain round type="primary">{{slotProps.button}}</van-tag>
               </template>
             </van-cell>
           </template>
         </platform-list>
       </van-tab>
       <van-tab title="许可档案">
+        <van-cell :title="processTotal" value="" />
         <platform-list :list="list2">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
-              <van-col span="12" class="org-name" @click="goPermitArchiver">{{slotProps.orgname}}</van-col>
+              <van-col span="12" class="org-name" @click="goPermitArchiver(slotProps.id)">{{slotProps.orgname}}</van-col>
               <van-col span="12" class="org-tags">
-                <van-tag plain round type="primary" class="mr10">准许许可</van-tag>
-                <van-tag plain round type="primary">发证</van-tag>
+                <van-tag plain round type="primary">{{slotProps.applydescription}}</van-tag>
               </van-col>
             </van-row>
-            <van-cell title="许可事项" value="工业产品生产许可" />
-            <van-cell title="产品类别" value="测量用电流互感器" />
+            <van-cell title="许可事项" :value="slotProps.itemName" />
+            <van-cell title="产品类别" :value="slotProps.prodtype" />
           </template>
-           <template #variable>
-            <van-cell title="产品名称" value="测量用电流互感器" />
-            <van-cell title="申办号/密码" value="0/0" />
+           <template #variable="{slotProps}">
+            <van-cell title="产品名称" :value="slotProps.prodname" />
           </template>
         </platform-list>
       </van-tab>
@@ -75,11 +73,6 @@ export default {
       activeTabbar: 0,
       aa:"01",
       processList: [],
-      list1: [
-        { orgname: "山东群英电气有限公司1" },
-        { orgname: "山东群英电气有限公司2" },
-        { orgname: "山东群英电气有限公司3" },
-      ],
       list2: [
         { orgname: "山东群英电气有限公司1" },
         { orgname: "山东群英电气有限公司2" },
@@ -91,15 +84,26 @@ export default {
   },
   methods:{
     onLoad(){},
-    goPermitArchiver(){
+    goPermitArchiver(id){
+      client.saveSessionStorage("filesID",id);
       this.$router.push("/permit-archiver");
+    },
+    //查看计划通知书
+    seeNotice(event){
+      client.saveSessionStorage("notificationID",event);
+      this.$router.push("/admin-NotiCexaminationView");
     }
   },
   created(){
+    //申报历史
     client.rpc("/qy/findSbLsList").then(res=>{
-      debugger;
         this.processTotal = "共" + res.list.length + "条";
         this.processList = res.list;
+    });
+    //许可档案
+    client.rpc("/qy/findXkdaList").then(res=>{
+        this.processTotal = "共" + res.list.length + "条";
+        this.list2 = res.list;
     });
   }
 };

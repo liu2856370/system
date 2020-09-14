@@ -171,6 +171,12 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "百度地图" */ '../modules/platform/Admin-BaiduMap.vue')
     },
+    {
+        path: '/admin-NotiCexaminationView',
+        name: 'adminNotiCexaminationView',
+        component: () =>
+            import ( /* webpackChunkName: "现场审查计划通知书" */ '../modules/platform/Admin-NotiCexamination.vue')
+    },
     //swj
     {
         path: '/site-reView',

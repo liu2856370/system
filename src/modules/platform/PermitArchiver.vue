@@ -1,29 +1,54 @@
 <template>
   <div class="index">
+    <PHeader :showArrow="true"  @leftClick="onClickLeft">
+        <template #default>
+            许可档案
+        </template>
+    </PHeader>
     <van-tabs v-model="active" :ellipsis="false"
-            :border="false" swipe-threshold="4">
+            :border="false" @click="tabHandler" swipe-threshold="4">
       <van-tab title="受理通知书">
-          <div v-for="(item, index) in list1" :key="index" class="imageStyle">
+          <div v-for="(item, index) in pictureList" :key="index" class="imageStyle">
               <van-image width="2rem" height="2rem" fit="contain" src="https://img.yzcdn.cn/vant/cat.jpeg" rel="external nofollow" />
-              <p>现场审查计量器</p>
+              <p>{{item.filename}}</p>
+          </div>
+          <div class="imageStyle">
+            <van-image  width="2rem" height="2rem" fit="contain" use-error-slot v-show="pictureList">
+            </van-image>
+            <p>暂无数据</p>
           </div>
       </van-tab>
       <van-tab title="许可证书">
-          <div v-for="(item, index) in list1" :key="index" class="imageStyle">
+          <div v-for="(item, index) in pictureList" :key="index" class="imageStyle">
               <van-image width="2rem" height="2rem" fit="contain" src="https://img.yzcdn.cn/vant/cat.jpeg" rel="external nofollow" />
-              <p>全国工业产品生产许可证</p>
+              <p>{{item.filename}}</p>
+          </div>
+          <div class="imageStyle">
+            <van-image  width="2rem" height="2rem" fit="contain" use-error-slot v-show="pictureList">
+            </van-image>
+            <p>暂无数据</p>
           </div>
       </van-tab>
       <van-tab title="不予许可决定书">
-        <div v-for="(item, index) in list1" :key="index" class="imageStyle">
+          <div v-for="(item, index) in pictureList" :key="index" class="imageStyle">
               <van-image width="2rem" height="2rem" fit="contain" src="https://img.yzcdn.cn/vant/cat.jpeg" rel="external nofollow" />
-              <p>不予许可决定书</p>
+              <p>{{item.filename}}</p>
+          </div>
+          <div class="imageStyle">
+            <van-image  width="2rem" height="2rem" fit="contain" use-error-slot v-show="pictureList">
+            </van-image>
+            <p>暂无数据</p>
           </div>
       </van-tab>
       <van-tab title="证照寄送凭证">
-        <div v-for="(item, index) in list1" :key="index" class="imageStyle">
+          <div v-for="(item, index) in pictureList" :key="index" class="imageStyle">
               <van-image width="2rem" height="2rem" fit="contain" src="https://img.yzcdn.cn/vant/cat.jpeg" rel="external nofollow" />
-              <p>证照寄送凭证</p>
+              <p>{{item.filename}}</p>
+          </div>
+          <div class="imageStyle">
+            <van-image  width="2rem" height="2rem" fit="contain" use-error-slot v-show="pictureList">
+            </van-image>
+            <p>暂无数据</p>
           </div>
       </van-tab>
     </van-tabs>
@@ -37,10 +62,12 @@
 
 <script>
 import platformList from "../platform/common/platformList";
+import PHeader from '@/components/PHeader.vue';
 export default {
   name: "index",
   components: {
-    platformList
+    platformList,
+    PHeader
   },
   data() {
     return {
@@ -48,28 +75,37 @@ export default {
       activeTabbar: 0,
       finished: true,
       loading: false,
-      list1: [
-        { 
-          orgname: "山东群英电气有限公司1",
-          index: 1
-        },
-        { 
-          orgname: "山东群英电气有限公司2",
-          index: 2
-        },
-        { 
-          orgname: "山东群英电气有限公司3",
-          index: 3
-        },
-        { 
-          orgname: "山东群英电气有限公司4",
-          index: 4
-        }
-      ]
+      pictureList: []
     };
+  },
+  created: function () {
+    this.filesID = client.loadSessionStorage("filesID");
+    this.tabHandler();
   },
   methods:{
     onLoad(){},
+    //返回键
+    onClickLeft(){},
+    //
+    tabHandler(index){
+      this.filesID = client.loadSessionStorage("filesID");
+      var type;
+      if(index == undefined || index == 0){
+        type = "3";
+      }else if(index == 1){
+        type = "4";
+      }else if(index == 2){
+        type = "5";
+      }else if(index == 3){
+        type = "8";
+      }
+      client.rpc("/qy/getDaFileList/",{
+        id:this.filesID,
+        type:type
+      }).then(res=>{
+        this.pictureList = res;
+      });
+    },
     goQualificationsList(){
       this.$router.push("/qualifications")
     },

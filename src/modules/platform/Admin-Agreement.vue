@@ -24,7 +24,7 @@ export default {
         return {};
     },
     components: {
-    PHeader,
+    PHeader
   },
 }
 </script>
