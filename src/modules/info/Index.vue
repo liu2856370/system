@@ -93,6 +93,15 @@ export default {
       else if(itemData.applydescription === "换证"){
         this.$router.push("/replace-check");
       }
+
+      // //受理中计划中
+      // if(20000<=itemData.state&&itemData.state<50000){
+      //   this.$router.push("/replace-check");
+      // }
+      // //审查中、许可中、已发证、不予许可
+      // else if((50000<=itemData.state&&itemData.state<=80000) || (parseInt(itemData.state) === 10700)){
+      //   this.$router.push("/certification-check");
+      // }
     }
   },
   created(){
