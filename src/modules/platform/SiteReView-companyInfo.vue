@@ -15,6 +15,7 @@
     <van-tabs
       v-model="active"
       class="mt10 mb60"
+      @click="onClick"
     >
       <van-tab title="评审信息">
         <van-cell-group>
@@ -287,10 +288,10 @@
             value="2020-07-04 12:35:21"
           />
           <van-cell-group
-              class="mt10"
-              v-for="(item) in showPageData4"
-              v-bind:key="item.id"
-            >
+            class="mt10"
+            v-for="(item) in showPageData4"
+            v-bind:key="item.id"
+          >
             <van-cell
               title="规定提交材料"
               :value="item.filename"
@@ -309,7 +310,7 @@
               </template>
             </van-cell>
           </van-cell-group>
-          
+
         </template>
       </van-tab>
     </van-tabs>
@@ -382,13 +383,20 @@ export default {
   },
   components: { PHeader, platformList },
   created() {
-    var self = this;
-    this.getCommentInfo();
-    this.getCommentCompletion();
     this.getUnitName();
-    this.getPsclList();
   },
   methods: {
+    onClick(index, title) {
+      this.active = index;
+      if (index == 0) {
+        this.getCommentInfo();
+      } else if (index == 1) {
+        this.getCommentCompletion();
+      } else if (index == 2) {
+      } else if (index == 3) {
+        this.getPsclList();
+      }
+    },
     //获取页签一 评论信息
     getCommentInfo() {
       client
