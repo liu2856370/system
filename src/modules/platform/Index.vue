@@ -13,8 +13,8 @@
             <van-row class="org-info">
               <van-col span="12" class="org-name">{{slotProps.orgname}}</van-col>
               <van-col span="12" class="org-tags">
-                <van-tag plain round type="primary" class="mr10">{{slotProps.spzt}}</van-tag>
-                <van-tag plain round type="primary">{{slotProps.applydescription}}</van-tag>
+                <van-tag plain round type="primary" size="large" class="mr10">{{slotProps.spzt}}</van-tag>
+                <van-tag plain round size="large" type="primary">{{slotProps.applydescription}}</van-tag>
               </van-col>
             </van-row>
             <van-cell title="许可事项" :value="slotProps.itemname" />
@@ -39,7 +39,7 @@
             <van-row class="org-info">
               <van-col span="12" class="org-name" @click="goPermitArchiver(slotProps.id)">{{slotProps.orgname}}</van-col>
               <van-col span="12" class="org-tags">
-                <van-tag plain round type="primary">{{slotProps.applydescription}}</van-tag>
+                <van-tag plain round size="large" type="primary">{{slotProps.applydescription}}</van-tag>
               </van-col>
             </van-row>
             <van-cell title="许可事项" :value="slotProps.itemName" />

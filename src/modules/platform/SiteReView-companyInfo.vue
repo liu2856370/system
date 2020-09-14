@@ -1,7 +1,7 @@
 <template>
   <div>
     <PHeader :showArrow="true">
-      {{showPageData.orgname}}
+      {{orgname}}
       <template #right>
         <van-tag
           round
@@ -379,6 +379,7 @@ export default {
       showPicker: false,
       radio: "yes",
       columns: [],
+      orgname: client.loadSessionStorage("findPlanInfo").orgname,
     };
   },
   components: { PHeader, platformList },

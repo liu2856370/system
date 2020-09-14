@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PHeader :showArrow="true">现场审查</PHeader>
+    <PHeader>现场审查</PHeader>
     <van-search
       v-model="keyword"
       placeholder="请输入搜索关键词"

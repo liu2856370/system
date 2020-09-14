@@ -179,11 +179,11 @@ Vue.use(Button);
 export default {
   data() {
     return {
-      loginId1: "740208528",
-      loginId2: "jinpeizhi",
+      loginId1: "",
+      loginId2: "",
       loginId3: "",
-      password1: "740208528",
-      password2: "aaaaa",
+      password1: "",
+      password2: "",
       password3: "",
       usertype: 0, //登陆类型
       passwordType: "password",
