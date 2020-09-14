@@ -6,7 +6,7 @@
       <van-field v-model="password" name="用户名" placeholder="请输入新密码" :rules="[{ required: true, message: '请输入新密码' }]" />
       <van-field v-model="newPassword" type="password" name="密码" placeholder="请输入确认密码" :rules="[{ required: true, message: '请输入确认密码' }]" />
       <div style="margin: 16px;text-align: center;">
-        <van-button round type="info" native-type="submit">取消</van-button>
+        <van-button round type="info" @click="goBack">取消</van-button>
         <van-button round type="info" native-type="submit" class="ml10">提交</van-button>
       </div>
     </van-form>
@@ -36,6 +36,9 @@ export default {
     },
     onSubmit(values) {
       console.log('submit', values);
+    },
+    goBack(){
+      this.$router.go(-1);
     }
   }
 };
