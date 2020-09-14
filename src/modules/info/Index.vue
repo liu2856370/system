@@ -31,7 +31,7 @@
           <van-cell-group>
             <van-radio :name="index" :index="index" @click="saveData(item)">
                 <template #default>
-                  <span @click="goQualificationsList(item)">{{item}}</span>
+                  <span>{{item}}</span>
                 </template>
              
             </van-radio>

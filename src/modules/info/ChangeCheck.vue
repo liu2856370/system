@@ -94,13 +94,16 @@ export default {
     this.companyProcessInfo = client.loadStorage("companyProcessInfo");
 
     // //核查结果
-    // client.rpc("/xxgs/jl/getGcxx/xspz/hcjg/" + this.companyProcessInfo.id).then(res=>{
+    // client.rpc("/xxgs/gy/getGcxx/hcjg",{"neaid":this.companyProcessInfo.id}).then(res=>{
     //   this.resultList = res;
+    //   console.log(res)
     // });
 
-    //  //实地核查结论
-    // client.rpc("/xxgs/jl/getGcxx/xspz/sdhcjl/" + this.companyProcessInfo.id).then(res=>{
+    // //实地核查结论
+    // client.rpc("/xxgs/gy/getGcxx/sdhcjl",{"neaid":this.companyProcessInfo.id}).then(res=>{
     //   this.conclusionData = res;
+    //   this.itemList = res.itemList;
+    //   console.log(res)
     // });
   }
 };
