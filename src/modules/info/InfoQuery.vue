@@ -1,5 +1,6 @@
 <template>
   <div>
+       <PHeader :showArrow="true">{{companyData.orgname}}</PHeader>
         <template>
             <van-cell title="单位名称" :value="companyData.orgname" />
             <van-cell title="产品名称" :value="companyData.prodname" />
@@ -15,8 +16,12 @@
 </template>
 
 <script>
+import PHeader from "../../components/PHeader.vue";
 export default {
     name: "infoQuery",
+    components:{
+        PHeader
+    },
     data(){
         return {
             companyData:{}
