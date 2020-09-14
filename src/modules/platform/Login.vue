@@ -239,18 +239,18 @@ export default {
     },
     goAdministrationView() {
       //行政审批登陆
-      client
-        .rpc('/login',{
-          loginId:this.loginId3,
-          password:this.password3,
-          openId:this.openId,
-          usertype:this.usertype+1,
-          captcha:this.captcha
-        })
-        .then((res) => {
-          client.saveSessionStorage("logonInfoToken",res.token);
+      // client
+      //   .rpc('/login',{
+      //     loginId:this.loginId3,
+      //     password:this.password3,
+      //     openId:this.openId,
+      //     usertype:this.usertype+1,
+      //     captcha:this.captcha
+      //   })
+      //   .then((res) => {
+      //     client.saveSessionStorage("logonInfoToken",res.token);
           this.$router.push("./admin-ListView");
-        });
+        // });
     },
     // onConfirm(value) {
     //   this.value = value;

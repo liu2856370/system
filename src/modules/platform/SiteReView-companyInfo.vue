@@ -63,97 +63,48 @@
           </van-cell>
         </van-cell-group>
 
-        <div class="whiteBg">
-          <van-tabs type="card">
-            <van-tab title="评审单位">
-              <template>
-                <van-cell-group class="mt10">
-                  <van-cell
-                    title="申请人名称"
-                    value="山东泰汶盐化工有限责任公司"
-                  />
-                  <van-cell title="生产地址">
-                    <template #default>
-                      <van-tag
-                        type="primary"
-                        size="large"
-                        @click="showAddress"
-                      >查看</van-tag>
-                    </template>
-                  </van-cell>
-                  <van-cell
-                    title="联系人"
-                    value="张主任"
-                  />
-                  <van-cell
-                    title="电话"
-                    value="18655552222"
-                  />
-                  <van-cell title="审报产品">
-                    <template #default>
-                      <van-tag
-                        type="primary"
-                        size="large"
-                        @click="showProduction"
-                      >查看</van-tag>
-                    </template>
-                  </van-cell>
-                  <van-cell
-                    title="产业政策"
-                    value="是"
-                  />
-                  <van-cell
-                    title="发证类型"
-                    value=""
-                  />
-                </van-cell-group>
-              </template>
-            </van-tab>
-            <van-tab title="评审组">
-              <template>
-
-                <van-cell-group
-                  class="mt10"
-                  v-for="(item) in showPageData.pszryList"
-                  v-bind:key="item.certno"
-                >
-                  <van-cell
-                    title="姓名"
-                    :value="item.name"
-                  />
-                  <van-cell
-                    title="性别"
-                    :value="item.sex|dictFormatter('isManOrWoman')"
-                  />
-                  <van-cell
-                    title="组长"
-                    :value="item.isgroupleader|dictFormatter('isShowYesAndNo')"
-                  />
-                  <van-cell
-                    title="实习"
-                    :value="item.ispractise|dictFormatter('isShowYesAndNo')"
-                  />
-                  <van-cell title="职责">
-                    <template #default>
-                      <van-checkbox-group
-                        v-model="item.ismanageList"
-                        direction="horizontal"
-                      >
-                        <van-checkbox name="管理">管理</van-checkbox>
-                        <van-checkbox name="工艺">工艺</van-checkbox>
-                        <van-checkbox name="检验">检验</van-checkbox>
-                      </van-checkbox-group>
-                    </template>
-                  </van-cell>
-                  <van-cell
-                    title="工作单位"
-                    :value="item.orgname"
-                  />
-                  <van-cell
-                    title="手机"
-                    :value="item.mobileno"
-                  />
-                  <!-- <van-cell
+        <van-cell-group
+          class="mt10"
+          v-for="(item) in showPageData.pszryList"
+          v-bind:key="item.certno"
+        >
+          <van-cell
+            title="姓名"
+            :value="item.name"
+          />
+          <van-cell
+            title="性别"
+            :value="item.sex|dictFormatter('isManOrWoman')"
+          />
+          <van-cell
+            title="组长"
+            :value="item.isgroupleader|dictFormatter('isShowYesAndNo')"
+          />
+          <van-cell
+            title="实习"
+            :value="item.ispractise|dictFormatter('isShowYesAndNo')"
+          />
+          <van-cell title="职责">
+            <template #default>
+              <van-checkbox-group
+                v-model="item.ismanageList"
+                direction="horizontal"
+              >
+                <van-checkbox name="管理">管理</van-checkbox>
+                <van-checkbox name="工艺">工艺</van-checkbox>
+                <van-checkbox name="检验">检验</van-checkbox>
+              </van-checkbox-group>
+            </template>
+          </van-cell>
+          <van-cell
+            title="工作单位"
+            :value="item.orgname"
+          />
+          <van-cell
+            title="手机"
+            :value="item.mobileno"
+          />
+          <!-- <van-cell
                     title="电话"
                     :value="0531-88765543"
                   />
@@ -161,20 +112,15 @@
                     title="Email"
                     :value="gaoxin@sina.com"
                   /> -->
-                  <van-cell
-                    title="联系地址"
-                    :value="item.address"
-                  />
-                  <van-cell
-                    title="注册号"
-                    :value="item.certno"
-                  />
-                </van-cell-group>
-
-              </template>
-            </van-tab>
-          </van-tabs>
-        </div>
+          <van-cell
+            title="联系地址"
+            :value="item.address"
+          />
+          <van-cell
+            title="注册号"
+            :value="item.certno"
+          />
+        </van-cell-group>
 
       </van-tab>
       <van-tab title="评审结论">
@@ -182,82 +128,63 @@
           <van-cell-group class="mt10">
             <van-cell
               title="评审开始时间"
-              value="2020-07-04 "
+              :value="showPageData2.plansdate"
             />
             <van-cell
               title="评审结束时间"
-              value="2020-07-04 "
+              :value="showPageData2.planedate"
             />
             <van-cell
               title="实际开始时间"
-              value="2020-07-04 "
+              :value="showPageData2.realplansdate"
             />
             <van-cell
               title="实际结束时间"
-              value="2020-07-04 "
+              :value="showPageData2.realplanedate"
             />
             <van-cell
               title="实地评审记录备用说明"
-              value="描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息"
+              :value="showPageData2.remark"
             />
           </van-cell-group>
 
-          <div class="whiteBg">
-            <van-tabs type="card">
-              <van-tab title="产品评审信息">
-                <template>
-                  <van-cell-group class="mt10">
-                    <van-cell
-                      title="产品单元"
-                      value="氯碱"
-                    />
-                    <van-cell
-                      title="产品品种明细"
-                      value="工业用氢氧化钠"
-                    />
-                    <van-cell
-                      title="规格型号"
-                      value="TCH-00321"
-                    />
-                    <van-cell
-                      title="申请类型"
-                      value=""
-                    />
-                    <div class="feildCell-autoWidth">
-                      <label>评审结论</label>
-                      <div>
-                        <van-checkbox-group
-                          v-model="result"
-                          direction="horizontal"
-                        >
-                          <van-checkbox name="0">合格</van-checkbox>
-                          <van-checkbox name="1">不合格</van-checkbox>
-                          <van-checkbox name="2">许可范围变更不审查</van-checkbox>
-                        </van-checkbox-group>
-                      </div>
-                    </div>
+          <van-cell-group
+            class="mt10"
+            v-for="(item) in showPageData2.kindList"
+            v-bind:key="item.kid"
+          >
+            <van-cell
+              title="产品单元"
+              :value="item.unitname"
+            />
+            <van-cell
+              title="产品品种明细"
+              :value="item.kind"
+            />
+            <van-cell
+              title="规格型号"
+              :value="item.cellmodel"
+            />
+            <van-cell
+              title="申请类型"
+              :value="item.applytype"
+            />
+            <div class="feildCell-autoWidth">
+              <label>评审结论</label>
+              <div>
+                <van-checkbox-group
+                  v-model="item.ispass"
+                  direction="horizontal"
+                  disabled
+                >
+                  <van-checkbox name="0">合格</van-checkbox>
+                  <van-checkbox name="1">不合格</van-checkbox>
+                  <van-checkbox name="2">许可范围变更不审查</van-checkbox>
+                </van-checkbox-group>
+              </div>
+            </div>
 
-                  </van-cell-group>
-                </template>
-              </van-tab>
-              <van-tab title="评审汇总">
-                <template>
-                  <van-cell-group class="mt10">
-                    <van-cell
-                      title="产品单元"
-                      value="氯碱"
-                    />
-                    <div class="feildCell-textarea">
-                      <p>评审记录</p>
-                      否决项： 0项；<br />
-                      轻微缺陷项： 5项；<br />
-                      不合格项： 0项；<br />
-                    </div>
-                  </van-cell-group>
-                </template>
-              </van-tab>
-            </van-tabs>
-          </div>
+          </van-cell-group>
 
         </template>
       </van-tab>
@@ -268,7 +195,7 @@
             readonly
             clickable
             label="请选择单元"
-            :value="value"
+            :value="unitId"
             placeholder="请选择"
             @click="showPicker = true"
             right-icon="arrow-down"
@@ -283,120 +210,72 @@
             <van-picker
               show-toolbar
               :columns="columns"
+              value-key="unitname"
               @cancel="showPicker = false"
               @confirm="onConfirm"
             />
           </van-popup>
 
           <div class="filterCardList">
-            <van-cell-group class="mt10">
-              <van-cell
-                title="不符合条款"
-                value="2.1"
-              />
-              <van-cell
-                title="核查项目"
-                value="技术工艺文件"
-              />
-              <van-cell
-                title="频次"
-                value="1"
-              />
-              <div class="feildCell-autoWidth">
-                <label>改进意见</label>
-                <div>
-                  <van-radio-group
-                    v-model="radio"
-                    direction="horizontal"
-                    disabled
-                  >
-                    <van-radio name="yes">建议改进</van-radio>
-                    <van-radio name="no">不符合</van-radio>
-                  </van-radio-group>
+            <van-cell-group
+              class="mt10"
+              v-for="(item) in showPageData3"
+              v-bind:key="item.id"
+            >
+              <van-cell-group class="mt10">
+                <van-cell
+                  title="不符合条款"
+                  :value="item.itemcode"
+                />
+                <van-cell
+                  title="核查项目"
+                  :value="item.hcitems"
+                />
+                <van-cell
+                  title="频次"
+                  :value="item.frequency"
+                />
+                <div class="feildCell-autoWidth">
+                  <label>改进意见</label>
+                  <div>
+                    <van-radio-group
+                      v-model="radio"
+                      direction="horizontal"
+                      disabled
+                    >
+                      <van-radio name="yes">建议改进</van-radio>
+                      <van-radio name="no">不符合</van-radio>
+                    </van-radio-group>
+                  </div>
                 </div>
-              </div>
 
-              <div class="feildCell-textarea">
-                <p>缺陷事实描述</p>
-                部分技术人员对产品标准中除丙烯含量以外的质量指标要求不熟悉。
-              </div>
-
-              <van-cell
-                title="整改要求"
-                value=""
-              />
-            </van-cell-group>
-            <van-cell-group class="tac pt10 pb10">
-              <van-tag
-                round
-                plain
-                size="large"
-                type="success"
-                @click="goEdit"
-              >编辑</van-tag>
-              <van-tag
-                round
-                plain
-                class="ml20"
-                size="large"
-                type="danger"
-              >删除</van-tag>
-            </van-cell-group>
-
-            <van-cell-group class="mt10">
-              <van-cell
-                title="不符合条款"
-                value="2.1"
-              />
-              <van-cell
-                title="核查项目"
-                value="技术工艺文件"
-              />
-              <van-cell
-                title="频次"
-                value="1"
-              />
-              <div class="feildCell-autoWidth">
-                <label>改进意见</label>
-                <div>
-                  <van-radio-group
-                    v-model="radio"
-                    direction="horizontal"
-                    disabled
-                  >
-                    <van-radio name="yes">建议改进</van-radio>
-                    <van-radio name="no">不符合</van-radio>
-                  </van-radio-group>
+                <div class="feildCell-textarea">
+                  <p>缺陷事实描述</p>
+                  {{item.itemcode}}
                 </div>
-              </div>
 
-              <div class="feildCell-textarea">
-                <p>缺陷事实描述</p>
-                部分技术人员对产品标准中除丙烯含量以外的质量指标要求不熟悉。
-              </div>
-
-              <van-cell
-                title="整改要求"
-                value=""
-              />
+                <van-cell
+                  title="整改要求"
+                  :value="item.claim"
+                />
+              </van-cell-group>
+              <van-cell-group class="tac pt10 pb10">
+                <van-tag
+                  round
+                  plain
+                  size="large"
+                  type="success"
+                  @click="goEdit"
+                >编辑</van-tag>
+                <van-tag
+                  round
+                  plain
+                  class="ml20"
+                  size="large"
+                  type="danger"
+                >删除</van-tag>
+              </van-cell-group>
             </van-cell-group>
-            <van-cell-group class="tac pt10 pb10">
-              <van-tag
-                round
-                plain
-                size="large"
-                type="success"
-                @click="goEdit"
-              >编辑</van-tag>
-              <van-tag
-                round
-                plain
-                class="ml20"
-                size="large"
-                type="danger"
-              >删除</van-tag>
-            </van-cell-group>
-
           </div>
 
         </template>
@@ -407,15 +286,19 @@
             title="现场签到"
             value="2020-07-04 12:35:21"
           />
-          <van-cell-group class="mt10">
+          <van-cell-group
+              class="mt10"
+              v-for="(item) in showPageData4"
+              v-bind:key="item.id"
+            >
             <van-cell
               title="规定提交材料"
-              value="实地核查办法 *"
+              :value="item.filename"
               value-class="color-red"
             />
             <van-cell
               title="已提交材料"
-              value="22 危化品工业气体核查办法1.zip "
+              :value="item.uplfilename"
             />
             <van-cell
               title="现场情况"
@@ -426,49 +309,12 @@
               </template>
             </van-cell>
           </van-cell-group>
-          <van-cell-group class="mt10">
-            <van-cell
-              title="规定提交材料"
-              value="实地核查报告 *"
-              value-class="color-red"
-            />
-            <van-cell
-              title="已提交材料"
-              value="22 危化品工业气体核查办法1.zip "
-            />
-            <van-cell
-              title="现场情况"
-              center
-            >
-              <template #right-icon>
-                <van-icon class-prefix="icon-camear" />
-              </template>
-            </van-cell>
-          </van-cell-group>
-          <van-cell-group class="mt10">
-            <van-cell
-              title="规定提交材料"
-              value="实地核查总结 *"
-              value-class="color-red"
-            />
-            <van-cell
-              title="已提交材料"
-              value="22 危化品工业气体核查办法1.zip "
-            />
-            <van-cell
-              title="现场情况"
-              center
-            >
-              <template #right-icon>
-                <van-icon class-prefix="icon-camear" />
-              </template>
-            </van-cell>
-          </van-cell-group>
+          
         </template>
       </van-tab>
     </van-tabs>
 
-    <van-tabbar v-model="active">
+    <van-tabbar v-model="active1">
       <van-tabbar-item
         icon="home-o"
         to="/site-reView"
@@ -520,30 +366,38 @@ Vue.use(Button);
 export default {
   data() {
     return {
-      showPageData: {},
+      findPlanInfo: client.loadSessionStorage("findPlanInfo"),
+      showPageData: {}, //页签一数据
+      showPageData2: {}, //页签二数据
+      showPageData3: {}, //页签三数据
+      showPageData4: {}, //页签四数据
       active: 0,
+      active1: 0,
       result: ["0", "2"],
-      value: "",
+      unitId: "",
       showPicker: false,
       radio: "yes",
-      columns: ["单元一", "单元二", "单元三", "单元四", "单元五", "单元六"],
+      columns: [],
     };
   },
   components: { PHeader, platformList },
   created() {
     var self = this;
     this.getCommentInfo();
+    this.getCommentCompletion();
+    this.getUnitName();
+    this.getPsclList();
   },
   methods: {
-    //获取评论信息
+    //获取页签一 评论信息
     getCommentInfo() {
-      const findPlanInfo = client.loadSessionStorage("findPlanInfo");
       client
         .rpc("/sc/gy/findPsxx", {
-          neaid: findPlanInfo.id,
-          planid: findPlanInfo.planid,
+          neaid: this.findPlanInfo.id,
+          planid: this.findPlanInfo.planid,
         })
         .then((res) => {
+          console.info(res);
           this.showPageData = res;
           for (let i = 0; i < this.showPageData.pszryList.length; i++) {
             var itemData = this.showPageData.pszryList[i];
@@ -551,9 +405,61 @@ export default {
           }
         });
     },
-    onConfirm(value) {
-      this.value = value;
+    //获取页签二 评论结论
+    getCommentCompletion() {
+      client
+        .rpc("/sc/gy/findPsjl", {
+          neaid: this.findPlanInfo.id,
+          planid: this.findPlanInfo.planid,
+        })
+        .then((res) => {
+          console.info(res);
+          this.showPageData2 = res;
+          for (let i = 0; i < this.showPageData2.kindList.length; i++) {
+            var itemData = this.showPageData2.kindList[i];
+            itemData.ispass = itemData.ispass.split(",");
+          }
+        });
+    },
+    //获取产品单元的选项
+    getUnitName: function () {
+      client
+        .rpc("/sc/gy/findBhgxUnit", { neaid: this.findPlanInfo.id })
+        .then((res) => {
+          console.info(res);
+          this.columns = res;
+        });
+    },
+    //不合格 项列表
+    getBhgxByUnit: function (unitid) {
+      client
+        .rpc("/sc/gy/findBhgxByUnit", {
+          neaid: this.findPlanInfo.id,
+          unitid: unitid,
+        })
+        .then((res) => {
+          console.info(res);
+          this.showPageData3 = res;
+        });
+    },
+    //获取 评审材料列表
+    getPsclList: function (unitid) {
+      client
+        .rpc("/sc/findPscl", {
+          neaid: this.findPlanInfo.id,
+          planid: this.findPlanInfo.planid,
+          type: "MP",
+        })
+        .then((res) => {
+          console.info(res);
+          this.showPageData4 = res;
+        });
+    },
+
+    onConfirm(value, index) {
+      this.unitId = value.unitname;
       this.showPicker = false;
+      this.getBhgxByUnit(value.id);
     },
     onClickRight() {
       console.info("新增");
