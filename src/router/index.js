@@ -91,6 +91,12 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "许可档案" */ '../modules/platform/PermitArchiver.vue')
     },
+    {
+        path: '/approval-matter',
+        name: 'approvalMatter',
+        component: () =>
+            import ( /* webpackChunkName: "许可档案" */ '../modules/info/ApprovalMatter.vue')
+    },
     //zxq
 
     {
@@ -170,6 +176,12 @@ const routes = [{
         name: 'adminBaiduMapView',
         component: () =>
             import ( /* webpackChunkName: "百度地图" */ '../modules/platform/Admin-BaiduMap.vue')
+    },
+    {
+        path: '/admin-NotiCexaminationView',
+        name: 'adminNotiCexaminationView',
+        component: () =>
+            import ( /* webpackChunkName: "现场审查计划通知书" */ '../modules/platform/Admin-NotiCexamination.vue')
     },
     //swj
     {

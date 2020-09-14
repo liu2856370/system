@@ -3,7 +3,7 @@
     <div class="govTitle"> 山东市场监管行政许可管理系统 </div>
     <div class="nav">
       <router-link
-        to="/info"
+        to="/approval-matter"
         class="info"
       >信息公示查询</router-link>
       <router-link
@@ -26,13 +26,7 @@ export default {
     client.rpc("/dic/getArea",{}).then(res=>{
       console.log(res);
     });*/
-    client.rpc("/qy/getDaFileList",{id:"275185",type:"3"}).then(res=>{
-      console.log(res);
-    });
-
   }
-
-
 }
 </script>
 

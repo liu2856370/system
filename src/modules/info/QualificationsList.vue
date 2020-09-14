@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <PHeader :showArrow="true">{{certificateList[0].xksx}}</PHeader>
     <van-search v-model="value" shape="round" placeholder="单位名称" />
     <van-cell :title="total" value="筛选" />
         <platform-list :list="certificateList">
@@ -29,11 +30,13 @@
 </template>
 
 <script>
+import PHeader from "../../components/PHeader.vue";
 import platformList from "../common/platformList";
 export default {
 name: "accordingInfo",
   components: {
-    platformList
+    platformList,
+    PHeader
   },
   data() {
     return {
