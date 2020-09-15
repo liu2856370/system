@@ -200,7 +200,7 @@ const routes = [{
         path: '/site-reView',
         name: 'siteReview',
         component: () =>
-            import ( /* webpackChunkName: "platformSiteReView */ '../modules/platform/SiteReView.vue')
+            import ( /* webpackChunkName: "platformSiteReView" */ '../modules/platform/SiteReView.vue')
     },
     {
         path: '/siteReView-companyList',

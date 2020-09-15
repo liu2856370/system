@@ -1,15 +1,15 @@
 <template>
   <div id="app">
     <router-view />
-    <OverLayPage :isShow="false"></OverLayPage> 
+    <LoadingComponent></LoadingComponent> 
   </div>
 </template>
 <script>
-import OverLayPage from "./components/OverLayPage"
+import LoadingComponent from "./plugins/custom/LoadingComponent.vue"
 export default {
     name: "app",
     components:{
-        OverLayPage
+        LoadingComponent
     }
 }
 </script>
