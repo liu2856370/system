@@ -19,9 +19,11 @@ const _axios = axios.create(config);
 _axios.interceptors.request.use(
   function(config) {
     //在此对所有请求进行一次数据包装
+    window.loading.show();
     return config;
   },
   function(error) {
+    window.loading.hide();
     // Do something with request error
     return Promise.reject(error);
   }
@@ -31,10 +33,12 @@ _axios.interceptors.request.use(
 _axios.interceptors.response.use(
   function(response) {
     // Do something with response data
+    window.loading.hide();
     return response;
   },
   function(error) {
     // Do something with response error
+    window.loading.hide();
     return Promise.reject(error);
   }
 );

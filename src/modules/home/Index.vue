@@ -3,7 +3,7 @@
     <div class="govTitle"> 山东市场监管行政许可管理系统 </div>
     <div class="nav">
       <router-link
-        to="/approval-matter"
+        to="/info"
         class="info"
       >信息公示查询</router-link>
       <router-link

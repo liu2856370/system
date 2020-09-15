@@ -2,7 +2,7 @@
   <div>
     <van-overlay :show="show">
       <div class="wrapper" @click.stop>
-        <van-loading type="spinner" />//这里是加载中图标
+        <van-loading type="spinner" />
       </div>
     </van-overlay>
   </div>
@@ -10,15 +10,12 @@
 
 <script>
 export default {
-    props:["isShow"],//通过父组件传过来的show1进行遮罩显示与隐藏 show1为布尔值
-    data(){
-        return{
-            show:this.isShow
-        }
-    },
-    methods:{
-
-    }
+  name: "LoadingComponent",
+  data() {
+    return {
+      show: false
+    };
+  },
 };
 </script>
 

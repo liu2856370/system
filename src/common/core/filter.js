@@ -1,3 +1,4 @@
+import Vue from "vue"
 import dictData from "./dictData"
 
 //产品标签
@@ -235,7 +236,7 @@ const dictFormatter = (key = "",dictName = "")=>{
   return dictData[dictName][key];
 }
 
-export default {
+let Plugin = {
     install (Vue, option) {
         //格式化过滤器
         Vue.filter('formatMoney', formatMoney);
@@ -251,3 +252,7 @@ export default {
         Vue.prototype['formatEditVal']= formatEditVal;
     }
 }
+
+Vue.use(Plugin)
+
+export default Plugin;
