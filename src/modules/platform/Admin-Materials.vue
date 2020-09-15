@@ -28,5 +28,8 @@ export default {
         PHeader,
         platformList
     },
+    methods:{
+        onClickLeft(){}
+    }
 }
 </script>

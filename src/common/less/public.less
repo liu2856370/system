@@ -2,3 +2,80 @@
 .aa{
     border:0px;
 }
+
+.filterLabel{
+    padding-right: .25rem;
+    color: #090809;
+}
+.icon-filter{
+    display: inline-block;
+    width:.2rem;
+    height:.2rem;
+    background: url('../../assets/platform/icon-filter.png') no-repeat center;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 50%;
+    right: 0rem;
+    margin-top: -.1rem;
+}
+
+.licenseCard{
+    width: 3.74rem;
+    margin: .1rem .2rem;
+}
+.licenseCard::after{
+    display: block;
+    content:"";
+    clear: both;
+}
+.licenseCard li{
+    width:1.62rem;
+    height:.86rem;
+    float: left;
+    margin:0 .125rem;
+    border-radius: .1rem;
+    position: relative;
+}
+.licenseCard li::before{
+    display: block;
+    width:.48rem;
+    height:.4rem;
+    position: absolute;
+    top: .24rem;
+    left:.14rem;
+    content:"";
+    background:no-repeat center;
+}
+.licenseCard li p{
+    float:left;
+    margin-left:.88rem;
+    margin-top: .15rem;
+    font-size: .14rem;
+    line-height: .20rem;
+}
+.licenseCard li label{
+    float: left;
+    margin-left: .88rem;
+    font-size: .2rem;
+    line-height: .3rem;
+    margin-top: .07rem;
+    font-weight: bold;
+}
+.licenseCard li.upComing{
+    background-color:#F5E6E4;
+}
+.licenseCard li.upComing::before{
+    background-image:url("../../assets/platform/icon-upComing.png");
+}
+.licenseCard li.upComing p,.licenseCard li.upComing label{
+    color: #EC1B1B;
+}
+.licenseCard li.done{
+    background-color:#F8EDD7;
+}
+.licenseCard li.done::before{
+    background-image:url("../../assets/platform/icon-done.png");
+}
+.licenseCard li.done p,.licenseCard li.done label{
+    color: #FE7617;
+}

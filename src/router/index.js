@@ -10,6 +10,12 @@ const routes = [{
             import ( /* webpackChunkName: "homeIndex" */ '../modules/home/Index.vue')
     },
     {
+        path: '/demo',
+        name: 'demo',
+        component: () =>
+            import ( /* webpackChunkName: "demo" */ '../modules/info/Demo.vue')
+    },
+    {
         path: '/info',
         name: 'info',
         component: () =>
@@ -182,6 +188,12 @@ const routes = [{
         name: 'adminNotiCexaminationView',
         component: () =>
             import ( /* webpackChunkName: "platformAdminNotiCexamination" */ '../modules/platform/Admin-NotiCexamination.vue')
+    },
+    {
+        path: '/admin-UserCenterView',
+        name: 'adminUserCenterView',
+        component: () =>
+            import ( /* webpackChunkName: "platformUserCenter" */ '../modules/platform/Admin-UserCenter.vue')
     },
     //swj
     {
