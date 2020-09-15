@@ -59,8 +59,8 @@
             </van-tab>
         </van-tabs>
         <van-tabbar v-model="active">
-            <van-tabbar-item icon="wap-home-o" to="/platform">首页</van-tabbar-item>
-            <van-tabbar-item icon="user-o" to="/user-center">个人中心</van-tabbar-item>
+            <van-tabbar-item icon="wap-home-o" to="/admin-ListView">首页</van-tabbar-item>
+            <van-tabbar-item icon="user-o" to="/admin-UserCenterView">个人中心</van-tabbar-item>
         </van-tabbar>
     </div>
 </template>
