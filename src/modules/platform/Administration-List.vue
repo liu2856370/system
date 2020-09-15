@@ -1,6 +1,6 @@
 <template>
     <div>
-        <PHeader :showArrow="true">行政审批</PHeader>
+        <PHeader>行政审批</PHeader>
         <van-search v-model="keyword" placeholder="请输入搜索关键词" />
         <!-- 这里给两个图片留个地方 -->
         <van-tabs v-model="active" sticky>
