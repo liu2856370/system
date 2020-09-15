@@ -1,6 +1,6 @@
 <template>
     <div>
-        <PHeader :showArrow="true" @leftClick="onClickLeft">
+        <PHeader :showArrow="true">
             <template #default>材料退回</template>
         </PHeader>
         <template style="margin-top: 0.1rem;">
@@ -22,6 +22,9 @@ export default {
     },
     components: {
     PHeader,
-  },
+    },
+    methods:{
+      queryBasisList(){}
+    }
 }
 </script>

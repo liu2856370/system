@@ -33,5 +33,8 @@ export default {
     components: {
     PHeader,
   },
+  methods:{
+      onClickLeft(){}
+  }
 }
 </script>

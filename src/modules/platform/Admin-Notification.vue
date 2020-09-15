@@ -3,38 +3,34 @@
         <PHeader :showArrow="true" @leftClick="onClickLeft">
             <template #default>受理通知书</template>
         </PHeader>
-        <van-image width="1.35rem" height="1.5rem" fit="现场审查技..." src="https://img.yzcdn.cn/vant/cat.jpeg">
-            <template #default>
-                <div class="mt10" ></div>
-                现场审查技...
-            </template>
-        </van-image>
-        <van-image width="1.35rem" height="1.5rem" fit="现场审查技..." src="https://img.yzcdn.cn/vant/cat.jpeg">
-            <template #default>
-                <div class="mt10" ></div>
-                现场审查技...
-            </template>
-        </van-image>
-        <van-image width="1.35rem" height="1.5rem" fit="现场审查技..." src="https://img.yzcdn.cn/vant/cat.jpeg">
-            <template #default>
-                <div class="mt10" ></div>
-                现场审查技...
-            </template>
-        </van-image>
-        
+        <template>
+            <div v-for="(item, index) in pictureList" :key="index" class="imageStyle">
+              <van-image width="3rem" height="3rem" fit="contain" src="https://img.yzcdn.cn/vant/cat.jpeg"/>
+              <p>现场审查计...</p>
+          </div>
+        </template>
     </div>
 </template>
 <script>
 import PHeader from "../../components/PHeader.vue";
 export default {
     data(){
-        return{};
+        return{
+            pictureList:[{
+                
+            },{}]
+        };
     },
     components: {
         PHeader,
     },
+    methods:{
+        onClickLeft(){}
+    }
 }
 </script>
 <style scoped>
-
+.imageStyle{
+  text-align: center;
+}
 </style>

@@ -7,43 +7,43 @@ const routes = [{
         path: '/',
         name: 'home',
         component: () =>
-            import ( /* webpackChunkName: "首页" */ '../modules/home/Index.vue')
+            import ( /* webpackChunkName: "homeIndex" */ '../modules/home/Index.vue')
     },
     {
         path: '/info',
         name: 'info',
         component: () =>
-            import ( /* webpackChunkName: "信息查询首页" */ '../modules/info/Index.vue')
+            import ( /* webpackChunkName: "infoIndex" */ '../modules/info/Index.vue')
     },
     {
         path: '/login',
         name: 'login',
         component: () =>
-            import ( /* webpackChunkName: "平台登录页" */ '../modules/platform/Login.vue')
+            import ( /* webpackChunkName: "platformLogin" */ '../modules/platform/Login.vue')
     },
     {
         path: '/process-info',
         name: 'process-info',
         component: () =>
-            import ( /* webpackChunkName: "过程信息" */ '../modules/info/ProcessInfo.vue')
+            import ( /* webpackChunkName: "infoProcessInfo" */ '../modules/info/ProcessInfo.vue')
     },
     {
         path: '/qualifications',
         name: 'qualificationsList',
         component: () =>
-            import ( /* webpackChunkName: "符合单位列表信息" */ '../modules/info/QualificationsList.vue')
+            import ( /* webpackChunkName: "infoQualificationsList" */ '../modules/info/QualificationsList.vue')
     },
     {
         path: '/info-query',
         name: 'infoQuery',
         component: () =>
-            import ( /* webpackChunkName: "信息查询" */ '../modules/info/InfoQuery.vue')
+            import ( /* webpackChunkName: "infoInfoQuery" */ '../modules/info/InfoQuery.vue')
     },
     {
         path: '/according-info',
         name: 'according-info',
         component: () =>
-            import ( /* webpackChunkName: "匹配信息" */ '../modules/info/AccordingInfo.vue')
+            import ( /* webpackChunkName: "infoAccordingInfo" */ '../modules/info/AccordingInfo.vue')
     },
 
     //lzq
@@ -51,13 +51,13 @@ const routes = [{
         path: '/platform',
         name: 'platform',
         component: () =>
-            import ( /* webpackChunkName: "平台首页" */ '../modules/platform/Index.vue')
+            import ( /* webpackChunkName: "platformIndex" */ '../modules/platform/Index.vue')
     },
     {
         path: '/user-center',
         name: 'userCenter',
         component: () =>
-            import ( /* webpackChunkName: "平台首页" */ '../modules/platform/UserCenter.vue')
+            import ( /* webpackChunkName: "platformUserCenter" */ '../modules/platform/UserCenter.vue')
     },
     //zp
 
@@ -65,37 +65,37 @@ const routes = [{
         path: '/set-basis-list',
         name: 'setBasisList',
         component: () =>
-            import ( /* webpackChunkName: "法律依据列表" */ '../modules/info/SetBasisList.vue')
+            import ( /* webpackChunkName: "infoSetBasisList" */ '../modules/info/SetBasisList.vue')
     },
     {
         path: '/certification-check',
         name: 'certificationCheck',
         component: () =>
-            import ( /* webpackChunkName: "发证检核" */ '../modules/info/CertificationCheck.vue')
+            import ( /* webpackChunkName: "infoCertificationCheck" */ '../modules/info/CertificationCheck.vue')
     },
     {
         path: '/change-check',
         name: 'changeCheck',
         component: () =>
-            import ( /* webpackChunkName: "发证检核" */ '../modules/info/ChangeCheck.vue')
+            import ( /* webpackChunkName: "infoChangeCheck" */ '../modules/info/ChangeCheck.vue')
     },
     {
         path: '/replace-check',
         name: 'replaceCheck',
         component: () =>
-            import ( /* webpackChunkName: "发证检核" */ '../modules/info/ReplaceCheck.vue')
+            import ( /* webpackChunkName: "infoReplaceCheck" */ '../modules/info/ReplaceCheck.vue')
     },
     {
         path: '/permit-archiver',
         name: 'permitArchiver',
         component: () =>
-            import ( /* webpackChunkName: "许可档案" */ '../modules/platform/PermitArchiver.vue')
+            import ( /* webpackChunkName: "platformPermitArchiver" */ '../modules/platform/PermitArchiver.vue')
     },
     {
         path: '/approval-matter',
         name: 'approvalMatter',
         component: () =>
-            import ( /* webpackChunkName: "许可档案" */ '../modules/info/ApprovalMatter.vue')
+            import ( /* webpackChunkName: "infoApprovalMatter" */ '../modules/info/ApprovalMatter.vue')
     },
     //zxq
 
@@ -103,134 +103,140 @@ const routes = [{
         path: '/image',
         name: 'image',
         component: () =>
-            import ( /* webpackChunkName: "平台首页img" */ '../modules/platform/ImageShow.vue')
+            import ( /* webpackChunkName: "platformImageShow" */ '../modules/platform/ImageShow.vue')
     },
     {
         path: '/admin-ListView',
         name: 'adminListView',
         component: () =>
-            import ( /* webpackChunkName: "行政审批列表" */ '../modules/platform/Administration-List.vue')
+            import ( /* webpackChunkName: "platformAdministrationList" */ '../modules/platform/Administration-List.vue')
     },
     {
         path: '/admin-InfoView',
         name: 'adminInfoView',
         component: () =>
-            import ( /* webpackChunkName: "行政审批信息" */ '../modules/platform/Administration-Info.vue')
+            import ( /* webpackChunkName: "platformAdministrationInfo" */ '../modules/platform/Administration-Info.vue')
     },
     {
         path: '/admin-DetailView',
         name: 'adminDetailView',
         component: () =>
-            import ( /* webpackChunkName: "行政审批信息" */ '../modules/platform/Administration-Detail.vue')
+            import ( /* webpackChunkName: "platformAdministrationDetail" */ '../modules/platform/Administration-Detail.vue')
     },
     {
         path: '/admin-EquipmentView',
         name: 'adminEquipmentView',
         component: () =>
-            import ( /* webpackChunkName: "行政审批-生产设备信息" */ '../modules/platform/Admin-Equipment.vue')
+            import ( /* webpackChunkName: "platformAdminEquipment" */ '../modules/platform/Admin-Equipment.vue')
     },
     {
         path: '/admin-InstrumentView',
         name: 'adminInstrumentView',
         component: () =>
-            import ( /* webpackChunkName: "行政审批-仪器、设备信息" */ '../modules/platform/Admin-Instrument.vue')
+            import ( /* webpackChunkName: "platformAdminInstrument" */ '../modules/platform/Admin-Instrument.vue')
     },
     {
         path: '/admin-AgreementView',
         name: 'adminAgreementView',
         component: () =>
-            import ( /* webpackChunkName: "行政审批-原材料外构件、外协议信息" */ '../modules/platform/Admin-Agreement.vue')
+            import ( /* webpackChunkName: "platformAdminAgreement" */ '../modules/platform/Admin-Agreement.vue')
     },
     {
         path: '/admin-MaterialsView',
         name: 'adminMaterialsView',
         component: () =>
-            import ( /* webpackChunkName: "行政审批-许可档案-申请材料信息" */ '../modules/platform/Admin-Materials.vue')
+            import ( /* webpackChunkName: "platformAdminMaterials" */ '../modules/platform/Admin-Materials.vue')
     },
     {
         path: '/admin-ObserverView',
         name: 'adminObserverView',
         component: () =>
-            import ( /* webpackChunkName: "行政审批-许可档案-观察员报告信息" */ '../modules/platform/Admin-Observer.vue')
+            import ( /* webpackChunkName: "platformAdminObserver" */ '../modules/platform/Admin-Observer.vue')
     },
     {
         path: '/admin-NotificationView',
         name: 'adminNotificationView',
         component: () =>
-            import ( /* webpackChunkName: "行政审批-许可档案-受理通知书信息" */ '../modules/platform/Admin-Notification.vue')
+            import ( /* webpackChunkName: "platformAdminNotification" */ '../modules/platform/Admin-Notification.vue')
     },
     {
         path: '/admin-ReturnableView',
         name: 'adminReturnableView',
         component: () =>
-            import ( /* webpackChunkName: "行政审批-综合查询-材料退回信息" */ '../modules/platform/Admin-Returnable.vue')
+            import ( /* webpackChunkName: "platformAdminReturnable" */ '../modules/platform/Admin-Returnable.vue')
     },
     {
         path: '/admin-CorrectionView',
         name: 'adminCorrectionView',
         component: () =>
-            import ( /* webpackChunkName: "行政审批-综合查询-材料补正信息" */ '../modules/platform/Admin-Correction.vue')
+            import ( /* webpackChunkName: "platformAdminCorrection" */ '../modules/platform/Admin-Correction.vue')
     },
     {
         path: '/admin-BaiduMapView',
         name: 'adminBaiduMapView',
         component: () =>
-            import ( /* webpackChunkName: "百度地图" */ '../modules/platform/Admin-BaiduMap.vue')
+            import ( /* webpackChunkName: "platformAdminBaiduMap" */ '../modules/platform/Admin-BaiduMap.vue')
     },
     {
         path: '/admin-NotiCexaminationView',
         name: 'adminNotiCexaminationView',
         component: () =>
-            import ( /* webpackChunkName: "现场审查计划通知书" */ '../modules/platform/Admin-NotiCexamination.vue')
+            import ( /* webpackChunkName: "platformAdminNotiCexamination" */ '../modules/platform/Admin-NotiCexamination.vue')
+    },
+    {
+        path: '/admin-UserCenterView',
+        name: 'adminUserCenterView',
+        component: () =>
+            import ( /* webpackChunkName: "platformUserCenter" */ '../modules/platform/Admin-UserCenter.vue')
     },
     //swj
     {
         path: '/site-reView',
         name: 'siteReview',
         component: () =>
-            import ( /* webpackChunkName: "现场审查列表" */ '../modules/platform/SiteReView.vue')
+            import ( /* webpackChunkName: "platformSiteReView */ '../modules/platform/SiteReView.vue')
     },
     {
         path: '/siteReView-companyList',
         name: 'siteReview-companyList',
         component: () =>
-            import ( /* webpackChunkName: "现场审查列表-待审查公司列表" */ '../modules/platform/SiteReView-companyList.vue')
+            import ( /* webpackChunkName: "platformSiteReViewcompanyList" */ '../modules/platform/SiteReView-companyList.vue')
     },
     {
         path: '/siteReView-companyInfo',
         name: 'siteReview-companyInfo',
         component: () =>
-            import ( /* webpackChunkName: "现场审查列表-待审查公司详情" */ '../modules/platform/SiteReView-companyInfo.vue')
+            import ( /* webpackChunkName: "platformSiteReViewcompanyInfo" */ '../modules/platform/SiteReView-companyInfo.vue')
     },
     {
         path: '/siteReView-userCenter',
         name: 'siteReview-userCenter',
         component: () =>
-            import ( /* webpackChunkName: "现场审查列表-用户中心" */ '../modules/platform/SiteReView-userCenter.vue')
+            import ( /* webpackChunkName: "platformSiteReViewuserCenter" */ '../modules/platform/SiteReView-userCenter.vue')
     },
     {
         path: '/siteReView-unqualifiedEdit',
         name: 'siteReview-unqualifiedEdit',
         component: () =>
-            import ( /* webpackChunkName: "现场审查列表-编辑不符合项" */ '../modules/platform/SiteReView-unqualifiedEdit.vue')
+            import ( /* webpackChunkName: "platformSiteReViewunqualifiedEdit" */ '../modules/platform/SiteReView-unqualifiedEdit.vue')
     },
     {
         path: '/goMore-showAddress',
         name: 'goMore-showAddress',
         component: () =>
-            import ( /* webpackChunkName: "现场审查列表-详情-更多-展示生产地址" */ '../modules/platform/SiteReView-companyInfo-showAddress.vue')
+            import ( /* webpackChunkName: "platformSiteReViewshowAddress" */ '../modules/platform/SiteReView-companyInfo-showAddress.vue')
     },
     {
         path: '/goMore-showProduction',
         name: 'goMore-showProduction',
         component: () =>
-            import ( /* webpackChunkName: "现场审查列表-详情-更多-申报产品" */ '../modules/platform/SiteReView-companyInfo-showProduction.vue')
+            import ( /* webpackChunkName: "platformSiteReViewshowProduction" */ '../modules/platform/SiteReView-companyInfo-showProduction.vue')
     },
     {
         path: '/goMore-showNotice',
         name: 'goMore-showNotice',
         component: () =>
-            import ( /* webpackChunkName: "现场审查列表-详情-更多-展示现场核查通知书" */ '../modules/platform/SiteReView-companyInfo-showNotice.vue')
+            import ( /* webpackChunkName: "platformSiteReViewshowNotice" */ '../modules/platform/SiteReView-companyInfo-showNotice.vue')
     }
 ]
 
