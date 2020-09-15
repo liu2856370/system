@@ -187,7 +187,7 @@ const routes = [{
         path: '/admin-UserCenterView',
         name: 'adminUserCenterView',
         component: () =>
-            import ( /* webpackChunkName: "platformAdminNotiCexamination" */ '../modules/platform/Admin-UserCenter.vue')
+            import ( /* webpackChunkName: "platformUserCenter" */ '../modules/platform/Admin-UserCenter.vue')
     },
     //swj
     {
