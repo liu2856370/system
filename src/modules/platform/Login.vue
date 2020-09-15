@@ -179,12 +179,12 @@ Vue.use(Button);
 export default {
   data() {
     return {
-      loginId1: "",
-      loginId2: "",
-      loginId3: "",
-      password1: "",
-      password2: "",
-      password3: "",
+      loginId1: "740208528",
+      loginId2: "jinpeizhi",
+      loginId3: "gyxksc3701",
+      password1: "740208528",
+      password2: "aaaaa",
+      password3: "asdf7349",
       usertype: 0, //登陆类型
       passwordType: "password",
       passwordRightIcon: "closed-eye",
@@ -239,18 +239,18 @@ export default {
     },
     goAdministrationView() {
       //行政审批登陆
-      // client
-      //   .rpc('/login',{
-      //     loginId:this.loginId3,
-      //     password:this.password3,
-      //     openId:this.openId,
-      //     usertype:this.usertype+1,
-      //     captcha:this.captcha
-      //   })
-      //   .then((res) => {
-      //     client.saveSessionStorage("logonInfoToken",res.token);
+      client
+        .rpc('/login',{
+          loginId:this.loginId3,
+          password:this.password3,
+          openId:this.openId,
+          usertype:this.usertype+1,
+          captcha:this.captcha
+        })
+        .then((res) => {
+          client.saveSessionStorage("logonInfoToken",res.token);
           this.$router.push("./admin-ListView");
-        // });
+        });
     },
     // onConfirm(value) {
     //   this.value = value;
