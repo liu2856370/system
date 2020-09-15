@@ -16,7 +16,7 @@ export default {
         return new Promise((resolve, reject) => {
             //动态引入,如下引入
             //let imgUrl = require('../images/' + imgName + '.png');  // 目录 + 文件名 + 后缀
-            import("../mock/api/" + url + ".js").then(res => {
+            import ("../mock/api/" + url + ".js").then(res => {
                 let rspData = res.default[data.opid || 'index'](data);
                 resolve(rspData);
             }).catch(error => {
@@ -46,7 +46,7 @@ export default {
                         let code = rspData.code;
                         let msg = rspData.msg;
                         if (!successFlag) {
-                           /* //失败情况
+                            //失败情况
                             if (process.env.NODE_ENV !== 'production') {
                                 //非生产环境
                                 Dialog.alert({
@@ -60,7 +60,7 @@ export default {
                                 });
                             }
                             //注意session超时的处理
-                            */
+
                         } else {
                             //成功
                             return resolve(rspData.data, rspData);
