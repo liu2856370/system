@@ -385,6 +385,7 @@ export default {
   components: { PHeader, platformList },
   created() {
     this.getUnitName();
+    this.getCommentInfo();
   },
   methods: {
     onClick(index, title) {

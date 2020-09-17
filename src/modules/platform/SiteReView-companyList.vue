@@ -95,10 +95,10 @@ export default {
       itemData.index = i;
       itemData.date = itemData.sdate + "至" + itemData.edate;
       if (itemData.lastdate < 0) {
-        itemData.showDays = "超期：" + itemData.lastdate + "天";
+        itemData.showDays = "超期：" + itemData.lastdate;
         itemData.state1Type = "danger";
       } else {
-        itemData.showDays = "上报：" + itemData.lastdate + "天";
+        itemData.showDays = "上报：" + itemData.lastdate;
         itemData.state1Type = "success";
       }
       switch (itemData.applydescription) {
@@ -137,16 +137,5 @@ export default {
   overflow: hidden;
   font-size: 14px;
   line-height: 24px;
-}
-
-.org-info {
-  padding: 0.1rem 0.15rem;
-  color: #7b7b7b;
-  .org-name {
-    font-size: 0.16rem;
-  }
-  .org-tags {
-    text-align: right;
-  }
 }
 </style>
