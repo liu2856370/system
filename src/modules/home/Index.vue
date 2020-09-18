@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="govTitle"> 山东市场监管行政许可管理系统 </div>
+    <div class="govTitle"> <router-link to="/demo">山东市场监管行政许可管理系统</router-link> </div>
     <div class="nav">
       <router-link
         to="/info"
