@@ -6,8 +6,35 @@
     }
 }
 
-//重写tab样式
+/*重写tab样式*/
 .van-tabs__line{
     background-color:#1677FF;
 }
+
+/* 重写checkBox样式 */
+.van-checkbox--horizontal {
+    margin-right: 0.1rem !important;
+  }
+  .van-checkbox__label {
+    margin-left: 0.03rem !important;
+  }
+  .feildCell-autoWidth {
+    width: 3.82rem;
+    margin: 0 0.16rem;
+    padding: 0.1rem 0;
+    line-height: 0.24rem;
+    border-bottom: #f5f5f5 1px solid;
+  }
+  .feildCell-autoWidth > label {
+    float: left;
+  }
+  .feildCell-autoWidth > div {
+    float: right;
+    text-align: right;
+  }
+  .feildCell-autoWidth::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
 

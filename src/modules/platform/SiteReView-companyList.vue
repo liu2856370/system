@@ -23,11 +23,11 @@
               round
               size="large"
               :type="slotProps.state1Type"
-              class="mr10"
             >{{slotProps.showDays}}</van-tag>
             <van-tag
               plain
               round
+              class="ml10"
               size="large"
               :type="slotProps.state2Type"
             >{{slotProps.applydescription}}</van-tag>
@@ -95,10 +95,10 @@ export default {
       itemData.index = i;
       itemData.date = itemData.sdate + "至" + itemData.edate;
       if (itemData.lastdate < 0) {
-        itemData.showDays = "超期：" + itemData.lastdate;
+        itemData.showDays = "超期:" + itemData.lastdate;
         itemData.state1Type = "danger";
       } else {
-        itemData.showDays = "上报：" + itemData.lastdate;
+        itemData.showDays = "上报:" + itemData.lastdate;
         itemData.state1Type = "success";
       }
       switch (itemData.applydescription) {

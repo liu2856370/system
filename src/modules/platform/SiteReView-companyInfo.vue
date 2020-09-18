@@ -6,6 +6,7 @@
         <van-tag
           round
           plain
+          :class="isShowBtnAdd"
           size="large"
           type="primary"
           @click="goAdd"
@@ -18,7 +19,7 @@
       @click="onClick"
     >
       <van-tab title="评审信息">
-        <van-cell-group>
+        <van-cell-group class="pt10">
           <van-cell
             title="计划标题"
             :value="showPageData.plantitle"
@@ -85,18 +86,22 @@
             title="实习"
             :value="item.ispractise|dictFormatter('isShowYesAndNo')"
           />
-          <van-cell title="职责">
-            <template #default>
+
+          <div class="feildCell-autoWidth">
+            <label>职责</label>
+            <div>
               <van-checkbox-group
                 v-model="item.ismanageList"
                 direction="horizontal"
+                disabled
               >
                 <van-checkbox name="管理">管理</van-checkbox>
                 <van-checkbox name="工艺">工艺</van-checkbox>
                 <van-checkbox name="检验">检验</van-checkbox>
               </van-checkbox-group>
-            </template>
-          </van-cell>
+            </div>
+          </div>
+
           <van-cell
             title="工作单位"
             :value="item.orgname"
@@ -105,14 +110,6 @@
             title="手机"
             :value="item.mobileno"
           />
-          <!-- <van-cell
-                    title="电话"
-                    :value="0531-88765543"
-                  />
-                  <van-cell
-                    title="Email"
-                    :value="gaoxin@sina.com"
-                  /> -->
           <van-cell
             title="联系地址"
             :value="item.address"
@@ -126,7 +123,7 @@
       </van-tab>
       <van-tab title="评审结论">
         <template>
-          <van-cell-group class="mt10">
+          <van-cell-group class="pt10">
             <van-cell
               title="评审开始时间"
               :value="showPageData2.plansdate"
@@ -191,17 +188,18 @@
       </van-tab>
       <van-tab title="不合格项汇总">
         <template>
-
-          <van-field
-            readonly
-            clickable
-            label="请选择单元"
-            :value="unitId"
-            placeholder="请选择"
-            @click="showPicker = true"
-            right-icon="arrow-down"
-            center
-          />
+          <van-cell-group class="pt10">
+            <van-field
+              readonly
+              clickable
+              label="请选择单元"
+              :value="unitId"
+              placeholder="请选择"
+              @click="showPicker = true"
+              right-icon="arrow-down"
+              center
+            />
+          </van-cell-group>
           <van-popup
             v-model="showPicker"
             round
@@ -283,10 +281,13 @@
       </van-tab>
       <van-tab title="评审材料列表">
         <template>
-          <van-cell
-            title="现场签到"
-            value="2020-07-04 12:35:21"
-          />
+
+          <van-cell-group class="pt10">
+            <van-cell
+              title="现场签到"
+              value="2020-07-04 12:35:21"
+            />
+          </van-cell-group>
           <van-cell-group
             class="mt10"
             v-for="(item) in showPageData4"
@@ -380,6 +381,7 @@ export default {
       radio: "yes",
       columns: [],
       orgname: client.loadSessionStorage("findPlanInfo").orgname,
+      isShowBtnAdd: "none",
     };
   },
   components: { PHeader, platformList },
@@ -391,11 +393,15 @@ export default {
     onClick(index, title) {
       this.active = index;
       if (index == 0) {
+        this.isShowBtnAdd = "none";
         this.getCommentInfo();
       } else if (index == 1) {
+        this.isShowBtnAdd = "none";
         this.getCommentCompletion();
       } else if (index == 2) {
+        this.isShowBtnAdd = "inline-block";
       } else if (index == 3) {
+        this.isShowBtnAdd = "none";
         this.getPsclList();
       }
     },
@@ -495,72 +501,3 @@ export default {
   },
 };
 </script>
-<style>
-.tac {
-  text-align: center;
-}
-.pt10 {
-  padding-top: 0.1rem;
-}
-.pb10 {
-  padding-bottom: 0.1rem;
-}
-.ml20 {
-  margin-left: 0.2rem;
-}
-.color-red {
-  color: #ff3b30;
-}
-.whiteBg {
-  width: 100%;
-
-  margin-top: 0.1rem;
-  padding: 0.1rem 0;
-}
-/* 重写checkBox样式 */
-.van-checkbox--horizontal {
-  margin-right: 0.1rem;
-}
-.van-checkbox__label {
-  margin-left: 0.03rem;
-}
-.feildCell-autoWidth {
-  width: 3.82rem;
-  margin: 0 0.16rem;
-  padding: 0.1rem 0;
-  line-height: 0.24rem;
-  border-bottom: #f5f5f5 1px solid;
-}
-.feildCell-autoWidth > label {
-  float: left;
-}
-.feildCell-autoWidth > div {
-  float: right;
-  text-align: right;
-}
-.feildCell-autoWidth::after {
-  display: block;
-  content: "";
-  clear: both;
-}
-.feildCell-textarea {
-  width: 3.82rem;
-  margin: 0 0.16rem;
-  padding: 0.1rem 0;
-  line-height: 0.2rem;
-  color: #878787;
-  border-bottom: #f5f5f5 1px solid;
-}
-.feildCell-textarea p {
-  color: #323232;
-  font-size: 0.14rem;
-  line-height: 0.25rem;
-}
-.icon-camera {
-  width: 0.24rem;
-  height: 0.24rem;
-  display: block;
-  background: url("../../assets/platform/icon-camera.png") no-repeat center;
-  background-size: 100% 100%;
-}
-</style>
