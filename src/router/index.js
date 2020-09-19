@@ -219,6 +219,12 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "platformProductVariety" */ '../modules/platform/Admin-ProductVariety.vue')
     },
+    {
+        path: '/admin-XkhcSeienceView',
+        name: 'adminXkhcSeienceView',
+        component: () =>
+            import ( /* webpackChunkName: "platformProductVariety" */ '../modules/platform/Admin-XkhcSeience.vue')
+    },
     //swj
     {
         path: '/site-reView',

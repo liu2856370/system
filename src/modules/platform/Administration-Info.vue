@@ -20,7 +20,6 @@
                 </van-radio-group>
               </template>
         </van-field>
-        <van-field v-model="cost" label="费用" placeholder="0"/>
         <van-field v-model="opinionMaker" label="意见人" placeholder="请您输入意见人"/>
         <van-field v-model="opinion" rows="2" autosize label="本岗意见" type="textarea" placeholder="请您输入本岗意见"/>
       </van-form>
@@ -58,7 +57,6 @@ export default {
   data() {
     return {
       radio: '1',
-      cost: "",
       opinionMaker: "",
       opinion: "",
       activeNames: ['1']
