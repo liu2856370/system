@@ -213,6 +213,12 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "platformDeclareDetails" */ '../modules/platform/Admin-DeclareDetails.vue')
     },
+    {
+        path: '/admin-ProductVarietyView',
+        name: 'adminProductVarietyView',
+        component: () =>
+            import ( /* webpackChunkName: "platformProductVariety" */ '../modules/platform/Admin-ProductVariety.vue')
+    },
     //swj
     {
         path: '/site-reView',
