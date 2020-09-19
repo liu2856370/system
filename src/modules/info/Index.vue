@@ -10,20 +10,6 @@
       <van-tab title="证书信息">
         <van-cell :title="certificateTotal" value="" />
           <van-cell v-for="(item,index) in certificateCompanyList" :key="index" :title="item" is-link @click="goQualifications(item)" />
-        <!-- <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-          <van-cell v-for="(item,index) in certificateCompanyList" :key="index" :title="item" is-link @click="goInfo(item)" />
-          <van-radio-group v-model="radio" v-for="(item,index) in certificateCompanyList" :key="index" class="mt10">
-          <van-cell-group>
-            <van-radio :name="index" :index="index" @click="saveData(item)">
-                <template #default>
-                  <span>{{item}}</span>
-                </template>
-             
-            </van-radio>
-          </van-cell-group>
-          </van-radio-group>
-        </van-list> -->
-        <!-- <van-button type="primary" size="large" @click="goQualifications">下一步</van-button> -->
         <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" >证书如需邮寄送达，请于当地业务窗口联系告知邮寄地址、收件人等信息，便于邮寄</van-notice-bar>
       </van-tab>
     </van-tabs>

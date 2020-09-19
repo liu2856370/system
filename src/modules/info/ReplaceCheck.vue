@@ -1,15 +1,13 @@
 <template>
   <div class="index">
-    <PHeader :showArrow="true">品种信息</PHeader>
+    <PHeader :showArrow="true">申请信息</PHeader>
         <platform-list :list="resultList">
           <template #fixed="{slotProps}">
-            <van-cell title="产品品种" :value="slotProps.kind" />
-            <van-cell title="规格型号" :value="slotProps.cellmodel" />
-            <van-cell title="产品标准" :value="slotProps.cellexecstandard" />
-            <van-cell title="年设计生产能力" :value="slotProps.designability" />
-            <van-cell title="申请类别" :value="slotProps.applydescription" />
-            <van-cell title="涉及产业政策情况" :value="slotProps.policyremark" />
-            <van-cell title="生产地址" :value="slotProps.addr" />
+            <van-cell title="序号" :value="slotProps.kind" />
+            <van-cell title="产品单元">
+              <a href="javascript:void(0)" @click="goVarietiesInfo(slotProps.id)">{{slotProps.unitname}}</a>
+            </van-cell>
+            <van-cell title="是否申请免检">{{slotProps.isfreefztest|dictFormatter("isShowYesAndNo")}}</van-cell>
           </template>
         </platform-list>
   </div>
@@ -26,29 +24,25 @@ export default {
   },
   data() {
     return {
-      active: 0,
       resultList: []
     };
   },
   methods:{
-    
+    goVarietiesInfo(id){
+      client.saveStorage("varietiesInfo", {
+        "neaid":this.companyProcessInfo.id,
+        "unitid":id
+      });
+      this.$router.push("/change-check");
+    }
   },
   created(){
     this.companyProcessInfo = client.loadStorage("companyProcessInfo");
 
     //品种信息
-    client.rpc("/xxgs/gy/getGcxx/sqxm",{"neaid":this.companyProcessInfo.id}).then(sqxmRes=>{
-      client.rpc("/xxgs/gy/getGcxx/sqxmpz",{"neaid":this.companyProcessInfo.id,"unitid":sqxmRes[0].id}).then(res=>{
-        this.resultList = res;
-        console.log(res)
-      });
+    client.rpc("/xxgs/gy/getGcxx/sqxm",{"neaid":this.companyProcessInfo.id}).then(res=>{
+      this.resultList = res;
     });
-
-
-    //  //实地核查结论
-    // client.rpc("/xxgs/jl/getGcxx/xspz/sdhcjl/" + this.companyProcessInfo.id).then(res=>{
-    //   this.conclusionData = res;
-    // });
   }
 };
 </script>
