@@ -195,6 +195,24 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "platformUserCenter" */ '../modules/platform/Admin-UserCenter.vue')
     },
+    {
+        path: '/admin-ReturnReasonView',
+        name: 'adminReturnReasonView',
+        component: () =>
+            import ( /* webpackChunkName: "platformReturnReason" */ '../modules/platform/Admin-ReturnReason.vue')
+    },
+    {
+        path: '/admin-SupplementView',
+        name: 'adminSupplementView',
+        component: () =>
+            import ( /* webpackChunkName: "platformSupplement" */ '../modules/platform/Admin-Supplement.vue')
+    },
+    {
+        path: '/admin-DeclareDetailsView',
+        name: 'adminDeclareDetailsView',
+        component: () =>
+            import ( /* webpackChunkName: "platformDeclareDetails" */ '../modules/platform/Admin-DeclareDetails.vue')
+    },
     //swj
     {
         path: '/site-reView',
