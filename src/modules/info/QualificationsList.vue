@@ -1,7 +1,6 @@
 <template>
   <div class="index">
     <PHeader :showArrow="true">{{certificateList[0].xksx}}</PHeader>
-    <van-search v-model="value" shape="round" placeholder="单位名称" />
     <van-cell :title="total" value="筛选" />
         <platform-list :list="certificateList">
           <template #fixed="{slotProps}">

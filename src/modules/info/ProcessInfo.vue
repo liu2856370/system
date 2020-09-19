@@ -1,7 +1,6 @@
 <template>
   <div class="index">
     <PHeader :showArrow="true">过程信息</PHeader>
-    <van-search v-model="value" shape="round" placeholder="请输入单位名称" />
         <van-cell :title="processTotal" value="筛选" />
         <platform-list :list="processList">
           <template #fixed="{slotProps}">
