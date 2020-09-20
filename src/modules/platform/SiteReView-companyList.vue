@@ -146,7 +146,7 @@ export default {
     },
     getfindList(reqData) {
       client.rpc("/sc/findPlanList", reqData).then((res) => {
-        this.findPlanList = res;
+        this.findPlanList = res.list;
 
         for (let i = 0; i < this.findPlanList.length; i++) {
           const itemData = this.findPlanList[i];
