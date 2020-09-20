@@ -16,7 +16,9 @@ import { Step, Steps } from 'vant';
 import { Uploader } from 'vant';
 import { Area } from 'vant'
 import { Picker } from 'vant'
+import { ImagePreview } from 'vant'
 
+Vue.use(ImagePreview);
 Vue.use(Picker);
 Vue.use(Area);
 Vue.use(Loading);

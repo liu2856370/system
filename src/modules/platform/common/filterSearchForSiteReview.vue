@@ -3,8 +3,10 @@
     <div class="filter-tit">筛选</div>
     <van-form @submit="onSubmit" class="filter-form">
       <van-field v-model="orgname" name="orgname" placeholder="请输入单位名称" />
-      <van-field v-model="producttypename" name="producttypename" placeholder="请输入产品类别" />
-      <van-field v-model="producttype" name="producttype" placeholder="请输入产品名称" />
+      <van-field v-model="itemName" name="itemName" placeholder="请输入许可事项" />
+      <van-field v-model="applydescription" name="applydescription" placeholder="请输入申请类别" />
+      <van-field v-model="producttype" name="producttype" placeholder="请输入产品类别" />
+
       <div class="filter-form-btns">
         <van-row>
           <van-col span="12">
@@ -20,42 +22,30 @@
 </template>
 
 <script>
-//单位名称（输入框）；产品类别（输入框）；所在地址（级联）
+
 export default {
-  name: "filterSearch",
+  name: "filterSearchForSiteReview",
   data() {
     return {
       orgname: "",
-      producttypename: "",
-      producttype:"",
-      areaList: {
-        province_list: {},
-        city_list: {},
-        county_list: {},
-      },
+      itemName: "",
+      applydescription:"",
+      producttype:""
     };
   },
   created() {
-    client.rpc("/dic/getArea").then((res) => {
-      res.map((item) => {
-        if (/0{4}$/.test(item.code) || item.code == 379900) {
-          this.areaList.province_list[item.code] = item.caption;
-        } else if (/0{2}$/.test(item.code)) {
-          this.areaList.city_list[item.code] = item.caption;
-        } else {
-          this.areaList.county_list[item.code] = item.caption;
-        }
-      });
-    });
+    
   },
   methods: {
     onSubmit(formData) {
       this.$emit("onSearchHandler",formData);
+      this.resetFormData();
     },
     //重置数据
     resetFormData(){
       this.orgname = "";
-      this.producttypename = "";
+      this.itemName = "";
+      this.applydescription = "";
       this.producttype = "";
     }
   }
