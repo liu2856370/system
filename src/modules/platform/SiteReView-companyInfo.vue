@@ -210,7 +210,7 @@
           <div class="filterCardList">
             <van-cell-group
               class="mt10"
-              v-for="(item) in showPageData3"
+              v-for="(item,index) in showPageData3"
               v-bind:key="item.id"
             >
               <van-cell-group class="mt10">
@@ -256,13 +256,15 @@
                   plain
                   size="large"
                   type="success"
-                  @click="goEdit"
+                  :info="JSON.stringify(item)"
+                  @click="goEdit(index)"
                 >编辑</van-tag>
                 <van-tag
                   round
                   plain
                   class="ml20"
                   size="large"
+                  :info="JSON.stringify(item)"
                   type="danger"
                 >删除</van-tag>
               </van-cell-group>
@@ -385,7 +387,9 @@ export default {
         this.isShowBtnAdd = "none";
         this.getCommentCompletion();
       } else if (index == 2) {
-        this.isShowBtnAdd = "inline-block";
+        if (this.unitId) {
+          this.isShowBtnAdd = "inline-block";
+        }
       } else if (index == 3) {
         this.isShowBtnAdd = "none";
         this.getPsclList();
@@ -416,11 +420,11 @@ export default {
         })
         .then((res) => {
           console.info(res);
-          this.showPageData2 = res;
-          for (let i = 0; i < this.showPageData2.kindList.length; i++) {
-            var itemData = this.showPageData2.kindList[i];
+          for (let i = 0; i < res.kindList.length; i++) {
+            var itemData = res.kindList[i];
             itemData.ispass = itemData.ispass.split(",");
           }
+          this.showPageData2 = res;
         });
     },
     //获取产品单元的选项
@@ -460,6 +464,8 @@ export default {
 
     onConfirm(value, index) {
       this.unitId = value.unitname;
+      this.isShowBtnAdd = "inline-block";
+      client.saveSessionStorage("unitInfo", value);
       this.showPicker = false;
       this.getBhgxByUnit(value.id);
     },
@@ -469,7 +475,9 @@ export default {
     goAdd() {
       this.$router.push("/siteReView-unqualifiedEdit");
     },
-    goEdit() {
+    goEdit(index) {
+      debugger;
+      client.saveSessionStorage("unqualifiedInfo",this.showPageData3[index]);
       this.$router.push("/siteReView-unqualifiedEdit");
     },
     showNotice() {
@@ -490,3 +498,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.tac {
+  text-align: center;
+}
+</style>
