@@ -166,7 +166,7 @@ export default {
     return {
       findPlanInfo: client.loadSessionStorage("findPlanInfo"),
       unitInfo: client.loadSessionStorage("unitInfo"),
-      unqualifiedInfo: client.loadSessionStorage("unqualifiedInfo", true),
+      unqualifiedInfo: client.loadSessionStorage("unqualifiedInfo"),
       active: 1,
       showPicker1: false,
       showPicker2: false,
