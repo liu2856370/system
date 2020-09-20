@@ -133,14 +133,6 @@
               :value="showPageData2.planedate"
             />
             <van-cell
-              title="实际开始时间"
-              :value="showPageData2.realplansdate"
-            />
-            <van-cell
-              title="实际结束时间"
-              :value="showPageData2.realplanedate"
-            />
-            <van-cell
               title="实地评审记录备用说明"
               :value="showPageData2.remark"
             />
@@ -170,15 +162,15 @@
             <div class="feildCell-autoWidth">
               <label>评审结论</label>
               <div>
-                <van-checkbox-group
+                <van-radio-group
                   v-model="item.ispass"
                   direction="horizontal"
-                  disabled
+                  @change="change"
                 >
-                  <van-checkbox name="0">合格</van-checkbox>
-                  <van-checkbox name="1">不合格</van-checkbox>
-                  <van-checkbox name="2">许可范围变更不审查</van-checkbox>
-                </van-checkbox-group>
+                  <van-radio name="0">合格</van-radio>
+                  <van-radio name="1">不合格</van-radio>
+                  <van-radio name="2">许可范围变更不审查</van-radio>
+                </van-radio-group>
               </div>
             </div>
 
@@ -186,7 +178,7 @@
 
         </template>
       </van-tab>
-      <van-tab title="不合格项汇总">
+      <van-tab title="不合格项">
         <template>
           <van-cell-group class="pt10">
             <van-field
@@ -279,15 +271,9 @@
 
         </template>
       </van-tab>
-      <van-tab title="评审材料列表">
+      <van-tab title="评审材料">
         <template>
 
-          <van-cell-group class="pt10">
-            <van-cell
-              title="现场签到"
-              value="2020-07-04 12:35:21"
-            />
-          </van-cell-group>
           <van-cell-group
             class="mt10"
             v-for="(item) in showPageData4"
@@ -298,10 +284,10 @@
               :value="item.filename"
               value-class="color-red"
             />
-            <van-cell
+            <!-- <van-cell
               title="已提交材料"
               :value="item.uplfilename"
-            />
+            /> -->
             <van-cell
               title="现场情况"
               center
@@ -497,6 +483,9 @@ export default {
     showProduction() {
       // 申报产品
       this.$router.push("./goMore-showProduction");
+    },
+    change(ind) {
+      console.info("评审结论选中的索引：" + ind);
     },
   },
 };
