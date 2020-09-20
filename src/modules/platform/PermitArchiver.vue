@@ -23,6 +23,10 @@
             />
             <p>{{item.filename}}</p>
           </div>
+          <div class="imageStyle noimage" v-show="noImage">
+          <van-image width="2rem" height="2rem" :src="imageSrc"/>
+          <p>暂无数据</p>
+        </div>
         </template>
       </van-tab>
       <van-tab title="许可证书">
@@ -30,17 +34,29 @@
           <van-image width="3rem" height="3rem" fit="contain" :src="item.image" @click="showImage(item.image)"/>
           <p>{{item.filename}}</p>
         </div>
+        <div class="imageStyle noimage" v-show="noImage">
+          <van-image width="2rem" height="2rem" :src="imageSrc"/>
+          <p>暂无数据</p>
+        </div>
       </van-tab>
       <van-tab title="不予许可决定书">
         <div v-for="(item, index) in pictureList" :key="index" class="imageStyle">
           <van-image width="3rem" height="3rem" fit="contain" :src="item.image" @click="showImage(item.image)"/>
           <p>{{item.filename}}</p>
         </div>
+        <div class="imageStyle noimage" v-show="noImage">
+          <van-image width="2rem" height="2rem" :src="imageSrc"/>
+          <p>暂无数据</p>
+        </div>
       </van-tab>
       <van-tab title="证照寄送凭证">
         <div v-for="(item, index) in pictureList" :key="index" class="imageStyle">
           <van-image width="3rem" height="3rem" fit="contain" :src="item.image" @click="showImage(item.image)"/>
           <p>{{item.filename}}</p>
+        </div>
+        <div class="imageStyle noimage" v-show="noImage">
+          <van-image width="2rem" height="2rem" :src="imageSrc"/>
+          <p>暂无数据</p>
         </div>
       </van-tab>
     </van-tabs>
@@ -77,7 +93,10 @@ export default {
       activeTabbar: 0,
       finished: true,
       loading: false,
+      noImage: false,
+      imageSrc: require("../../assets/icons/noImageData.png"),
       pictureList: [],
+      
     };
   },
   created: function () {
@@ -113,6 +132,9 @@ export default {
         })
         .then((res) => {
           self.pictureList = res;
+          if(self.pictureList.length == 0){
+            self.noImage = true;
+          }
           for (let i = 0; i < self.pictureList.length; i++) {
             client
               .rpc("/qy/openFile/", { id: res[i].id })
@@ -188,5 +210,8 @@ export default {
 }
 .pb140 {
   padding-bottom: 1.4rem;
+}
+.noimage{
+  margin-top: 30%;
 }
 </style>
