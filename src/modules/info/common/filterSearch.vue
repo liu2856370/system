@@ -3,7 +3,12 @@
     <div class="filter-tit">筛选</div>
     <van-form @submit="onSubmit" class="filter-form">
       <van-field v-model="orgname" name="orgname" placeholder="请输入单位名称" />
-      <van-field v-model="producttypename" name="producttypename" placeholder="请输入产品类别" @click="showTypes = true" />
+      <van-field
+        v-model="producttypename"
+        name="producttypename"
+        placeholder="请输入产品类别"
+        @click="showTypes = true"
+      />
       <van-field
         readonly
         clickable
@@ -71,7 +76,7 @@ export default {
   },
   methods: {
     onSubmit(formData) {
-      this.$emit("onSearchHandler",formData);
+      this.$emit("onSearchHandler", formData);
     },
     onAreaConfirm(values) {
       this.areaVal = values.map((item) => item?.name).join("");
@@ -82,12 +87,12 @@ export default {
       this.showTypes = false;
     },
     //重置数据
-    resetFormData(){
+    resetFormData() {
       this.orgname = "";
       this.producttypename = "";
       this.areaVal = "";
-    }
-  }
+    },
+  },
 };
 </script>
 

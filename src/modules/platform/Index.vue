@@ -119,7 +119,7 @@ export default {
       //formData筛选的数据
       //申报历史
       this.isShowPopup = false;
-      client.rpc("/qy/findSbLsList").then((res) => {
+      client.rpc("/qy/findSbLsList",formData).then((res) => {
         this.processTotal = "共" + res.list.length + "条";
         this.processList = res.list;
       });

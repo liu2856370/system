@@ -3,26 +3,8 @@
     <div class="filter-tit">筛选</div>
     <van-form @submit="onSubmit" class="filter-form">
       <van-field v-model="orgname" name="orgname" placeholder="请输入单位名称" />
-      <van-field v-model="producttypename" name="producttypename" placeholder="请输入产品类别" @click="showTypes = true" />
-      <van-field
-        readonly
-        clickable
-        name="area"
-        :value="areaVal"
-        placeholder="所在地址"
-        @click="showArea = true"
-      />
-      <van-popup v-model="showTypes" position="bottom">
-        <van-picker
-          show-toolbar
-          :columns="typeColumns"
-          @cancel="showTypes = false"
-          @confirm="onTypesConfirm"
-        />
-      </van-popup>
-      <van-popup v-model="showArea" position="bottom">
-        <van-area :area-list="areaList" @confirm="onAreaConfirm" @cancel="showArea = false" />
-      </van-popup>
+      <van-field v-model="producttypename" name="producttypename" placeholder="请输入产品类别" />
+      <van-field v-model="producttype" name="producttype" placeholder="请输入产品名称" />
       <div class="filter-form-btns">
         <van-row>
           <van-col span="12">
@@ -45,10 +27,7 @@ export default {
     return {
       orgname: "",
       producttypename: "",
-      areaVal: "",
-      showArea: false,
-      showTypes: false,
-      typeColumns: ["产品类别1", "产品类别2", "产品类别3"],
+      producttype:"",
       areaList: {
         province_list: {},
         city_list: {},
@@ -73,19 +52,11 @@ export default {
     onSubmit(formData) {
       this.$emit("onSearchHandler",formData);
     },
-    onAreaConfirm(values) {
-      this.areaVal = values.map((item) => item?.name).join("");
-      this.showArea = false;
-    },
-    onTypesConfirm(value) {
-      this.producttypename = value;
-      this.showTypes = false;
-    },
     //重置数据
     resetFormData(){
       this.orgname = "";
       this.producttypename = "";
-      this.areaVal = "";
+      this.producttype = "";
     }
   }
 };
