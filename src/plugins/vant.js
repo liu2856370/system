@@ -14,7 +14,11 @@ import { Overlay } from 'vant'
 import { Loading } from 'vant'
 import { Step, Steps } from 'vant';
 import { Uploader } from 'vant';
+import { Area } from 'vant'
+import { Picker } from 'vant'
 
+Vue.use(Picker);
+Vue.use(Area);
 Vue.use(Loading);
 Vue.use(Overlay);
 Vue.use(Calendar);

@@ -4,7 +4,7 @@
       <template #default>企业申报</template>
     </PHeader>
         <van-cell :title="processTotal">
-          <div>筛选</div>
+          <div @click="isShowPopup = true">筛选</div>
         </van-cell>
         <platform-list :list="processList">
           <template #fixed="{slotProps}">
@@ -38,7 +38,11 @@
         <platform-list :list="list2">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
-              <van-col span="12" class="org-name" @click="goPermitArchiver(slotProps.id)">{{slotProps.orgname}}</van-col>
+              <van-col
+                span="12"
+                class="org-name"
+                @click="goPermitArchiver(slotProps.id)"
+              >{{slotProps.orgname}}</van-col>
               <van-col span="12" class="org-tags">
                 <van-tag plain round size="large" type="primary">{{slotProps.applydescription}}</van-tag>
               </van-col>
@@ -46,12 +50,12 @@
             <van-cell title="许可事项" :value="slotProps.itemName" />
             <van-cell title="产品类别" :value="slotProps.prodtype" />
           </template>
-           <template #variable="{slotProps}">
+          <template #variable="{slotProps}">
             <van-cell title="产品名称" :value="slotProps.prodname" />
           </template>
         </platform-list> -->
     <van-popup v-model="isShowPopup" position="right" :style="{ width: '75%', height:'100%' }">
-      <filterSearch> </filterSearch>
+      <filterSearch @onSearchHandler="searchHandler"></filterSearch>
     </van-popup>
     <van-tabbar v-model="activeTabbar">
       <van-tabbar-item icon="wap-home-o" to="/platform">首页</van-tabbar-item>
@@ -67,26 +71,25 @@ import PHeader from "../../components/PHeader.vue";
 export default {
   name: "index",
   components: {
-    platformList,
     PHeader,
-    filterSearch
+    platformList,
+    filterSearch,
   },
   data() {
     return {
       processTotal: "",
       active: 0,
       activeTabbar: 0,
-      aa: "01",
       processList: [],
-      isShowPopup:false,
-      // list2: [
-      //   { orgname: "山东群英电气有限公司1" },
-      //   { orgname: "山东群英电气有限公司2" },
-      //   { orgname: "山东群英电气有限公司3" },
-      //   { orgname: "山东群英电气有限公司4" },
-      //   { orgname: "山东群英电气有限公司5" },
-      // ],
+      isShowPopup:false
     };
+  },
+  created(){
+    //申报历史
+    client.rpc("/qy/findSbLsList").then(res=>{
+        this.processTotal = "共" + res.list.length + "条";
+        this.processList = res.list;
+    });
   },
   methods:{
     onLoad(){},
@@ -111,19 +114,16 @@ export default {
     goDetails(id){
       client.saveSessionStorage("detailsID", id);
       this.$router.push("/admin-DeclareDetailsView");
-    }
-  },
-  created(){
-    //申报历史
-    client.rpc("/qy/findSbLsList").then(res=>{
+    },
+    searchHandler(formData) {
+      //formData筛选的数据
+      //申报历史
+      this.isShowPopup = false;
+      client.rpc("/qy/findSbLsList").then((res) => {
         this.processTotal = "共" + res.list.length + "条";
         this.processList = res.list;
-    });
-    //许可档案
-    client.rpc("/qy/findXkdaList").then(res=>{
-        this.processTotal = "共" + res.list.length + "条";
-        this.list2 = res.list;
-    });
+      });
+    }
   }
 };
 </script>

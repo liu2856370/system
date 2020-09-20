@@ -9,13 +9,15 @@
                     <van-cell title="产品品种" :value="slotProps.kind"/>
                     <van-cell title="规格型号" :value="slotProps.cellmodel"/>
                     <van-cell title="产品标准" :value="slotProps.cellexecstandard"/>
+                </div>
+            </template>
+            <template #variable="{slotProps}">
                     <van-cell title="年设计生产能力" :value="slotProps.designability"/>
                     <van-cell title="申请类别" :value="slotProps.applydescription"/>
                     <van-cell title="是否涉及产业政策" :value="slotProps.ispolicy"/>
                     <van-cell title="涉及产业政策情况" :value="slotProps.policyremark"/>
                     <van-cell title="生产地址" :value="slotProps.addr"/>
                     <van-cell title="是否申报" :value="slotProps.shenbao"/>
-                </div>
             </template>
         </platform-list>
     </div>
@@ -23,7 +25,7 @@
 
 <script>
 import PHeader from "../../components/PHeader.vue";
-import platformList from "../platform/common/platformList";
+import platformList from "../common/platformList";
 export default {
     name: "adminProductVariety",
     components: {
