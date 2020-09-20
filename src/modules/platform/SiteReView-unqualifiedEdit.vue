@@ -100,7 +100,7 @@
           round
           plain
           type="info"
-          native-type="submit"
+          native-type="button"
           @click="goBack"
         >取消</van-button>
         <van-button
@@ -111,7 +111,7 @@
         >提交</van-button>
       </div>
     </van-form>
-    <van-tabbar v-model="active">
+    <van-tabbar v-model="tabBarActive">
       <van-tabbar-item
         icon="home-o"
         to="/site-reView"
@@ -143,6 +143,7 @@ import {
   Radio,
   Button,
   Form,
+  Dialog,
 } from "vant";
 
 Vue.use(Tab);
@@ -161,13 +162,15 @@ Vue.use(RadioGroup);
 Vue.use(Radio);
 Vue.use(Button);
 Vue.use(Form);
+Vue.use(Dialog);
 export default {
   data() {
     return {
       findPlanInfo: client.loadSessionStorage("findPlanInfo"),
       unitInfo: client.loadSessionStorage("unitInfo"),
       unqualifiedInfo: client.loadSessionStorage("unqualifiedInfo"),
-      active: 1,
+      unqualifiedType: client.loadSessionStorage("unqualifiedType"),
+      tabBarActive: 1,
       showPicker1: false,
       showPicker2: false,
       frequency: "",
@@ -183,20 +186,25 @@ export default {
   components: { PHeader },
   created() {
     this.getHcxmList();
-    this.claim = this.unqualifiedInfo.claim;
-    this.degree = this.unqualifiedInfo.degree;
-    this.description = this.unqualifiedInfo.description;
-    this.frequency = this.unqualifiedInfo.frequency;
-    this.hcitems = this.unqualifiedInfo.hcitems;
-    this.unquas = this.unqualifiedInfo.itemcode;
   },
   methods: {
     //获取核查项目列表
     getHcxmList: function () {
+      var self = this;
       client.rpc("/sc/gy/findSelItems").then((res) => {
         console.info(res);
-        this.unquasList = res.unquas;
-        this.hcitemsList = res.hcitems;
+        self.unquasList = res.unquas;
+        self.hcitemsList = res.hcitems;
+        if (self.unqualifiedType == "edit") {
+          self.claim = self.unqualifiedInfo.claim;
+          self.degree = self.unqualifiedInfo.degree;
+          self.description = self.unqualifiedInfo.description;
+          self.frequency = self.unqualifiedInfo.frequency;
+          self.unquas = self.unqualifiedInfo.itemcode;
+          self.hcitems = self.unqualifiedInfo.hcitems;
+          self.unquasId = self.getUnquas(self.unquas);
+          self.hcitemscode = self.getHcitems(self.hcitems);
+        }
       });
     },
     onConfirm1(value) {
@@ -213,10 +221,8 @@ export default {
       this.$router.go(-1);
     },
     onSubmit(values) {
+      var self = this;
       console.log("submit", values);
-      console.log(
-        "目前无法拿到条款号ID：itemid，所以无法添加新的不合格项，所以页面直接返回上一层"
-      );
       debugger;
       client
         .rpc("/sc/gy/saveOrUpdBhgx", {
@@ -231,9 +237,34 @@ export default {
           hcitemscode: this.hcitemscode, //核查项目编代号
         })
         .then(function (res) {
-          debugger;
+          if (self.unqualifiedType == "edit") {
+            Dialog.alert({
+              message: "修改成功",
+            }).then(() => {
+              self.$router.go(-1);
+            });
+          } else {
+            Dialog.alert({
+              message: "添加成功",
+            }).then(() => {
+              self.$router.go(-1);
+            });
+          }
         });
-      this.$router.go(-1);
+    },
+    getUnquas(val) {
+      for (let i = 0; i < this.unquasList.length; i++) {
+        if (this.unquasList[i].code == val) {
+          return this.unquasList[i].id;
+        }
+      }
+    },
+    getHcitems(val) {
+      for (let i = 0; i < this.hcitemsList.length; i++) {
+        if (this.hcitemsList[i].caption == val) {
+          return this.hcitemsList[i].code;
+        }
+      }
     },
   },
 };
