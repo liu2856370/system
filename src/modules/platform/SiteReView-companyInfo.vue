@@ -48,10 +48,10 @@
         </van-cell-group>
 
         <van-cell-group class="mt10">
-          <van-cell
-            title="现场签到"
-            value="2020-07-04 12:35:21"
-          />
+          <van-cell title="现场签到" :value="signTime" />
+          <van-cell title="">
+            <van-uploader v-model="signList" multiple :after-read="signAfterRead" @delete="signAfterDelete" :max-count="1"/>
+          </van-cell>
           <van-cell
             title="现场签退"
             center
@@ -278,7 +278,7 @@
 
           <van-cell-group
             class="mt10"
-            v-for="(item) in showPageData4"
+            v-for="(item,index) in showPageData4"
             v-bind:key="item.id"
           >
             <van-cell
@@ -293,10 +293,9 @@
             <van-cell
               title="现场情况"
               center
+              @click="getFieldInfo(item)"
             >
-              <template #right-icon>
-                <van-icon class-prefix="icon-camera" />
-              </template>
+            <van-uploader v-model=bindIndex[index] multiple :after-read="afterRead" :max-count="1"/>
             </van-cell>
           </van-cell-group>
 
@@ -370,6 +369,10 @@ export default {
       columns: [],
       orgname: client.loadSessionStorage("findPlanInfo").orgname,
       isShowBtnAdd: "none",
+      bindIndex:[],
+      fieldInfo:{},
+      signList:[],
+      signTime:""
     };
   },
   components: { PHeader, platformList },
@@ -450,6 +453,7 @@ export default {
     },
     //获取 评审材料列表
     getPsclList: function (unitid) {
+      let self = this;
       client
         .rpc("/sc/findPscl", {
           neaid: this.findPlanInfo.id,
@@ -458,10 +462,35 @@ export default {
         })
         .then((res) => {
           console.info(res);
+          for(let i=0;i<res.length;i++){
+            self.bindIndex[i] = [];
+          }
           this.showPageData4 = res;
         });
     },
-
+    afterRead(file){
+      console.log(file)
+      console.log(this.fieldInfo)
+      // client
+      //   .rpc("/sc/uploadPscl", {
+      //     file: file,
+      //     neaid: this.findPlanInfo.id,
+      //     planid: this.findPlanInfo.planid,
+      //     modelid: this.fieldInfo.id
+      //   })
+      //   .then((res) => {
+      //     
+      //   });
+    },
+    getFieldInfo(item){
+      this.fieldInfo = item;
+    },
+    signAfterRead(file){
+      this.signTime = "2020-09-20 17:40:48";
+    },
+    signAfterDelete(){
+      this.signTime = "";
+    },
     onConfirm(value, index) {
       this.unitId = value.unitname;
       this.isShowBtnAdd = "inline-block";
@@ -501,5 +530,9 @@ export default {
 <style scoped>
 .tac {
   text-align: center;
+}
+.van-uploader__upload{
+  width:24px;
+  height:24px;
 }
 </style>
