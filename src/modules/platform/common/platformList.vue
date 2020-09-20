@@ -38,7 +38,6 @@ export default {
   methods: {
     onLoad() {},
     toggleShow(index) {
-        console.log(this.list[index].unfold)
         this.$set(this.list[index],"unfold",!this.list[index].unfold);
     },
   },

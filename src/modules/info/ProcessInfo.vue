@@ -4,7 +4,7 @@
     <van-cell :title="processTotal">
       <div @click="isShowPopup = true">筛选</div>
     </van-cell>
-    <platform-list :list="processList">
+    <platform-list :list="processList" @reLoad="reloadData($event)">
       <template #fixed="{slotProps}">
         <van-row class="org-info">
           <van-col
@@ -51,8 +51,6 @@ export default {
       certificateTotal: "",
       active: 0,
       value: "",
-      finished: true,
-      loading: false,
       itemData: "",
       processList: [],
       certificateList: {},
@@ -61,7 +59,6 @@ export default {
     };
   },
   methods: {
-    onLoad() {},
     goVerificationInfo(itemData) {
       client.saveStorage("companyProcessInfo", itemData);
       if (itemData.applydescription === "发证") {
@@ -84,11 +81,11 @@ export default {
     searchHandler(formData) {
       //formData筛选的数据
       //申报历史
-      debugger;
       this.isShowPopup = false;
       client
         .rpc("/xxgs/findGcxx", {
           itemId: client.loadStorage("approvalInfo").code,
+          pageNum:1
         })
         .then((res) => {
           this.processTotal = "共" + res.list.length + "条";
@@ -99,21 +96,25 @@ export default {
           }
         });
     },
-  },
-  created() {
-    client
-      .rpc("/xxgs/findGcxx", {
-        itemId: client.loadStorage("approvalInfo").code,
-      })
-      .then((res) => {
-        this.processTotal = "共" + res.list.length + "条";
-        this.processList = res.list;
-        for (let i = 0; i < res.list.length; i++) {
-          let itemData = res.list[i];
-          itemData.stateClass = "stateIcon icon-stateIcon" + res.list[i].flag;
-        }
-      });
-  },
+    reloadData(pageNum){
+      this.rpcListData(pageNum);
+    },
+    rpcListData(pageNum){
+       client
+        .rpc("/xxgs/findGcxx", {
+          itemId: client.loadStorage("approvalInfo").code,
+          pageNum:pageNum
+        })
+        .then((res) => {
+          this.processTotal = "共" + res.list.length + "条";
+          this.processList = res.list;
+          for (let i = 0; i < res.list.length; i++) {
+            let itemData = res.list[i];
+            itemData.stateClass = "stateIcon icon-stateIcon" + res.list[i].flag;
+          }
+        });
+    }
+  }
 };
 </script>
 
