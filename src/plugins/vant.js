@@ -13,6 +13,7 @@ import { Calendar } from 'vant'
 import { Overlay } from 'vant'
 import { Loading } from 'vant'
 import { Step, Steps } from 'vant';
+import { Uploader } from 'vant';
 
 Vue.use(Loading);
 Vue.use(Overlay);
@@ -46,3 +47,4 @@ Vue.use(Field);
 Vue.use(Search);
 Vue.use(Step);
 Vue.use(Steps);
+Vue.use(Uploader);
