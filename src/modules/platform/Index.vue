@@ -84,6 +84,13 @@ export default {
       isShowPopup:false
     };
   },
+  created(){
+    //申报历史
+    client.rpc("/qy/findSbLsList").then(res=>{
+        this.processTotal = "共" + res.list.length + "条";
+        this.processList = res.list;
+    });
+  },
   methods:{
     onLoad(){},
     //查看许可档案
@@ -117,14 +124,6 @@ export default {
         this.processList = res.list;
       });
     }
-  },
-  created(){
-    //申报历史
-    client.rpc("/qy/findSbLsList").then(res=>{
-        this.processTotal = "共" + res.list.length + "条";
-        this.processList = res.list;
-      });
-    },
   }
 };
 </script>
