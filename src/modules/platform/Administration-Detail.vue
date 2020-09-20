@@ -159,7 +159,6 @@
                 </template>
             </van-tab>
             <van-tab title="许可信用记录">
-                <template>
                   <template >
                     <van-cell title="产品类别" value="化肥" />
                     <van-cell title="产品名称" value="化肥" />
@@ -170,8 +169,29 @@
                     <van-cell title="申请日期" value="2020-05-25" />
                     <van-cell title="审批状态" value="成功" />
                 </template>
-                </template>
             </van-tab>
+            <van-tab title="流转历史">
+              <template>
+                  <van-steps direction="vertical" :active="0">
+                    <van-step>
+                      <h3>2020-06-17 13:41</h3>
+                      <p>发送环节：青岛市受理审核</p>
+                      <p>操作：发送</p>
+                      <p>目标环节：受理决定</p>
+                      <p>历史意见</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;罗青：同意受理审查岗意见</p>
+                    </van-step>
+                    <van-step>
+                      <h3>2020-06-17 13:40</h3>
+                      <p>发送环节：青岛市受理审核</p>
+                      <p>操作：发送</p>
+                      <p>目标环节：受理决定</p>
+                      <p>历史意见</p>
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;罗青：同意受理审查岗意见</p>
+                    </van-step>
+                </van-steps>
+              </template>
+              </van-tab>
         </van-tabs>
     </div>
 </template>
@@ -185,7 +205,8 @@ export default {
   data() {
     return {
             active: Number(localStorage.getItem('activeIdx'))?Number(localStorage.getItem('activeIdx')):0,
-            tabList:['申请人基本信息','申请项目','企业主要负责人和技术人员情况','集团总公司及所属单位明细','申请材料','许可档案','许可信用记录'],           
+            tabList:['申请人基本信息','申请项目','企业主要负责人和技术人员情况','集团总公司及所属单位明细','申请材料','许可档案','许可信用记录'], 
+            historyList:[]          
     };
   },
   components: {

@@ -50,28 +50,8 @@
               value="测量用电流互感器"
             />
             <van-cell
-              title="审查结论"
-              value="烟台市市场监督管理局"
-            />
-            <van-cell
-              title="检验结论"
-              value="2020-01-15"
-            />
-            <van-cell
-              title="材料齐全"
-              value="0/0"
-            />
-            <van-cell
               title="工作时限(单位:工作日)"
               value="烟台市市场监督管理局"
-            />
-            <van-cell
-              title="免现场核审"
-              value="2020-01-15"
-            />
-            <van-cell
-              title="简化审核"
-              value="是"
             />
           </template>
         </platform-list>
@@ -83,6 +63,7 @@
               <van-col
                 span="16"
                 class="org-name"
+                @click="checkMoreDetails()"
               >{{slotProps.orgname}}</van-col>
               <van-col
                 span="8"
@@ -243,6 +224,10 @@ export default {
       console.info("当前点击的索引是：" + ind);
       this.$router.push("/admin-InfoView");
     },
+    checkMoreDetails(){
+      this.$router.push("/admin-DetailView");
+    }
+    
     //综合查询 -- 》材料退回 
     // goReturnable(value) {
     //   if (value == "材料退回") {
