@@ -1,10 +1,10 @@
 <template>
   <div>
     <PHeader>现场审查</PHeader>
-    <van-search
+    <!-- <van-search
       v-model="keyword"
       placeholder="请输入搜索关键词"
-    />
+    /> -->
 
     <van-list
       v-model="loading"

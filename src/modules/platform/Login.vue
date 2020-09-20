@@ -234,7 +234,8 @@ export default {
         })
         .then((res) => {
           client.saveSessionStorage("logonInfoToken",res.token);
-          this.$router.push("./site-reView");
+          // this.$router.push("./site-reView");
+          this.$router.push("./siteReView-companyList");
         });
     },
     goAdministrationView() {
