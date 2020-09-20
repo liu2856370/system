@@ -6,7 +6,7 @@
     <van-tabs v-model="active" sticky>
       <van-tab title="申报历史">
         <van-cell :title="processTotal">
-          <div>筛选</div>
+          <div @click="isShowPopup = true">筛选</div>
         </van-cell>
         <platform-list :list="processList">
           <template #fixed="{slotProps}">
@@ -33,11 +33,15 @@
         </platform-list>
       </van-tab>
       <van-tab title="许可档案">
-        <van-cell :title="processTotal" value="" />
+        <van-cell :title="processTotal" value />
         <platform-list :list="list2">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
-              <van-col span="12" class="org-name" @click="goPermitArchiver(slotProps.id)">{{slotProps.orgname}}</van-col>
+              <van-col
+                span="12"
+                class="org-name"
+                @click="goPermitArchiver(slotProps.id)"
+              >{{slotProps.orgname}}</van-col>
               <van-col span="12" class="org-tags">
                 <van-tag plain round size="large" type="primary">{{slotProps.applydescription}}</van-tag>
               </van-col>
@@ -45,14 +49,14 @@
             <van-cell title="许可事项" :value="slotProps.itemName" />
             <van-cell title="产品类别" :value="slotProps.prodtype" />
           </template>
-           <template #variable="{slotProps}">
+          <template #variable="{slotProps}">
             <van-cell title="产品名称" :value="slotProps.prodname" />
           </template>
         </platform-list>
       </van-tab>
     </van-tabs>
     <van-popup v-model="isShowPopup" position="right" :style="{ width: '75%', height:'100%' }">
-      <filterSearch> </filterSearch>
+      <filterSearch @onSearchHandler="searchHandler"></filterSearch>
     </van-popup>
     <van-tabbar v-model="activeTabbar">
       <van-tabbar-item icon="wap-home-o" to="/platform">首页</van-tabbar-item>
@@ -68,9 +72,9 @@ import PHeader from "../../components/PHeader.vue";
 export default {
   name: "index",
   components: {
-    platformList,
     PHeader,
-    filterSearch
+    platformList,
+    filterSearch,
   },
   data() {
     return {
@@ -79,7 +83,7 @@ export default {
       activeTabbar: 0,
       aa: "01",
       processList: [],
-      isShowPopup:false,
+      isShowPopup: false,
       list2: [
         { orgname: "山东群英电气有限公司1" },
         { orgname: "山东群英电气有限公司2" },
@@ -89,30 +93,38 @@ export default {
       ],
     };
   },
-  methods:{
-    onLoad(){},
-    goPermitArchiver(id){
-      client.saveSessionStorage("filesID",id);
+  methods: {
+    onLoad() {},
+    goPermitArchiver(id) {
+      client.saveSessionStorage("filesID", id);
       this.$router.push("/permit-archiver");
     },
     //查看计划通知书
-    seeNotice(event){
-      client.saveSessionStorage("notificationID",event);
+    seeNotice(event) {
+      client.saveSessionStorage("notificationID", event);
       this.$router.push("/admin-NotiCexaminationView");
-    }
-  },
-  created(){
-    //申报历史
-    client.rpc("/qy/findSbLsList").then(res=>{
+    },
+    searchHandler(formData) {
+      //formData筛选的数据
+      //申报历史
+      client.rpc("/qy/findSbLsList").then((res) => {
         this.processTotal = "共" + res.list.length + "条";
         this.processList = res.list;
+      });
+    },
+  },
+  created() {
+    //申报历史
+    client.rpc("/qy/findSbLsList").then((res) => {
+      this.processTotal = "共" + res.list.length + "条";
+      this.processList = res.list;
     });
     //许可档案
-    client.rpc("/qy/findXkdaList").then(res=>{
-        this.processTotal = "共" + res.list.length + "条";
-        this.list2 = res.list;
+    client.rpc("/qy/findXkdaList").then((res) => {
+      this.processTotal = "共" + res.list.length + "条";
+      this.list2 = res.list;
     });
-  }
+  },
 };
 </script>
 
