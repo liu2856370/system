@@ -1,29 +1,33 @@
 <template>
   <div class="index">
     <PHeader :showArrow="true">过程信息</PHeader>
-     <van-cell :title="processTotal">
-          <div @click="isShowPopup = true">筛选</div>
-        </van-cell>
-        <platform-list :list="processList">
-          <template #fixed="{slotProps}">
-            <van-row class="org-info">
-              <van-col span="14" class="org-name" @click="goVerificationInfo(slotProps)">{{slotProps.orgname}}</van-col>
-              <van-col span="10" class="org-tags">
-                <!-- <van-tag plain round type="primary" size="large" class="mr10">{{slotProps.flag|dictFormatter("businessType")}}</van-tag> -->
-                <i :class="slotProps.stateClass"></i>
-                <van-tag plain round type="primary" size="large">{{slotProps.applydescription}}</van-tag>
-              </van-col>
-            </van-row>
-            <van-cell title="产品类别" :value="slotProps.prodtype" />
-            <van-cell title="审批事项" :value="slotProps.itemName" />
-          </template>
-          <template #variable="{slotProps}">
-            <van-cell title="所在地区" :value="slotProps.region" />
-            <van-cell title="营业执照注册号" :value="slotProps.busliceno" />
-            <van-cell title="组织机构代码" :value="slotProps.organno" />
-          </template>
-        </platform-list>
-            <van-popup v-model="isShowPopup" position="right" :style="{ width: '75%', height:'100%' }">
+    <van-cell :title="processTotal">
+      <div @click="isShowPopup = true">筛选</div>
+    </van-cell>
+    <platform-list :list="processList">
+      <template #fixed="{slotProps}">
+        <van-row class="org-info">
+          <van-col
+            span="14"
+            class="org-name"
+            @click="goVerificationInfo(slotProps)"
+          >{{slotProps.orgname}}</van-col>
+          <van-col span="10" class="org-tags">
+            <!-- <van-tag plain round type="primary" size="large" class="mr10">{{slotProps.flag|dictFormatter("businessType")}}</van-tag> -->
+            <i :class="slotProps.stateClass"></i>
+            <van-tag plain round type="primary" size="large">{{slotProps.applydescription}}</van-tag>
+          </van-col>
+        </van-row>
+        <van-cell title="产品类别" :value="slotProps.prodtype" />
+        <van-cell title="审批事项" :value="slotProps.itemName" />
+      </template>
+      <template #variable="{slotProps}">
+        <van-cell title="所在地区" :value="slotProps.region" />
+        <van-cell title="营业执照注册号" :value="slotProps.busliceno" />
+        <van-cell title="组织机构代码" :value="slotProps.organno" />
+      </template>
+    </platform-list>
+    <van-popup v-model="isShowPopup" position="right" :style="{ width: '75%', height:'100%' }">
       <filterSearch @onSearchHandler="searchHandler"></filterSearch>
     </van-popup>
   </div>
@@ -38,7 +42,7 @@ export default {
   components: {
     platformList,
     PHeader,
-    filterSearch
+    filterSearch,
   },
   data() {
     return {
@@ -51,22 +55,20 @@ export default {
       loading: false,
       itemData: "",
       processList: [],
-      certificateList:{},
-      certificateCompanyList:[],
-      isShowPopup:false
+      certificateList: {},
+      certificateCompanyList: [],
+      isShowPopup: false,
     };
   },
-  methods:{
-    onLoad(){},
-    goVerificationInfo(itemData){
+  methods: {
+    onLoad() {},
+    goVerificationInfo(itemData) {
       client.saveStorage("companyProcessInfo", itemData);
-      if(itemData.applydescription === "发证"){
+      if (itemData.applydescription === "发证") {
         this.$router.push("/certification-check");
-      }
-      else if(itemData.applydescription === "变更"){
+      } else if (itemData.applydescription === "变更") {
         this.$router.push("/change-check");
-      }
-      else if(itemData.applydescription === "换证"){
+      } else if (itemData.applydescription === "换证") {
         this.$router.push("/replace-check");
       }
 
@@ -82,38 +84,47 @@ export default {
     searchHandler(formData) {
       //formData筛选的数据
       //申报历史
+      debugger;
       this.isShowPopup = false;
-      client.rpc("/xxgs/findGcxx",{"itemId": client.loadStorage("approvalInfo").code}).then(res=>{
-        this.processTotal = "共" + res.list.length + "条";
-        this.processList = res.list;
-        for(let i =0; i<res.list.length; i++){
-          let itemData =  res.list[i];
-          itemData.stateClass="stateIcon icon-stateIcon"+res.list[i].flag;
-        }
-      });
-    }
+      client
+        .rpc("/xxgs/findGcxx", {
+          itemId: client.loadStorage("approvalInfo").code,
+        })
+        .then((res) => {
+          this.processTotal = "共" + res.list.length + "条";
+          this.processList = res.list;
+          for (let i = 0; i < res.list.length; i++) {
+            let itemData = res.list[i];
+            itemData.stateClass = "stateIcon icon-stateIcon" + res.list[i].flag;
+          }
+        });
+    },
   },
-  created(){
-      client.rpc("/xxgs/findGcxx",{"itemId": client.loadStorage("approvalInfo").code}).then(res=>{
+  created() {
+    client
+      .rpc("/xxgs/findGcxx", {
+        itemId: client.loadStorage("approvalInfo").code,
+      })
+      .then((res) => {
         this.processTotal = "共" + res.list.length + "条";
         this.processList = res.list;
-        for(let i =0; i<res.list.length; i++){
-          let itemData =  res.list[i];
-          itemData.stateClass="stateIcon icon-stateIcon"+res.list[i].flag;
+        for (let i = 0; i < res.list.length; i++) {
+          let itemData = res.list[i];
+          itemData.stateClass = "stateIcon icon-stateIcon" + res.list[i].flag;
         }
       });
-  }
+  },
 };
 </script>
 
 <style lang="less" scoped>
 .van-radio,
 .van-button,
-.van-notice-bar{
+.van-notice-bar {
   padding: 10px 16px;
 }
 
-.van-radio{
+.van-radio {
   padding: 10px 16px;
   overflow: hidden;
   font-size: 14px;

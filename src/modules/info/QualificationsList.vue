@@ -76,12 +76,12 @@ export default {
       client.saveStorage("reportId", id);
       this.$router.push("/set-basis-list");
     },
-     searchHandler(formData) {
+    searchHandler(formData) {
       //formData筛选的数据
       this.isShowPopup = false;
       //请求数据
-    }
-  }
+    },
+  },
 };
 </script>
 
