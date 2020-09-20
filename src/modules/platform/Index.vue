@@ -3,15 +3,13 @@
     <PHeader :showArrow="false">
       <template #default>企业申报</template>
     </PHeader>
-    <van-tabs v-model="active" sticky>
-      <van-tab title="申报历史">
         <van-cell :title="processTotal">
           <div @click="isShowPopup = true">筛选</div>
         </van-cell>
         <platform-list :list="processList">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
-              <van-col span="12" class="org-name">{{slotProps.orgname}}</van-col>
+              <van-col span="12" class="org-name" @click="goDetails(slotProps.id)">{{slotProps.orgname}}</van-col>
               <van-col span="12" class="org-tags">
                 <van-tag plain round type="primary" size="large" class="mr10">{{slotProps.spzt}}</van-tag>
                 <van-tag plain round size="large" type="primary">{{slotProps.applydescription}}</van-tag>
@@ -23,17 +21,20 @@
           <template #variable="{slotProps}">
             <van-cell title="产品名称" :value="slotProps.producttype" />
             <van-cell title="提交单位" :value="slotProps.description" />
-            <van-cell title="主动撤回日期" :value="slotProps.submitdate" />
-            <van-cell v-show="slotProps.button" @click="seeNotice(slotProps.id)" title="现场审查计划通知书">
+            <van-cell title="提交日期" :value="slotProps.submitdate" />
+            <van-cell title="许可档案" >
               <template #right-icon>
-                <van-tag plain round type="primary">{{slotProps.button}}</van-tag>
+                <van-tag plain round @click="goPermitArchiver(slotProps.id)" size="large" type="primary">查看</van-tag>
+              </template>
+            </van-cell>
+            <van-cell title="操作区">
+              <template #right-icon>
+                <van-tag plain round @click="choceButtonType(slotProps.orgname,slotProps.id,slotProps.button)" type="primary">{{slotProps.button}}</van-tag>
               </template>
             </van-cell>
           </template>
         </platform-list>
-      </van-tab>
-      <van-tab title="许可档案">
-        <van-cell :title="processTotal" value />
+        <!-- <van-cell :title="processTotal" value="" />
         <platform-list :list="list2">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
@@ -52,9 +53,7 @@
           <template #variable="{slotProps}">
             <van-cell title="产品名称" :value="slotProps.prodname" />
           </template>
-        </platform-list>
-      </van-tab>
-    </van-tabs>
+        </platform-list> -->
     <van-popup v-model="isShowPopup" position="right" :style="{ width: '75%', height:'100%' }">
       <filterSearch @onSearchHandler="searchHandler"></filterSearch>
     </van-popup>
@@ -83,26 +82,39 @@ export default {
       activeTabbar: 0,
       aa: "01",
       processList: [],
-      isShowPopup: false,
-      list2: [
-        { orgname: "山东群英电气有限公司1" },
-        { orgname: "山东群英电气有限公司2" },
-        { orgname: "山东群英电气有限公司3" },
-        { orgname: "山东群英电气有限公司4" },
-        { orgname: "山东群英电气有限公司5" },
-      ],
+      isShowPopup:false,
+      // list2: [
+      //   { orgname: "山东群英电气有限公司1" },
+      //   { orgname: "山东群英电气有限公司2" },
+      //   { orgname: "山东群英电气有限公司3" },
+      //   { orgname: "山东群英电气有限公司4" },
+      //   { orgname: "山东群英电气有限公司5" },
+      // ],
     };
   },
-  methods: {
-    onLoad() {},
-    goPermitArchiver(id) {
-      client.saveSessionStorage("filesID", id);
+  methods:{
+    onLoad(){},
+    //查看许可档案
+    goPermitArchiver(id){
+      client.saveSessionStorage("filesID",id);
       this.$router.push("/permit-archiver");
     },
-    //查看计划通知书
-    seeNotice(event) {
-      client.saveSessionStorage("notificationID", event);
-      this.$router.push("/admin-NotiCexaminationView");
+    //计划通知书、补正内容、退回原因
+    choceButtonType(orgname,id,buttonName){
+      client.saveSessionStorage("notificationID", id);
+      client.saveSessionStorage("notificationOrgname", orgname);
+      if(buttonName == "计划通知书"){
+        this.$router.push("/admin-NotiCexaminationView");
+      }else if(buttonName == "查看原因"){
+        this.$router.push("/admin-ReturnReasonView");
+      }else if(buttonName == "查看补正内容"){
+        this.$router.push("/admin-SupplementView");
+      }
+    },
+    //查看详情
+    goDetails(id){
+      client.saveSessionStorage("detailsID", id);
+      this.$router.push("/admin-DeclareDetailsView");
     },
     searchHandler(formData) {
       //formData筛选的数据
@@ -111,20 +123,16 @@ export default {
         this.processTotal = "共" + res.list.length + "条";
         this.processList = res.list;
       });
-    },
+    }
   },
-  created() {
+  created(){
     //申报历史
-    client.rpc("/qy/findSbLsList").then((res) => {
-      this.processTotal = "共" + res.list.length + "条";
-      this.processList = res.list;
-    });
-    //许可档案
-    client.rpc("/qy/findXkdaList").then((res) => {
-      this.processTotal = "共" + res.list.length + "条";
-      this.list2 = res.list;
-    });
-  },
+    client.rpc("/qy/findSbLsList").then(res=>{
+        this.processTotal = "共" + res.list.length + "条";
+        this.processList = res.list;
+      });
+    },
+  }
 };
 </script>
 

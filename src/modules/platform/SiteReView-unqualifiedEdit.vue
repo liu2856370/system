@@ -203,7 +203,24 @@ export default {
     },
     onSubmit(values) {
       console.log("submit", values);
-      console.log("目前无法拿到条款号ID：itemid，所以无法添加新的不合格项，所以页面直接返回上一层");
+      console.log(
+        "目前无法拿到条款号ID：itemid，所以无法添加新的不合格项，所以页面直接返回上一层"
+      );
+      client
+        .rpc("/sc/gy/saveOrUpdBhgx", {
+          produnitid: "",
+          neaid: "", //'过程Id'
+          frequency: "", //	是	频次
+          itemid: "", //条款号ID
+          itemcode: "", //否	不符合条款号
+          degree: "", //是	改进建议
+          description: "", //缺陷事实描述
+          claim: "", //整改要求
+          hcitemscode:""   //核查项目编代号
+        })
+        .then(function (res) {
+          debugger;
+        });
       this.$router.go(-1);
     },
   },

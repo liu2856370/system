@@ -106,7 +106,7 @@
           </template>
         </platform-list>
       </van-tab>
-      <van-tab title="综合查询">
+      <!-- <van-tab title="综合查询">
         <platform-list :list="list3">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
@@ -143,7 +143,7 @@
             />
           </template>
         </platform-list>
-      </van-tab>
+      </van-tab> -->
     </van-tabs>
     <van-tabbar v-model="active">
       <van-tabbar-item
@@ -243,15 +243,14 @@ export default {
       console.info("当前点击的索引是：" + ind);
       this.$router.push("/admin-InfoView");
     },
-    //材料退回
-    goReturnable(value) {
-      if (value == "材料退回") {
-        this.$router.push("/admin-ReturnableView");
-      } else if (value == "材料补正") {
-        this.$router.push("/admin-CorrectionView");
-      }
-    },
-    goSynthesis() {},
+    //综合查询 -- 》材料退回 
+    // goReturnable(value) {
+    //   if (value == "材料退回") {
+    //     this.$router.push("/admin-ReturnableView");
+    //   } else if (value == "材料补正") {
+    //     this.$router.push("/admin-CorrectionView");
+    //   }
+    // },
   },
 };
 </script>

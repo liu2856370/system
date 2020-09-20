@@ -11,11 +11,9 @@
               <van-cell title="规格型号" :value="slotProps.cellmodel" />
               <van-cell title="生产地址" :value="slotProps.addrs" />
               <van-cell title="实地核查结果">{{slotProps.ispass|dictFormatter("ispassList")}}</van-cell>
-              <van-cell title="发证检验结果">{{slotProps.testresult|dictFormatter("ispassList")}}</van-cell>
               <van-cell title="技术审查意见">{{slotProps.ischeckfilepass|dictFormatter("ischeckfilepassList")}}</van-cell>
               <van-cell title="抽查复查结论">{{slotProps.isccfspass|dictFormatter("isccfspassList")}}</van-cell>
               <van-cell title="许可建议">{{slotProps.isxukepass|dictFormatter("isxukepassList")}}</van-cell>
-              <van-cell title="不予行政许可理由" value="尚未提供字段" />
             </div>
           </template>
         </platform-list>
@@ -27,7 +25,6 @@
           <van-cell title="住所" :value="permitData.abode" />
           <van-cell title="生产地址" :value="permitData.prodaddrxx" />
           <van-cell title="拟许可范围" :value="permitData.certinfo" />
-          <van-notice-bar wrapable :scrollable="false" text="备注：拟许可范围内容如果需要修改，请同步修改“技术审查确认信息”中的相关数据" />
         </div>
       </van-tab>
       <van-tab title="实地核查结论">
@@ -111,7 +108,6 @@ export default {
       //拟许可范围
       client.rpc("/xxgs/gy/getGcxx/nxkfw",{"neaid":this.companyProcessInfo.id}).then(res=>{
         this.permitData = res;
-        console.log(res)
       });
 
       //实地核查结论

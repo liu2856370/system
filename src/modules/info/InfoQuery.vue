@@ -11,7 +11,9 @@
                 <van-cell title="证书编号" :value="companyData.certno" />
                 <van-cell title="有效期至" :value="companyData.enddate" />
                 <van-cell title="发证日期" :value="companyData.startdate" />
-                <van-cell title="许可范围" :value="companyData.xkfw" />
+                <van-cell title="许可范围">
+                    <span v-html="companyData.xkfw">{{companyData.xkfw}}</span>
+                </van-cell>
             </div>
           </template>
   </div>

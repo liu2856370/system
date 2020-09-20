@@ -1,14 +1,14 @@
 <template>
   <div class="index">
     <PHeader :showArrow="true">过程信息</PHeader>
-    <van-search v-model="value" shape="round" placeholder="请输入单位名称" />
         <van-cell :title="processTotal" value="筛选" />
         <platform-list :list="processList">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
               <van-col span="14" class="org-name" @click="goVerificationInfo(slotProps)">{{slotProps.orgname}}</van-col>
               <van-col span="10" class="org-tags">
-                <van-tag plain round type="primary" size="large" class="mr10">{{slotProps.flag|dictFormatter("businessType")}}</van-tag>
+                <!-- <van-tag plain round type="primary" size="large" class="mr10">{{slotProps.flag|dictFormatter("businessType")}}</van-tag> -->
+                <i :class="slotProps.stateClass"></i>
                 <van-tag plain round type="primary" size="large">{{slotProps.applydescription}}</van-tag>
               </van-col>
             </van-row>
@@ -76,6 +76,10 @@ export default {
       client.rpc("/xxgs/findGcxx",{"itemId": client.loadStorage("approvalInfo").code}).then(res=>{
         this.processTotal = "共" + res.list.length + "条";
         this.processList = res.list;
+        for(let i =0; i<res.list.length; i++){
+          let itemData =  res.list[i];
+          itemData.stateClass="stateIcon icon-stateIcon"+res.list[i].flag;
+        }
       });
   }
 };

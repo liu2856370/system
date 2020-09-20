@@ -151,6 +151,7 @@
                         <van-cell title="受理通知书" is-link @click="goNotification" />
                         <van-cell title="核查材料" is-link @click="goCheckApply" />
                         <van-cell title="观察员报告" is-link @click="goObserver" />
+                        <van-cell title="许可证书" is-link @click="goLicense" />
                         <van-cell title="不予许可决定书" is-link @click="goDecision" />
                         <van-cell title="照片寄送凭证" is-link @click="goPhoto" />
                     </van-list>
@@ -216,11 +217,15 @@ export default {
       this.$router.push("/admin-NotificationView");
     },
     //核查材料
-    goCheckApply(){},
+    goCheckApply(){
+      this.$router.push("/admin-XkhcSeienceView");
+    },
     //观察员报告
     goObserver(){
       this.$router.push("/admin-ObserverView");
     },
+    //许可证书
+    goLicense(){},
     //不予许可决定书
     goDecision(){},
     //照片寄送凭证

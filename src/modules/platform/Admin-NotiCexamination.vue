@@ -36,6 +36,29 @@
                         <td class="applyTD">{{item.orgname}}</td>
                       </tr>   
                 </table>
+                <table border="1" class="applyCss" style="margin-top: 0.2rem;">
+                      <colgroup>
+                        <col width="20%">
+                        <col width="10%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="30%">
+                      </colgroup>
+                      <tr>
+                        <th class="applyTH">人员信息</th>
+                        <th class="applyTH">姓名</th>
+                        <th class="applyTH">职务</th>
+                        <th class="applyTH">联系电话</th>
+                        <th class="applyTH">所在单位名称</th>
+                      </tr>   
+                      <tr v-for="(item, index) in informationHczryList" :key="index">
+                        <td class="applyTD">{{item.type}}</td>
+                        <td class="applyTD">{{item.linkman}}</td>
+                        <td class="applyTD">{{item.isgroupleader}}</td>
+                        <td class="applyTD">{{item.mobileno}}</td>
+                        <td class="applyTD">{{item.orgname}}</td>
+                      </tr>   
+                </table>
             </div>
             <div class="delegateBuckDesc">
                 <p class="title right">核查组织单位（盖章）</p>
@@ -53,6 +76,7 @@ export default {
     data(){
         return{
             informationList: [],
+            informationHczryList:[],
             planno:"",
             orgname:"",
             plansdate:"",
@@ -68,7 +92,8 @@ export default {
         //获取人员信息
         reqInformation(notificationID){
             client.rpc("/qy/getJhtzsInfo/",{id:notificationID}).then(res=>{
-                this.informationList = res.hczryList;
+                this.informationList = res.qyryLsit;
+                this.informationHczryList = res.hczryList;
                 this.planno = res.planno;
                 this.orgname = res.orgname;
                 this.plansdate = res.plansdate;

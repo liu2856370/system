@@ -1,7 +1,6 @@
 <template>
   <div class="index">
     <PHeader :showArrow="true">信息公示查询</PHeader>
-    <van-search v-model="value" shape="round" placeholder="请输入单位名称" />
     <van-tabs v-model="active" sticky>
       <van-tab title="过程信息">
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" class="mt10" >
@@ -10,19 +9,7 @@
       </van-tab>
       <van-tab title="证书信息">
         <van-cell :title="certificateTotal" value="" />
-        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-          <van-radio-group v-model="radio" v-for="(item,index) in certificateCompanyList" :key="index" class="mt10">
-          <van-cell-group>
-            <van-radio :name="index" :index="index" @click="saveData(item)">
-                <template #default>
-                  <span>{{item}}</span>
-                </template>
-             
-            </van-radio>
-          </van-cell-group>
-          </van-radio-group>
-        </van-list>
-        <van-button type="primary" size="large" @click="goQualifications">下一步</van-button>
+          <van-cell v-for="(item,index) in certificateCompanyList" :key="index" :title="item" is-link @click="goQualifications(item)" />
         <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" >证书如需邮寄送达，请于当地业务窗口联系告知邮寄地址、收件人等信息，便于邮寄</van-notice-bar>
       </van-tab>
     </van-tabs>
@@ -67,8 +54,8 @@ export default {
       client.saveStorage("certificateList", this.certificateList[value]);
       this.$router.push("/qualifications");
     },
-    goQualifications(){
-      client.saveStorage("certificateList", this.certificateList[this.itemData]);
+    goQualifications(value){
+      client.saveStorage("certificateList", this.certificateList[value]);
       this.$router.push("/qualifications");
     },
     goVerificationInfo(itemData){
