@@ -2,6 +2,14 @@
   <div>
     <PHeader :showArrow="true">现场审查</PHeader>
     <!-- 这里给筛选留个地方 -->
+    <van-popup
+      v-model="isShowPopup"
+      position="right"
+      :style="{ width: '75%', height:'100%' }"
+    >
+      <filterSearchForSiteReview @onSearchHandler="searchHandler"></filterSearchForSiteReview>
+    </van-popup>
+
     <van-tabs
       v-model="activeName"
       @click="onClick"
@@ -10,97 +18,121 @@
         title="待办事项"
         name="wait"
       >
-        <platform-list :list="findPlanList">
-          <template #fixed="{slotProps}">
-            <van-row class="org-info">
-              <van-col
-                span="12"
-                class="org-name"
-                @click="goVerificationInfo(slotProps.index)"
-              >{{slotProps.orgname}}</van-col>
-              <van-col
-                span="12"
-                class="org-tags"
-              >
-                <van-tag
-                  plain
-                  round
-                  class="ml10"
-                  size="large"
-                  :type="slotProps.state2Type"
-                >{{slotProps.applydescription}}</van-tag>
-              </van-col>
-            </van-row>
-            <van-cell
-              title="产品类别"
-              :value="slotProps.producttype"
-            />
-            <van-cell
-              title="所在地区"
-              :value="slotProps.region"
-            />
-            <van-cell
-              title="联系人"
-              :value="slotProps.linkman"
-            />
-            <van-cell
-              title="联系电话"
-              :value="slotProps.tel"
-            />
-            <van-cell
-              title="评审时间"
-              :value="slotProps.date"
-            />
-          </template>
-        </platform-list>
+        <template>
+          <van-cell
+            :title="processTotal"
+            value=""
+            value-class="filterLabel"
+          >
+            <template #default>
+              <div @click="isShowPopup = true">筛选<i class="icon-filter"></i></div>
+            </template>
+          </van-cell>
+
+          <platform-list :list="findPlanList">
+            <template #fixed="{slotProps}">
+              <van-row class="org-info">
+                <van-col
+                  span="12"
+                  class="org-name"
+                  @click="goVerificationInfo(slotProps.index)"
+                >{{slotProps.orgname}}</van-col>
+                <van-col
+                  span="12"
+                  class="org-tags"
+                >
+                  <van-tag
+                    plain
+                    round
+                    class="ml10"
+                    size="large"
+                    :type="slotProps.state2Type"
+                  >{{slotProps.applydescription}}</van-tag>
+                </van-col>
+              </van-row>
+              <van-cell
+                title="产品类别"
+                :value="slotProps.producttype"
+              />
+              <van-cell
+                title="所在地区"
+                :value="slotProps.region"
+              />
+              <van-cell
+                title="联系人"
+                :value="slotProps.linkman"
+              />
+              <van-cell
+                title="联系电话"
+                :value="slotProps.tel"
+              />
+              <van-cell
+                title="评审时间"
+                :value="slotProps.date"
+              />
+            </template>
+          </platform-list>
+        </template>
       </van-tab>
       <van-tab
         title="已办事项"
         name="finish"
       >
-        <platform-list :list="findPlanList">
-          <template #fixed="{slotProps}">
-            <van-row class="org-info">
-              <van-col
-                span="12"
-                class="org-name"
-                @click="goVerificationInfo(slotProps.index)"
-              >{{slotProps.orgname}}</van-col>
-              <van-col
-                span="12"
-                class="org-tags"
-              >
-                <van-tag
-                  plain
-                  round
-                  class="ml10"
-                  size="large"
-                  :type="slotProps.state2Type"
-                >{{slotProps.applydescription}}</van-tag>
-              </van-col>
-            </van-row>
-            <van-cell
-              title="产品类别"
-              :value="slotProps.producttype"
-            />
-            <van-cell
-              title="所在地区"
-              :value="slotProps.region"
-            />
-            <van-cell
-              title="联系人"
-              :value="slotProps.linkman"
-            />
-            <van-cell
-              title="联系电话"
-              :value="slotProps.tel"
-            />
-            <van-cell
-              title="评审时间"
-              :value="slotProps.date"
-            />
-          </template>
-        </platform-list>
+        <template>
+          <van-cell
+            :title="processTotal"
+            value=""
+            value-class="filterLabel"
+          >
+            <template #default>
+              <div @click="isShowPopup = true">筛选<i class="icon-filter"></i></div>
+            </template>
+          </van-cell>
+
+          <platform-list :list="findPlanList">
+            <template #fixed="{slotProps}">
+              <van-row class="org-info">
+                <van-col
+                  span="12"
+                  class="org-name"
+                  @click="goVerificationInfo(slotProps.index)"
+                >{{slotProps.orgname}}</van-col>
+                <van-col
+                  span="12"
+                  class="org-tags"
+                >
+                  <van-tag
+                    plain
+                    round
+                    class="ml10"
+                    size="large"
+                    :type="slotProps.state2Type"
+                  >{{slotProps.applydescription}}</van-tag>
+                </van-col>
+              </van-row>
+              <van-cell
+                title="产品类别"
+                :value="slotProps.producttype"
+              />
+              <van-cell
+                title="所在地区"
+                :value="slotProps.region"
+              />
+              <van-cell
+                title="联系人"
+                :value="slotProps.linkman"
+              />
+              <van-cell
+                title="联系电话"
+                :value="slotProps.tel"
+              />
+              <van-cell
+                title="评审时间"
+                :value="slotProps.date"
+              />
+            </template>
+          </platform-list>
+        </template>
       </van-tab>
     </van-tabs>
 
@@ -119,6 +151,7 @@
 <script>
 import Vue from "vue";
 import PHeader from "../../components/PHeader.vue";
+import filterSearchForSiteReview from "./common/filterSearchForSiteReview";
 import platformList from "../platform/common/platformList";
 import { Search, Tabbar, TabbarItem } from "vant";
 
@@ -132,12 +165,14 @@ export default {
       keyword: "",
       active: 0,
       findPlanList: [],
+      isShowPopup: false,
+      processTotal: "共2条",
     };
   },
   created() {
     this.getfindList({ type: "wait" });
   },
-  components: { PHeader, platformList },
+  components: { PHeader, platformList, filterSearchForSiteReview },
   methods: {
     goVerificationInfo(ind) {
       console.info("当前点击的索引是：" + ind);
@@ -146,7 +181,7 @@ export default {
     },
     getfindList(reqData) {
       client.rpc("/sc/findPlanList", reqData).then((res) => {
-        this.findPlanList = res;
+        this.findPlanList = res.list||[];
 
         for (let i = 0; i < this.findPlanList.length; i++) {
           const itemData = this.findPlanList[i];
@@ -171,6 +206,12 @@ export default {
         name + "||" + title + "；当前activeName是" + this.activeName
       );
       this.getfindList({ type: name });
+    },
+    searchHandler(formData) {
+      const itemData = Object.assign(formData, { type: this.activeName });
+      this.getfindList(itemData);
+      console.info("当前查询条件：", JSON.stringify(itemData));
+      this.isShowPopup = false;
     },
   },
 };
