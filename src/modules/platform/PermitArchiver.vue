@@ -27,19 +27,19 @@
       </van-tab>
       <van-tab title="许可证书">
         <div v-for="(item, index) in pictureList" :key="index" class="imageStyle">
-          <van-image width="3rem" height="3rem" fit="contain" :src="item.image" />
+          <van-image width="3rem" height="3rem" fit="contain" :src="item.image" @click="showImage(item.image)"/>
           <p>{{item.filename}}</p>
         </div>
       </van-tab>
       <van-tab title="不予许可决定书">
         <div v-for="(item, index) in pictureList" :key="index" class="imageStyle">
-          <van-image width="3rem" height="3rem" fit="contain" :src="item.image" />
+          <van-image width="3rem" height="3rem" fit="contain" :src="item.image" @click="showImage(item.image)"/>
           <p>{{item.filename}}</p>
         </div>
       </van-tab>
       <van-tab title="证照寄送凭证">
         <div v-for="(item, index) in pictureList" :key="index" class="imageStyle">
-          <van-image width="3rem" height="3rem" fit="contain" :src="item.image" />
+          <van-image width="3rem" height="3rem" fit="contain" :src="item.image" @click="showImage(item.image)"/>
           <p>{{item.filename}}</p>
         </div>
       </van-tab>
