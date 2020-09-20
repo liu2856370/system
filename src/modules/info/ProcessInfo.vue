@@ -1,7 +1,9 @@
 <template>
   <div class="index">
     <PHeader :showArrow="true">过程信息</PHeader>
-        <van-cell :title="processTotal" value="筛选" />
+     <van-cell :title="processTotal">
+          <div @click="isShowPopup = true">筛选</div>
+        </van-cell>
         <platform-list :list="processList">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
@@ -21,17 +23,22 @@
             <van-cell title="组织机构代码" :value="slotProps.organno" />
           </template>
         </platform-list>
+            <van-popup v-model="isShowPopup" position="right" :style="{ width: '75%', height:'100%' }">
+      <filterSearch @onSearchHandler="searchHandler"></filterSearch>
+    </van-popup>
   </div>
 </template>
 
 <script>
 import PHeader from "../../components/PHeader.vue";
 import platformList from "../common/platformList";
+import filterSearch from "./common/filterSearch";
 export default {
   name: "index",
   components: {
     platformList,
-    PHeader
+    PHeader,
+    filterSearch
   },
   data() {
     return {
@@ -45,7 +52,8 @@ export default {
       itemData: "",
       processList: [],
       certificateList:{},
-      certificateCompanyList:[]
+      certificateCompanyList:[],
+      isShowPopup:false
     };
   },
   methods:{
@@ -70,6 +78,19 @@ export default {
       // else if((50000<=itemData.state&&itemData.state<=80000) || (parseInt(itemData.state) === 10700)){
       //   this.$router.push("/certification-check");
       // }
+    },
+    searchHandler(formData) {
+      //formData筛选的数据
+      //申报历史
+      this.isShowPopup = false;
+      client.rpc("/xxgs/findGcxx",{"itemId": client.loadStorage("approvalInfo").code}).then(res=>{
+        this.processTotal = "共" + res.list.length + "条";
+        this.processList = res.list;
+        for(let i =0; i<res.list.length; i++){
+          let itemData =  res.list[i];
+          itemData.stateClass="stateIcon icon-stateIcon"+res.list[i].flag;
+        }
+      });
     }
   },
   created(){
