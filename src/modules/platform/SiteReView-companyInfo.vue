@@ -552,17 +552,17 @@ export default {
     },
     // 现场核查通知书
     showNotice() {
-      client.saveSessionStorage("siteReviewTabActive", 1); //记录当前所在页签
+      client.saveSessionStorage("siteReviewTabActive", 0); //记录当前所在页签
       this.$router.push("./goMore-showNotice");
     },
     // 生产地址
     showAddress() {
-      client.saveSessionStorage("siteReviewTabActive", 1); //记录当前所在页签
+      client.saveSessionStorage("siteReviewTabActive", 0); //记录当前所在页签
       this.$router.push("./goMore-showAddress");
     },
     // 申报产品
     showProduction() {
-      client.saveSessionStorage("siteReviewTabActive", 1); //记录当前所在页签
+      client.saveSessionStorage("siteReviewTabActive", 0); //记录当前所在页签
       this.$router.push("./goMore-showProduction");
     },
     change(ind) {
