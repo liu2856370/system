@@ -21,7 +21,7 @@
       sticky
     >
       <van-tab title="许可待办">
-        <platform-list :list="list1">
+        <platform-list :list="clearancePendingList">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
               <van-col
@@ -43,21 +43,21 @@
             </van-row>
             <van-cell
               title="许可事项"
-              value="特种设备安装改造维修许可"
+              :value="slotProps.item"
             />
             <van-cell
               title="产品类别"
-              value="测量用电流互感器"
+              :value="slotProps.producttype"
             />
             <van-cell
               title="工作时限(单位:工作日)"
-              value="烟台市市场监督管理局"
+              :value="slotProps.gzsx"
             />
           </template>
         </platform-list>
       </van-tab>
       <van-tab title="许可已办">
-        <platform-list :list="list2">
+        <platform-list :list="permissionGrantedList">
           <template #fixed="{slotProps}">
             <van-row class="org-info">
               <van-col
@@ -78,11 +78,15 @@
             </van-row>
             <van-cell
               title="许可事项"
-              value="特种设备安装改造维修许可"
+              :value="slotProps.item"
             />
             <van-cell
-              title="所在地区"
-              value="淄博市周村区"
+              title="产品类别"
+              :value="slotProps.producttype"
+            />
+            <van-cell
+              title="工作时限(单位:工作日)"
+              :value="slotProps.gzsx"
             />
           </template>
         </platform-list>
@@ -154,14 +158,10 @@ export default {
       active: 0,
       finished: true,
       loading: false,
+      clearancePendingList:[],
+      permissionGrantedList:[],
       list1: [
         {
-          orgname: "山东群英电气有限公司1",
-          index: 1,
-          state1: "超期50天",
-          state1Type: "danger",
-          state2: "发证",
-          state2Type: "success",
         },
       ],
       list2: [
@@ -190,35 +190,19 @@ export default {
           state2Type: "success",
         },
       ],
-      list3: [
-        {
-          orgname: "青岛计量技术研究院",
-          index: 1,
-          state1: "",
-          state1Type: "danger",
-          state2: "已提交",
-          state2Type: "success",
-        },
-        {
-          orgname: "青岛计量技术研究院",
-          index: 1,
-          state1: "",
-          state1Type: "danger",
-          state2: "材料退回",
-          state2Type: "success",
-        },
-        {
-          orgname: "青岛计量技术研究院",
-          index: 1,
-          state1: "",
-          state1Type: "danger",
-          state2: "材料补正",
-          state2Type: "success",
-        },
-      ],
     };
   },
   components: { platformList, PHeader },
+  created(){
+    //许可待办
+    client.rpc("/sp/findXkdb").then(res=>{
+        this.clearancePendingList = res.list;
+    });
+    //许可已办
+    client.rpc("/sp/findXkyb").then(res=>{
+        this.permissionGrantedList = res.list;
+    });
+  },
   methods: {
     goVerificationInfo(ind) {
       console.info("当前点击的索引是：" + ind);

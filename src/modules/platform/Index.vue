@@ -127,8 +127,6 @@ export default {
   }
 };
 </script>
-
-
 <style lang="less" scoped>
 .org-info {
   padding: 0.1rem 0.15rem;
