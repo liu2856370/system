@@ -5,10 +5,10 @@
         <div class="fixed-outer">
           <slot name="fixed" :slotProps="item"></slot>
         </div>
-        <div  class="variable-outer" v-show="item.unfold">
+        <div class="variable-outer" v-show="item.unfold">
           <slot name="variable" :slotProps="item"></slot>
         </div>
-        <div class="arrow-outer" @click="toggleShow(index)">
+        <div class="arrow-outer" @click="toggleShow(index)" v-show="showArrow">
             <van-icon v-show="item.unfold" name="arrow-up" />
             <van-icon v-show="!item.unfold"  name="arrow-down" />
         </div>
@@ -24,6 +24,10 @@ export default {
     list: {
       type: Array,
       default: []
+    },
+    showArrow:{
+      type:Boolean,
+      default:true
     }
   },
   data() {
@@ -36,7 +40,7 @@ export default {
   },
   watch:{
     list(values){
-      if(values.length > this.listLength){
+      if(values.length >= this.listLength){
         //有新数据的情况
         this.loading = false;
         this.finished = false;
@@ -50,7 +54,7 @@ export default {
   },
   methods: {
     onLoad() {
-      let pageNum = this.listLength/10 + 1;
+      let pageNum = parseInt(this.listLength/10) + 1;
       this.$emit("reLoad",pageNum);
     },
     toggleShow(index) {
