@@ -14,7 +14,7 @@
       </template>
     </PHeader>
     <van-tabs
-      v-model="active"
+      v-model="siteReviewTabActive"
       class="mt10 mb60"
       @click="onClick"
     >
@@ -50,8 +50,17 @@
         <van-cell-group class="mt10">
           <van-cell
             title="现场签到"
-            value="2020-07-04 12:35:21"
+            :value="signTime"
           />
+          <van-cell title="">
+            <van-uploader
+              v-model="signList"
+              multiple
+              :after-read="signAfterRead"
+              @delete="signAfterDelete"
+              :max-count="1"
+            />
+          </van-cell>
           <van-cell
             title="现场签退"
             center
@@ -185,7 +194,7 @@
               readonly
               clickable
               label="请选择单元"
-              :value="unitId"
+              :value="unitName"
               placeholder="请选择"
               @click="showPicker = true"
               right-icon="arrow-down"
@@ -210,7 +219,7 @@
           <div class="filterCardList">
             <van-cell-group
               class="mt10"
-              v-for="(item) in showPageData3"
+              v-for="(item,index) in showPageData3"
               v-bind:key="item.id"
             >
               <van-cell-group class="mt10">
@@ -242,7 +251,7 @@
 
                 <div class="feildCell-textarea">
                   <p>缺陷事实描述</p>
-                  {{item.itemcode}}
+                  {{item.description}}
                 </div>
 
                 <van-cell
@@ -256,13 +265,15 @@
                   plain
                   size="large"
                   type="success"
-                  @click="goEdit"
+                  :info="JSON.stringify(item)"
+                  @click="goEdit(index)"
                 >编辑</van-tag>
                 <van-tag
                   round
                   plain
                   class="ml20"
                   size="large"
+                  @click="goDel(index)"
                   type="danger"
                 >删除</van-tag>
               </van-cell-group>
@@ -276,7 +287,7 @@
 
           <van-cell-group
             class="mt10"
-            v-for="(item) in showPageData4"
+            v-for="(item,index) in showPageData4"
             v-bind:key="item.id"
           >
             <van-cell
@@ -291,10 +302,14 @@
             <van-cell
               title="现场情况"
               center
+              @click="getFieldInfo(item)"
             >
-              <template #right-icon>
-                <van-icon class-prefix="icon-camera" />
-              </template>
+              <van-uploader
+                v-model=bindIndex[index]
+                multiple
+                :after-read="afterRead"
+                :max-count="1"
+              />
             </van-cell>
           </van-cell-group>
 
@@ -302,7 +317,7 @@
       </van-tab>
     </van-tabs>
 
-    <van-tabbar v-model="active1">
+    <van-tabbar v-model="tabBarActive">
       <van-tabbar-item
         icon="home-o"
         to="/site-reView"
@@ -334,6 +349,8 @@ import {
   RadioGroup,
   Radio,
   Button,
+  Dialog,
+  Toast,
 } from "vant";
 
 Vue.use(Tab);
@@ -351,6 +368,8 @@ Vue.use(Popup);
 Vue.use(RadioGroup);
 Vue.use(Radio);
 Vue.use(Button);
+Vue.use(Dialog);
+Vue.use(Toast);
 export default {
   data() {
     return {
@@ -359,15 +378,21 @@ export default {
       showPageData2: {}, //页签二数据
       showPageData3: {}, //页签三数据
       showPageData4: {}, //页签四数据
-      active: 0,
-      active1: 0,
+      siteReviewTabActive:
+        client.loadSessionStorage("siteReviewTabActive") || 0,
+      tabBarActive: 0,
       result: ["0", "2"],
       unitId: "",
+      unitName: "",
       showPicker: false,
       radio: "yes",
       columns: [],
       orgname: client.loadSessionStorage("findPlanInfo").orgname,
       isShowBtnAdd: "none",
+      bindIndex: [],
+      fieldInfo: {},
+      signList: [],
+      signTime: "",
     };
   },
   components: { PHeader, platformList },
@@ -377,7 +402,7 @@ export default {
   },
   methods: {
     onClick(index, title) {
-      this.active = index;
+      this.siteReviewTabActive = index;
       if (index == 0) {
         this.isShowBtnAdd = "none";
         this.getCommentInfo();
@@ -385,7 +410,9 @@ export default {
         this.isShowBtnAdd = "none";
         this.getCommentCompletion();
       } else if (index == 2) {
-        this.isShowBtnAdd = "inline-block";
+        if (this.unitId) {
+          this.isShowBtnAdd = "inline-block";
+        }
       } else if (index == 3) {
         this.isShowBtnAdd = "none";
         this.getPsclList();
@@ -416,11 +443,11 @@ export default {
         })
         .then((res) => {
           console.info(res);
-          this.showPageData2 = res;
-          for (let i = 0; i < this.showPageData2.kindList.length; i++) {
-            var itemData = this.showPageData2.kindList[i];
+          for (let i = 0; i < res.kindList.length; i++) {
+            var itemData = res.kindList[i];
             itemData.ispass = itemData.ispass.split(",");
           }
+          this.showPageData2 = res;
         });
     },
     //获取产品单元的选项
@@ -433,11 +460,11 @@ export default {
         });
     },
     //不合格 项列表
-    getBhgxByUnit: function (unitid) {
+    getBhgxByUnit: function () {
       client
         .rpc("/sc/gy/findBhgxByUnit", {
           neaid: this.findPlanInfo.id,
-          unitid: unitid,
+          unitid: this.unitId,
         })
         .then((res) => {
           console.info(res);
@@ -446,6 +473,7 @@ export default {
     },
     //获取 评审材料列表
     getPsclList: function (unitid) {
+      let self = this;
       client
         .rpc("/sc/findPscl", {
           neaid: this.findPlanInfo.id,
@@ -454,34 +482,87 @@ export default {
         })
         .then((res) => {
           console.info(res);
+          for (let i = 0; i < res.length; i++) {
+            self.bindIndex[i] = [];
+          }
           this.showPageData4 = res;
         });
     },
-
-    onConfirm(value, index) {
-      this.unitId = value.unitname;
-      this.showPicker = false;
-      this.getBhgxByUnit(value.id);
+    afterRead(file) {
+      console.log(file);
+      console.log(this.fieldInfo);
+      // client
+      //   .rpc("/sc/uploadPscl", {
+      //     file: file,
+      //     neaid: this.findPlanInfo.id,
+      //     planid: this.findPlanInfo.planid,
+      //     modelid: this.fieldInfo.id
+      //   })
+      //   .then((res) => {
+      //
+      //   });
     },
-    onClickRight() {
-      console.info("新增");
+    getFieldInfo(item) {
+      this.fieldInfo = item;
+    },
+    signAfterRead(file) {
+      this.signTime = "2020-09-20 17:40:48";
+    },
+    signAfterDelete() {
+      this.signTime = "";
+    },
+    onConfirm(value, index) {
+      this.unitId = value.id;
+      this.unitName = value.unitname;
+      this.isShowBtnAdd = "inline-block";
+      client.saveSessionStorage("unitInfo", value);
+      this.showPicker = false;
+      this.getBhgxByUnit();
     },
     goAdd() {
+      client.saveSessionStorage("siteReviewTabActive", 2); //记录当前所在页签
+      client.saveSessionStorage("unqualifiedType", "add"); //记录跳转是添加还是修改
       this.$router.push("/siteReView-unqualifiedEdit");
     },
-    goEdit() {
+    goEdit(index) {
+      client.saveSessionStorage("siteReviewTabActive", 2); //记录当前所在页签
+      client.saveSessionStorage("unqualifiedType", "edit"); //记录跳转是添加还是修改
+      client.saveSessionStorage("unqualifiedInfo", this.showPageData3[index]);
       this.$router.push("/siteReView-unqualifiedEdit");
     },
+    goDel(index) {
+      var self = this;
+      Dialog.confirm({
+        title: "删除不合格项",
+        message: "您确定要删除此不合格项吗？",
+      })
+        .then(() => {
+          client
+            .rpc("/sc/gy/delBhgxById", {
+              id: this.showPageData3[index].id,
+            })
+            .then((res) => {
+              Toast("删除成功");
+              self.getBhgxByUnit();
+            });
+        })
+        .catch(() => {
+          // on cancel
+        });
+    },
+    // 现场核查通知书
     showNotice() {
-      // 现场核查通知书
+      client.saveSessionStorage("siteReviewTabActive", 0); //记录当前所在页签
       this.$router.push("./goMore-showNotice");
     },
+    // 生产地址
     showAddress() {
-      // 生产地址
+      client.saveSessionStorage("siteReviewTabActive", 0); //记录当前所在页签
       this.$router.push("./goMore-showAddress");
     },
+    // 申报产品
     showProduction() {
-      // 申报产品
+      client.saveSessionStorage("siteReviewTabActive", 0); //记录当前所在页签
       this.$router.push("./goMore-showProduction");
     },
     change(ind) {
@@ -490,3 +571,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+.tac {
+  text-align: center;
+}
+.van-uploader__upload {
+  width: 24px;
+  height: 24px;
+}
+</style>

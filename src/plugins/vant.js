@@ -12,7 +12,8 @@ import { Popup } from 'vant'
 import { Calendar } from 'vant'
 import { Overlay } from 'vant'
 import { Loading } from 'vant'
-import { Step, Steps } from 'vant'
+import { Step, Steps } from 'vant';
+import { Uploader } from 'vant';
 import { Area } from 'vant'
 import { Picker } from 'vant'
 import { ImagePreview } from 'vant'
@@ -52,3 +53,4 @@ Vue.use(Field);
 Vue.use(Search);
 Vue.use(Step);
 Vue.use(Steps);
+Vue.use(Uploader);
