@@ -18,7 +18,7 @@
             </template>
           </van-cell>
 
-          <platform-list :list="findPlanList" :showArrow="false" @reLoad="reloadData($event)">
+          <platform-list :list="findPlanList" :showArrow="false">
             <template #fixed="{slotProps}">
               <van-row class="org-info">
                 <van-col
@@ -56,7 +56,7 @@
             </template>
           </van-cell>
 
-          <platform-list :list="findPlanList" :showArrow="false" @reLoad="reloadData($event)">
+          <platform-list :list="findPlanList" :showArrow="false">
             <template #fixed="{slotProps}">
               <van-row class="org-info">
                 <van-col
@@ -121,9 +121,6 @@ export default {
       console.info("当前点击的索引是：" + ind);
       client.saveSessionStorage("findPlanInfo", this.findPlanList[ind]);
       this.$router.push("/siteReView-companyInfo");
-    },
-    reloadData(pageNum){
-      this.getfindList({ type: this.activeName,pageNum: pageNum})
     },
     getfindList(reqData) {
       client.rpc("/sc/findPlanList", reqData).then((res) => {

@@ -4,7 +4,7 @@
     <van-cell :title="processTotal">
       <div @click="isShowPopup = true">筛选</div>
     </van-cell>
-    <platform-list :list="processList" @reLoad="reloadData($event)">
+    <platform-list :list="processList">
       <template #fixed="{slotProps}">
         <van-row class="org-info">
           <van-col
@@ -56,7 +56,10 @@ export default {
       certificateList: {},
       certificateCompanyList: [],
       isShowPopup: false,
-    };
+    }
+  },
+  created(){
+    this.rpcListData();
   },
   methods: {
     goVerificationInfo(itemData) {
@@ -84,8 +87,7 @@ export default {
       this.isShowPopup = false;
       client
         .rpc("/xxgs/findGcxx", {
-          itemId: client.loadStorage("approvalInfo").code,
-          pageNum:1
+          itemId: client.loadStorage("approvalInfo").code
         })
         .then((res) => {
           this.processTotal = "共" + res.list.length + "条";
@@ -96,14 +98,10 @@ export default {
           }
         });
     },
-    reloadData(pageNum){
-      this.rpcListData(pageNum);
-    },
-    rpcListData(pageNum){
+    rpcListData(){
        client
         .rpc("/xxgs/findGcxx", {
-          itemId: client.loadStorage("approvalInfo").code,
-          pageNum:pageNum
+          itemId: client.loadStorage("approvalInfo").code
         })
         .then((res) => {
           this.processTotal = "共" + res.list.length + "条";

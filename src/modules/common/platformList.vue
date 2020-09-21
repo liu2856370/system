@@ -35,27 +35,11 @@ export default {
       //默认数组长度为0
       listLength: 0,
       loading: false,
-      finished: false
-    }
-  },
-  watch:{
-    list(values){
-      if(values.length >= this.listLength){
-        //有新数据的情况
-        this.loading = false;
-        this.finished = false;
-        this.listLength = values.length;
-      }else{
-          //没有新的数据，数据加载完毕
-          this.loading = false;
-          this.finished = true;
-      }
+      finished: true
     }
   },
   methods: {
     onLoad() {
-      let pageNum = parseInt(this.listLength/10) + 1;
-      this.$emit("reLoad",pageNum);
     },
     toggleShow(index) {
         this.$set(this.list[index],"unfold",!this.list[index].unfold);
